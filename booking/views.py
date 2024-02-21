@@ -93,6 +93,8 @@ def package_details(request, package_id):
     return render(request, template, context)
 
 
+@require_POST
+@csrf_exempt
 def check_availabilty(request):
     data = json.loads(request.body)
     print(data)
