@@ -9,7 +9,7 @@
  <main>
 
     <div class="hero small-height jarallax" data-jarallax data-speed="0.2">
-        <img class="jarallax-img" src="{% static 'img/rooms/3.jpg' %}" alt="">
+        <img class="jarallax-img" src="{% static 'img/p2.png' %}" alt="">
         <div class="wrapper opacity-mask d-flex align-items-center justify-content-center text-center animate_hero" data-opacity-mask="rgba(0, 0, 0, 0.5)">
             <div class="container">
                 <small class="slide-animated one">Belleza Beach Resort</small>
@@ -26,7 +26,7 @@
                     <small>Belleza Beach Resort</small>
                     <h2>Our Packages</h2>
                     <p class="lead"><strong>Your Dream Beach Getaway.</strong> We have packages that fit your number of guests and budget, from day to overnight packages.</p>
-                    <p><a href="#booking_section" class="btn_1 outline">Book Now</a></p>
+                    <p><a href="#packageavailability" class="btn_1 outline">Check Availability</a></p>
                 </div>
             </div>
             {% if all_packages %}
@@ -35,13 +35,11 @@
 
                 <div class="row_list_version_3" data-cue="fadeIn">
                     <div class="owl-carousel owl-theme carousel_item_1 kenburns rounded-img">
-                        {% if package.gallery %}
-                        {% for item in package.gallery.all %}
+
                         <div class="item">
-                            <a href="#"><img src="{{item.images.url}}" alt=""></a>
+                            <a href="#"><img src="{{package.banner.url}}" alt=""></a>
                         </div>
-                        {% endfor %}
-                        {% endif %}
+
                     </div>
                     <!-- /carousel -->
                     <div class="box_item_info" data-jarallax-element="-25">

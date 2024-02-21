@@ -29,15 +29,15 @@
         <div class="row_list_version_2 inverted">
             <div class="row g-0 align-items-center">
                 <div class="col-xl-8 order-xl-2">
-                    {% if room.gallery %}
+
                     <div class="owl-carousel owl-theme carousel_item_1 kenburns rounded-img">
-                        {% for item in room.gallery.all %}
+
                         <div class="item">
-                            <a data-fslightbox="gallery_2" data-type="image" href="{{item.images.url}}"><img src="{{item.images.url}}" alt=""></a>
+                            <a data-fslightbox="gallery_2" data-type="image" href="{{room.banner.url}}"><img src="{{room.banner.url}}" alt=""></a>
                         </div>
-                        {% endfor %}
+
                     </div>
-                    {% endif %}
+
 
                 </div>
                 <div class="col-xl-4 order-xl-1">
@@ -76,16 +76,16 @@
         <div class="row_list_version_2">
             <div class="row g-0 align-items-center">
                 <div class="col-xl-8">
-                    {% if room.gallery %}
+
                     <div class="owl-carousel owl-theme carousel_item_1 kenburns rounded-img">
-                        {% for item in room.gallery.all %}
+
                         <div class="item">
-                            <a data-fslightbox="gallery_1" data-type="image" href="{{item.images.url}}"><img src="{{item.images.url}}" alt=""></a>
+                            <a data-fslightbox="gallery_1" data-type="image" href="{{room.banner.url}}"><img src="{{room.banner.url}}" alt=""></a>
                         </div>
-                        {% endfor %}
+
 
                     </div>
-                    {% endif %}
+
                 </div>
                 <div class="col-xl-4">
                     <div class="box_item_info" data-jarallax-element="-25">
@@ -115,7 +115,7 @@
                         </div>
 
 
-                        <!-- /box_item_footer -->
+
                     </div>
                     <!-- /box_item_info -->
                 </div>

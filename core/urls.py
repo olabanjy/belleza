@@ -8,4 +8,6 @@ urlpatterns = [
     path("", homepage, name="home"),
     path("about/", about, name="about"),
     path("contact-us/", contact_us, name="contact-us"),
+    path("policy/", policy, name="policy"),
+    path("t&c/", terms_and_condition, name="terms"),
 ]

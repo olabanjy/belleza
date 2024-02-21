@@ -28,17 +28,17 @@ class Room(BaseAbstractModel):
     short_desc = models.CharField(max_length=400)
     long_desc = models.TextField(blank=True, null=True)
     price = models.DecimalField(
-        decimal_places=4,
+        decimal_places=2,
         help_text=_("the cost of the room"),
         max_digits=19,
     )
     discount_price = models.DecimalField(
-        decimal_places=4,
+        decimal_places=2,
         help_text=_("the cost of the room"),
         max_digits=19,
     )
     caution_fee = models.DecimalField(
-        decimal_places=4,
+        decimal_places=2,
         help_text=_("the caution fee"),
         max_digits=19,
     )
@@ -110,32 +110,32 @@ class Package(BaseAbstractModel):
     )
     # complimentary = models.CharField(max_length=400, null=True)
     caution_fee = models.DecimalField(
-        decimal_places=4,
+        decimal_places=2,
         help_text=_("the caution fee"),
         max_digits=19,
     )
     extra_guest_fee = models.DecimalField(
-        decimal_places=4,
+        decimal_places=2,
         help_text=_("the cost of extra guest"),
         max_digits=19,
     )
     day_weekday_price = models.DecimalField(
-        decimal_places=4,
+        decimal_places=2,
         help_text=_("weekday day booking price"),
         max_digits=19,
     )
     overnight_weekday_price = models.DecimalField(
-        decimal_places=4,
+        decimal_places=2,
         help_text=_("weekday overnight booking price"),
         max_digits=19,
     )
     day_weekend_price = models.DecimalField(
-        decimal_places=4,
+        decimal_places=2,
         help_text=_("weekend day booking price"),
         max_digits=19,
     )
     overnight_weekend_price = models.DecimalField(
-        decimal_places=4,
+        decimal_places=2,
         help_text=_("weekend overnight booking price"),
         max_digits=19,
     )
