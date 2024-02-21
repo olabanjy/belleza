@@ -26,7 +26,7 @@ def homepage(request):
 
     all_rooms_qs = Room.objects.filter(is_active=True)
     featured_room = all_rooms_qs.filter(featured=True).first()
-    other_rooms = all_rooms_qs.exclude(id__in=[featured_room.id])
+    other_rooms = all_rooms_qs.exclude(id__in=[featured_room.id]).all()[:2]
 
     all_packages = Package.objects.filter(is_active=True).all()
 
@@ -45,7 +45,7 @@ def about(request):
 
     template = "core/about.html"
 
-    context = {"page_title": "About Us"}
+    context = {"page_title": "Beach Resort in Lagos"}
 
     return render(request, template, context)
 
@@ -55,5 +55,23 @@ def contact_us(request):
     template = "core/contact_us.html"
 
     context = {"page_title": "Contact Us"}
+
+    return render(request, template, context)
+
+
+def policy(request):
+
+    template = "core/policy.html"
+
+    context = {"page_title": "Privacy Policy"}
+
+    return render(request, template, context)
+
+
+def terms_and_condition(request):
+
+    template = "core/terms.html"
+
+    context = {"page_title": "Terms and Condition"}
 
     return render(request, template, context)
