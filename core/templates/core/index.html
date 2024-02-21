@@ -288,83 +288,8 @@
             </div>
         </div>
     </div>
-    <!-- /parallax_section_1-->
-
-
-
-
-
-
-<!--
-
-    <div class="container margin_120_95" id="booking_section">
-        <div class="row justify-content-between">
-            <div class="col-xl-4">
-                <div data-cue="slideInUp">
-                    <div class="title">
-                        <small>Paradise Hotel</small>
-                        <h2>Check Availability</h2>
-                    </div>
-                    <p>Mea nibh meis philosophia eu. Duis legimus efficiantur ea sea. Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu. </p>
-                    <p class="phone_element no_borders"><a href="tel://423424234"><i class="bi bi-telephone"></i><span><em>Info and bookings</em>+41 934 121 1334</span></a></p>
-                </div>
-            </div>
-            <div class="col-xl-7">
-                <div data-cue="slideInUp" data-delay="200">
-                    <div class="booking_wrapper">
-                        <div class="col-12">
-                            <input type="hidden" id="date_booking" name="date_booking" >
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="custom_select">
-                                    {% if all_rooms_qs %}
-                                    <select name="selected_room_id" id="selected_room_id" class="wide">
-                                        {% for room in all_rooms_qs %}
-                                        <option value="{{room.id}}">{{room.title}}</option>
-                                        {% endfor %}
-                                    </select>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="qty-buttons mb-3 version_2">
-                                            <input type="button" value="+" class="qtyplus" name="adults_booking">
-                                            <input type="text" name="adults_booking" id="adults_booking" value="" class="qty form-control" placeholder="Adults">
-                                            <input type="button" value="-" class="qtyminus" name="adults_booking">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="mb-3 qty-buttons mb-3 version_2">
-                                            <input type="button" value="+" class="qtyplus" name="childs_booking">
-                                            <input type="text" name="childs_booking" id="childs_booking" value="" class="qty form-control" placeholder="Childs">
-                                            <input type="button" value="-" class="qtyminus" name="childs_booking">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="booking_error"></div>
-
-                    <button style="display: none;" type="button" id="added_to_cart_btn"  data-bs-toggle="modal" data-bs-target="#added_to_cart">
-
-                      </button>
-
-                    <p class="text-end mt-4"><a href="#0" id="bookNowBtn" class="btn_1 outline">Book Now</a></p>
-                </div>
-            </div>
-
-        </div>
-
-    </div> -->
 
 
 </main>
 
 {% endblock content %}
-
-
-
