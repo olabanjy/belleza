@@ -97,15 +97,18 @@
                     <div class="main-menu">
                         <a href="#" class="closebt open_close_menu"><i class="bi bi-x"></i></a>
                         <div class="logo_panel"><img src="{% static 'img/logo_sticky.png' %}" width="135" height="45" alt=""></div>
+
+
                         <nav id="mainNav">
-                            <ul>
+                            <ul id="booking_ul">
                                 <li><a href="/" >Home</a></li>
                                 <li><a href="{% url 'core:about' %}">About us</a></li>
                                 <li><a href="{% url 'booking:rooms' %}">Rooms</a></li>
                                 <li><a href="{% url 'booking:packages' %}">Packages</a></li>
                                 <li><a href="#">Polo Arena</a></li>
                                 <li><a href="{% url 'core:contact-us' %}">Contact Us</a></li>
-                                <li><a href="/#booking_section" class="btn_1">Book Now</a></li>
+
+                                <li id="booking_li" ><a href="{% url 'booking:cart' %}" class="btn_1">My Bookings</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -224,6 +227,16 @@
 {% block extra_scripts %}
 
 {% endblock extra_scripts %}
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        if (Object.keys(cart).length === 0) {
+            document.getElementById("booking_li").style.display="none"
+
+        }
+    })
+</script>
 
 </body>
 </html>
