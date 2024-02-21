@@ -278,6 +278,8 @@ def checkout(request):
     return render(request, template, context)
 
 
+@require_POST
+@csrf_exempt
 def process_checkout(request):
 
     data = json.loads(request.body)
@@ -308,6 +310,8 @@ def payment_view(request, profile_id, order_id):
     return render(request, template, context)
 
 
+@require_POST
+@csrf_exempt
 def process_paystack_payment(request):
     if request.method == "POST":
         reference = request.POST.get("paystackToken")
@@ -364,6 +368,8 @@ def process_paystack_payment(request):
     return redirect("core:home")
 
 
+@require_POST
+@csrf_exempt
 def process_flutterwave_payment(request):
     if request.method == "POST":
 
