@@ -1,0 +1,476 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+
+<main>
+    <div class="hero home-search full-height jarallax" data-jarallax-video="mp4:./static/video/belleza.mp4" data-speed="0.2">
+        <div class="wrapper opacity-mask d-flex align-items-center justify-content-center text-center animate_hero" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+            <div class="container">
+                <small class="slide-animated one">Belleza Beach Resort</small>
+                <h3 class="slide-animated two">Your Dream Beach<br>Getaway Starts Here</h3>
+                <br>
+                <div style="justify-content: center;"><a href="#booking_section" class="btn_1">Book Now</a></div>
+            </div>
+            <div class="mouse_wp slide-animated four">
+                <a href="#first_section" class="btn_scrollto">
+                    <div class="mouse"></div>
+                </a>
+            </div>
+            <!-- /mouse_wp -->
+        </div>
+    </div>
+    <!-- /jarallax video background -->
+
+    <div class="pattern_2">
+        <div class="container margin_120_95" id="first_section">
+            <div class="row justify-content-between flex-lg-row-reverse align-items-center">
+                <div class="col-lg-5">
+                    <div class="parallax_wrapper">
+                        <img src="{% static 'img/abinner2.png' %}" alt="" class="img-fluid rounded-img">
+                        <div data-cue="slideInUp" class="img_over"><span data-jarallax-element="-30"><img src="{% static 'img/aboutinner.png' %}" alt="" class="rounded-img"></span></div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="intro">
+                        <div class="title">
+                            <small>About us</small>
+                            <h2>Best Beach Resort in Lagos</h2>
+                        </div>
+                        <p class="lead">Experience the tranquility of nature and the splendor of luxury at Belleza — your homecoming beach resort. Our first-class services and commitment to our guests' needs make us the best beach resort in Lagos.</p>
+                        <p>At Belleza Beach Resort, we uphold our core values of Integrity, Customer Service, and Excellence (ICE), offering a customer-centric service to the utmost satisfaction of our guests. Situated around the historic Lagos Lagoon waterfront, our resort embodies the effortless serenity of nature with the finesse of modern amenities.</p>
+                        <p><a href="#" class="btn_1 mt-1 outline">Read More</a></p>
+                    </div>
+                </div>
+            </div>
+            <!-- /Row -->
+        </div>
+        <div class="pinned-image pinned-image--medium">
+            <div class="pinned-image__container" id="section_video">
+                <video loop="loop" muted="muted" id="video_home">
+                    <source src="{% static 'video/belleza2.mp4' %}" type="video/mp4">
+                    <!-- <source src="{% static 'video/swimming_pool_2.webm' %}" type="video/webm">
+                    <source src="{% static 'video/swimming_pool_2.ogv' %}" type="video/ogg"> -->
+                </video>
+                <div class="pinned-image__container-overlay"></div>
+            </div>
+            <div class="pinned_over_content">
+                <div class="title white">
+                    <small data-cue="slideInUp" data-delay="200">Belleza Beach Resort</small>
+                    <h2 data-cue="slideInUp" data-delay="300">Hospitality At<br> Its Peak</h2>
+                </div>
+            </div>
+        </div>
+        <!-- /pinned content -->
+    </div>
+    <!-- /Pattern  -->
+
+    <div class="container margin_120_95">
+        <div class="title mb-3">
+            <small data-cue="slideInUp">Luxury experience</small>
+            <h2 data-cue="slideInUp" data-delay="200">Rooms & Suites</h2>
+        </div>
+        {% if all_rooms_qs.count > 0 %}
+        <div class="row justify-content-center add_bottom_90" data-cues="slideInUp" data-delay="300">
+            {% if featured_room %}
+            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                <a href="{% url 'booking:room-details' featured_room.id %}" class="box_cat_rooms">
+                    <figure>
+                        <div class="background-image" data-background="url({{featured_room.thumbnail.url}})"></div>
+                        <div class="info">
+                            <small>₦{{featured_room.price|intcomma}}</small>
+                            <h3>{{featured_room.title}}</h3>
+                            <span>View Room</span>
+                        </div>
+                    </figure>
+                </a>
+            </div>
+            {% endif %}
+
+            {% for room in other_rooms %}
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                <a href="{% url 'booking:room-details' room.id %}" class="box_cat_rooms">
+                    <figure>
+                        <div class="background-image" data-background="url({{room.thumbnail.url}})"></div>
+                        <div class="info">
+                            <small>₦{{room.price|intcomma}}</small>
+                            <h3>{{room.title}}</h3>
+                            <span>View Room</span>
+                        </div>
+                    </figure>
+                </a>
+            </div>
+            {% endfor %}
+
+            <p class="text-end"><a href="{% url 'booking:rooms' %}" class="btn_1 outline mt-2">View all Rooms</a></p>
+        </div>
+        {% endif %}
+
+
+        <!-- /row-->
+
+        <div class="title text-center mb-5">
+            <small data-cue="slideInUp">Belleza Beach Resort</small>
+            <h2 data-cue="slideInUp" data-delay="100">Main Facilities</h2>
+        </div>
+        <div class="row mt-4">
+            <div class="col-xl-3 col-md-6">
+                <div class="box_facilities no-border" data-cue="slideInUp">
+                    <i class="icon-hotel-patio"></i>
+                    <h3>Game House</h3>
+                    <p>A game house with a variety of games for both adults and children.</p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="box_facilities" data-cue="slideInUp">
+                    <i class="customicon-wifi"></i>
+                    <h3>High Speed Wifi</h3>
+                    <p>High speed Free Wi-Fi at the resort.</p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="box_facilities" data-cue="slideInUp">
+                    <i class="customicon-cocktail"></i>
+                    <h3>Bar & Restaurant</h3>
+                    <p>We have a restaurant to cater to your meals throughout your stay. We also have 3 Bars.</p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="box_facilities" data-cue="slideInUp">
+                    <i class="customicon-swimming-pool"></i>
+                    <h3>Swimming Pool</h3>
+                    <p>We have a 28-metre swimming pool at the resort.</p>
+                </div>
+            </div>
+        </div>
+        <!-- /Row -->
+    </div>
+    <!-- /container-->
+
+    <div class="marquee">
+        <div class="track">
+            <div class="content">&nbsp;Relax Enjoy Luxury Holiday Travel Discover Experience Relax Enjoy Luxury Holiday Travel Discover Experience Relax Enjoy Luxury Holiday Travel Discover Experience Relax Enjoy Luxury Holiday Travel Discover Experience</div>
+        </div>
+    </div>
+    <!-- /marquee-->
+
+    <div class="container margin_120_95" id="first_section">
+        <div class="row justify-content-between">
+            <div class="col-xl-4 fixed_title">
+                <div class="title">
+                    <small>Belleza Beach Resort</small>
+                    <h2>Our Packages</h2>
+                    <p class="lead"><strong>Your Dream Beach Getaway.</strong> We have packages that fit your number of guests and budget, from day to overnight packages.</p>
+                    <p><a href="#booking_section" class="btn_1 outline">View All Packages</a></p>
+                </div>
+            </div>
+            {% if all_packages %}
+            <div class="col-xl-7">
+                {% for package in all_packages %}
+                <div class="row_list_version_3" data-cue="fadeIn">
+                    <div class="owl-carousel owl-theme carousel_item_1 kenburns rounded-img">
+                        {% if package.gallery %}
+                        {% for item in package.gallery.all %}
+                        <div class="item">
+                            <a href="{% url 'booking:package-details' package.id %}"><img src="{{item.images.url}}" alt=""></a>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+
+                    </div>
+                    <!-- /carousel -->
+                    <div class="box_item_info" data-jarallax-element="-25">
+                        <!-- <small>From $150/night</small> -->
+                        <h2>{{package.title}}</h2>
+                        <p>Maximum Number of {{package.nos_of_guest}} Guests. Extra Guest Attract A Fee of ₦{{package.extra_guest_fee|intcomma}} Per Person.</p>
+                        <div class="facilities clearfix">
+                            {% if package.features %}
+                            <ul>
+                                {% for item in package.features.all %}
+                                <li>
+                                    <i class="{{item.icon}}"></i>{{item.title}}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- /box_item_info -->
+                </div>
+                <!-- /row_list_version_3 -->
+
+                {% endfor %}
+
+
+
+
+
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- /container-->
+
+
+    <div class="parallax_wrapper inverted">
+        <div class="container margin_120_95">
+            <div class="row justify-content-between d-flex align-items-center add_bottom_90">
+                <div class="col-lg-12">
+                    <div class="title text-center mb-5">
+                        <small data-cue="slideInUp">Stay Updated with</small>
+                        <h2 data-cue="slideInUp" data-delay="100">Our Instagram</h2>
+                    </div>
+                    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+                    <div class="elfsight-app-304e3b60-e10a-4ce3-ab7d-077bf66d7321" data-elfsight-app-lazy></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg_white">
+        <div class="container margin_120_95">
+            <div class="row justify-content-between d-flex align-items-center add_bottom_90">
+                <div class="col-lg-6">
+                    <div class="pinned-image rounded_container pinned-image--small mb-4">
+                        <div class="pinned-image__container">
+                            <img src="{% static 'img/menubg.png' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="title">
+                        <small>Belleza Beach Resort</small>
+                        <h3>Experience Flavorful Moments With Us.</h3>
+                        <p>Elevate your dining experience by taking a moment to peruse our thoughtfully crafted menu, where each dish is a masterpiece waiting to be savored.</p>
+                        <p><a href="about.html" class="btn_1 mt-1 outline">View Our Menu</a></p>
+                    </div>
+                </div>
+            </div>
+            <!-- /row-->
+            <div class="row justify-content-between d-flex align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="pinned-image rounded_container pinned-image--small mb-4">
+                        <div class="pinned-image__container">
+                            <img src="{% static 'img/download.jpg' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 order-lg-1">
+                    <div class="title">
+                        <small>Belleza Beach Resort</small>
+                        <h3>Premium Cigar Collection.</h3>
+                        <p>Embrace the rich flavors and aromas of our premium cigar selection.</p>
+                        <p><a href="about.html" class="btn_1 mt-1 outline">Our Cigar Menu</a></p>
+                    </div>
+                </div>
+            </div>
+            <!-- /row-->
+        </div>
+        <!-- /container-->
+    </div>
+    <!-- /bg_white -->
+
+
+    <div class="parallax_wrapper inverted">
+        <div class="container margin_120_95">
+            <div class="row justify-content-between d-flex align-items-center add_bottom_90">
+                <div class="col-lg-12">
+                    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+                    <div class="elfsight-app-d31325c6-c124-4ca2-b697-8126cae97480" data-elfsight-app-lazy></div>
+                    <br>
+                    <div class="title text-center mb-5">
+                       <p><a href="https://www.google.com/travel/search?g2lb=2502548%2C2503771%2C2503781%2C4258168%2C4270442%2C4284970%2C4291517%2C4597339%2C4757164%2C4814050%2C4864715%2C4874190%2C4886480%2C4893075%2C4924070%2C4965990%2C4990494%2C72298667%2C72302247%2C72314553%2C72317059%2C72321071%2C72329544%2C72336909%2C72355851&hl=en-NG&gl=ng&ssta=1&ts=CAESABorCikSJzIlMHgxMDNiODc2MDU1ZmI1N2NkOjB4MTJlNzhlYjVlYjY4MTE4YQ&qs=CAEyE0Nnb0lpcU9nMjk3VzRfTVNFQUU4Ag&ap=ugEHcmV2aWV3cw&ictx=1&ved=0CAAQ5JsGahcKEwiQta6lvKKBAxUAAAAAHQAAAAAQCQ" class="btn_1">Leave A Review</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /parallax_section_1-->
+
+
+
+
+
+
+<!--
+
+    <div class="container margin_120_95" id="booking_section">
+        <div class="row justify-content-between">
+            <div class="col-xl-4">
+                <div data-cue="slideInUp">
+                    <div class="title">
+                        <small>Paradise Hotel</small>
+                        <h2>Check Availability</h2>
+                    </div>
+                    <p>Mea nibh meis philosophia eu. Duis legimus efficiantur ea sea. Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu. </p>
+                    <p class="phone_element no_borders"><a href="tel://423424234"><i class="bi bi-telephone"></i><span><em>Info and bookings</em>+41 934 121 1334</span></a></p>
+                </div>
+            </div>
+            <div class="col-xl-7">
+                <div data-cue="slideInUp" data-delay="200">
+                    <div class="booking_wrapper">
+                        <div class="col-12">
+                            <input type="hidden" id="date_booking" name="date_booking" >
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="custom_select">
+                                    {% if all_rooms_qs %}
+                                    <select name="selected_room_id" id="selected_room_id" class="wide">
+                                        {% for room in all_rooms_qs %}
+                                        <option value="{{room.id}}">{{room.title}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="qty-buttons mb-3 version_2">
+                                            <input type="button" value="+" class="qtyplus" name="adults_booking">
+                                            <input type="text" name="adults_booking" id="adults_booking" value="" class="qty form-control" placeholder="Adults">
+                                            <input type="button" value="-" class="qtyminus" name="adults_booking">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3 qty-buttons mb-3 version_2">
+                                            <input type="button" value="+" class="qtyplus" name="childs_booking">
+                                            <input type="text" name="childs_booking" id="childs_booking" value="" class="qty form-control" placeholder="Childs">
+                                            <input type="button" value="-" class="qtyminus" name="childs_booking">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="booking_error"></div>
+
+                    <button style="display: none;" type="button" id="added_to_cart_btn"  data-bs-toggle="modal" data-bs-target="#added_to_cart">
+
+                      </button>
+
+                    <p class="text-end mt-4"><a href="#0" id="bookNowBtn" class="btn_1 outline">Book Now</a></p>
+                </div>
+            </div>
+
+        </div>
+
+    </div> -->
+
+
+</main>
+
+{% endblock content %}
+
+{% block modals %}
+
+
+
+
+<div class="modal fade" id="added_to_cart" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Booking added to your cart</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p> Click the button below to go and checkout </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="{% url 'booking:cart' %}" class="btn btn-primary">Proceed</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock modals %}
+
+{% block extra_scripts %}
+
+<script>
+
+$(document).ready(function(){
+
+    var cartTotalEl = $("#cartTotal");
+    let bookNowBtn = $("#bookNowBtn");
+
+    let user = $("#currUser").val();
+
+    bookNowBtn.on("click", () =>{
+
+        let bookedDates = $("#date_booking")
+        let selectedRoom = $("#selected_room_id")
+        let adults_booking = $("#adults_booking")
+        let childs_booking = $("#childs_booking")
+        if (!bookedDates.val()) {
+
+            alert('Please select booking date'); return;
+        }
+
+        addCookieItem(selectedRoom.val(), bookedDates.val(), adults_booking.val(), childs_booking.val(), "room");
+    })
+
+// check availablilty
+
+function checkAvailabilty(productId,productType, bookedDates, quantity ){
+
+    var url = "/booking/check_availabilty/"
+
+    return fetch(url, {
+                method: 'POST',
+                headers:{
+                    'Content-Type':'applicaiton/json',
+	    			'X-CSRFToken':csrftoken,
+                },
+
+        body:JSON.stringify({'productId':productId, 'productType':productType, 'bookedDates': bookedDates,"quantity":quantity}),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        return data
+    })
+
+
+
+}
+
+// Add to cart
+function addCookieItem(productId, bookedDates, adult_count, child_count, productType) {
+        console.log("booking details are", productId, bookedDates, adult_count, child_count);
+
+
+    if (cart[productId] == undefined) {
+        checkAvailabilty(productId, productType,bookedDates, 1).then((data) => {
+            if (data.is_available === false) alert(data.message); return;
+        })
+      cart[productId] = { quantity: 1, dateBooked: bookedDates, adult: adult_count, child:child_count, productType:productType};
+    } else {
+        check_available = checkAvailabilty(productId, productType,bookedDates, cart[productId]["quantity"] += 1).then((data) => {
+            if (data.is_available === false) alert(data.message); return;
+        })
+      cart[productId]["quantity"] += 1;
+    }
+
+
+  console.log("Cart", cart);
+  document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
+  $("#cartTotal").load(" #cartTotal");
+  currUrl = window.location.href;
+  if (currUrl.indexOf("/booking/cart/") > -1) {
+    location.reload();
+  } else {
+    $("#added_to_cart_btn").click();
+  }
+
+
+}
+})
+</script>
+
+{% endblock extra_scripts %}
