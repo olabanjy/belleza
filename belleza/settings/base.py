@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     "django.contrib.humanize",
+    "corsheaders",
     "rest_framework",
     "allauth",
     "allauth.account",
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -172,3 +174,6 @@ TEST_FLW_PUBLIC_KEY = config("TEST_FLW_PUBLIC_KEY")
 TEST_FLW_SECRET_KEY = config("TEST_FLW_SECRET_KEY")
 TEST_FLW_ENCRYPTION_KEY = config("TEST_FLW_ENCRYPTION_KEY")
 FLW_SECRET_HASH = config("FLW_SECRET_HASH")
+
+
+CORS_ORIGIN_ALLOW_ALL = True
