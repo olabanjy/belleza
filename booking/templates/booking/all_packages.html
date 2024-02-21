@@ -1,0 +1,403 @@
+{% extends 'core/base.html' %}
+ {% load static %}
+
+ {% load humanize %}
+
+
+ {% block content %}
+
+ <main>
+
+    <div class="hero small-height jarallax" data-jarallax data-speed="0.2">
+        <img class="jarallax-img" src="{% static 'img/rooms/3.jpg' %}" alt="">
+        <div class="wrapper opacity-mask d-flex align-items-center justify-content-center text-center animate_hero" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+            <div class="container">
+                <small class="slide-animated one">Belleza Beach Resort</small>
+                <h1 class="slide-animated two">Our Packages</h1>
+            </div>
+        </div>
+    </div>
+    <!-- /Background Img Parallax -->
+
+    <div class="container margin_120_95" id="first_section">
+        <div class="row justify-content-between">
+            <div class="col-xl-4 fixed_title">
+                <div class="title">
+                    <small>Belleza Beach Resort</small>
+                    <h2>Our Packages</h2>
+                    <p class="lead"><strong>Your Dream Beach Getaway.</strong> We have packages that fit your number of guests and budget, from day to overnight packages.</p>
+                    <p><a href="#booking_section" class="btn_1 outline">Book Now</a></p>
+                </div>
+            </div>
+            {% if all_packages %}
+            <div class="col-xl-7">
+                {% for package in  all_packages %}
+
+                <div class="row_list_version_3" data-cue="fadeIn">
+                    <div class="owl-carousel owl-theme carousel_item_1 kenburns rounded-img">
+                        {% if package.gallery %}
+                        {% for item in package.gallery.all %}
+                        <div class="item">
+                            <a href="#"><img src="{{item.images.url}}" alt=""></a>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <!-- /carousel -->
+                    <div class="box_item_info" data-jarallax-element="-25">
+                        <!-- <small>From $150/night</small> -->
+                        <h2>{{package.title}}</h2>
+                        <p>Maximum Number of {{package.nos_of_guest}} Guests. Extra Guest Attract A Fee of ₦{{package.extra_guest_fee|intcomma}} Per Person.</p>
+                        <div class="facilities clearfix">
+                            {% if package.features %}
+                            <ul>
+                                {% for item in package.features.all %}
+                                <li>
+                                    <i class="{{item.icon}}"></i>{{item.title}}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <p class="wide"><a href="#packageavailability" class="btn_1">Check Availabilty</a></p>
+                            </div>
+                            <div class="col-lg-6">
+                                <p class="wide"><a href="{% url 'booking:package-details' package.id %}" class="btn_1">More Details</a></p>
+                            </div>
+                        </div>
+
+
+                        <!-- /box_item_footer -->
+                    </div>
+                    <!-- /box_item_info -->
+                </div>
+                <!-- /row_list_version_3 -->
+
+                {% endfor %}
+
+
+
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- /container-->
+
+
+    <div class="container margin_120_95">
+        <div class="title text-center mb-5">
+            <small data-cue="slideInUp">Belleza Beach Resort</small>
+            <h2 data-cue="slideInUp" data-delay="100">Main Facilities</h2>
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="box_facilities no-border" data-cue="slideInUp">
+                    <i class="icon-hotel-patio"></i>
+                    <h3>Game House</h3>
+                    <p>A game house with a variety of games for both adults and children.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="box_facilities" data-cue="slideInUp">
+                    <i class="customicon-wifi"></i>
+                    <h3>High Speed Wifi</h3>
+                    <p>High speed Free Wi-Fi at the resort.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="box_facilities" data-cue="slideInUp">
+                    <i class="customicon-cocktail"></i>
+                    <h3>Bar & Restaurant</h3>
+                    <p>We have a restaurant to cater to your meals throughout your stay. We also have 3 Bars.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="box_facilities" data-cue="slideInUp">
+                    <i class="customicon-swimming-pool"></i>
+                    <h3>Swimming Pool</h3>
+                    <p>We have a 28-metre swimming pool at the resort.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /pinned-image -->
+
+
+
+    <section id="packageavailability">
+        <div class="container margin_120_95" id="booking_section">
+            <div class="row justify-content-between">
+                <div class="col-xl-4">
+                    <div data-cue="slideInUp">
+                        <div class="title">
+                            <small>Belleza Beach Resort</small>
+                            <h2>Check Availability</h2>
+                        </div>
+                        <p>Kindly check the availabilty of your package of choice before making a booking.</p>
+                        <p class="phone_element no_borders"><a href="tel://09169999011"><i class="bi bi-telephone"></i><span><em>Info and bookings</em>09169999011</span></a></p>
+                    </div>
+                </div>
+                <div class="col-xl-7">
+                    <div data-cue="slideInUp" data-delay="200">
+                        <div class="booking_wrapper">
+                            <div class="col-12">
+                                <input type="hidden" id="date_booking" name="date_booking">
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="custom_select">
+
+                                        <select name="selected_package_id" id="selected_package_id" class="wide">
+                                            <option>Select Package</option>
+                                            {% if all_packages %}
+                                            {% for package in all_packages %}
+                                                 <option value="{{package.id}}">{{package.title}}</option>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="custom_select">
+                                        <select name="selected_period_id" id="selected_period_id" class="wide">
+                                            <option>Select Time</option>
+                                            <option value="day">Day</option>
+                                            <option value="night">Overnight</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <button style="display: none;" type="button" id="package_is_available"  data-bs-toggle="modal" data-bs-target="#package_is_available_modal"></button>
+                                    <button style="display: none;" type="button" id="package_not_available"  data-bs-toggle="modal" data-bs-target="#package_not_available_modal"></button>
+                                    <button style="display: none;" type="button" id="added_to_cart_btn"  data-bs-toggle="modal" data-bs-target="#added_to_cart"></button>
+                                    <p class="text-end mt-1"><a href="#0" id="checkAvailabilty" class="btn_1">Check Availabilty</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- / row -->
+                    </div>
+                </div>
+                <!-- /col -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </section>
+
+
+</main>
+
+
+
+ {% endblock content %}
+
+
+
+{% block modals %}
+
+
+
+<div class="modal fade" id="package_is_available_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel"> Selected package is Available </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>   <span id="selectedPackage"></span>   Package is available from <strong><span id="startDate"></span></strong> to  <strong><span id="endDate"></span></strong>. Proceed to booking
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="#" id="bookNowBtn" class="btn btn-primary">Book Now</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="package_not_available_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Selected package is not Available </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <p>   <span id="selectedPackage_ntav"></span> Package is not available from <strong><span id="startDate_ntav"></span></strong> to  <strong><span id="endDate_ntav"></span></strong>.Kindly book another room
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<div class="modal fade" id="added_to_cart" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Booking added to your cart</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p> Click the button below to go and checkout </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="{% url 'booking:cart' %}" class="btn btn-primary">Proceed</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock modals %}
+
+
+
+
+{% block extra_scripts %}
+
+<script>
+
+$(document).ready(function(){
+
+    // set global variables
+    var globBookedDates
+    var globSelectedPackage
+    var globSelectedPeriod
+
+
+    let checkAvailabiltyBtn = $("#checkAvailabilty");
+
+    checkAvailabiltyBtn.on("click", () =>{
+
+        let bookedDates = $("#date_booking")
+        let selectedPackage = $("#selected_package_id")
+        let selectedPeriod = $("#selected_period_id")
+        console.log('availability data', bookedDates.val(), selectedPackage.val(), selectedPeriod.val())
+
+        if (!bookedDates.val()) {
+            alert('Please select check-in and check-out date'); return;
+        }
+        if (!selectedPeriod.val()) {
+            alert('Please select period to continue'); return;
+        }
+        if (!selectedPackage.val()) {
+            alert('Please select a package to continue'); return;
+        }
+        checkAvailabilty(selectedPackage.val(), "package",  bookedDates.val(), 1, selectedPeriod.val() )
+    })
+
+
+
+
+// check availablilty
+function checkAvailabilty(productId,productType, bookedDates, quantity, period ){
+
+    var url = "/booking/check_availabilty/"
+
+    return fetch(url, {
+                method: 'POST',
+                headers:{
+                    'Content-Type':'applicaiton/json',
+	    			'X-CSRFToken':csrftoken,
+                },
+
+        body:JSON.stringify({'productId':productId, 'productType':productType, 'bookedDates': bookedDates,"quantity":quantity, "period":period}),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+
+        if (data.is_available === true){
+            $("#selectedPackage").text(`${data.package_name}`)
+            $("#startDate").text(`${data.check_in}`)
+            $("#endDate").text(`${data.check_out}`)
+            // set global
+            globBookedDates = bookedDates
+            globSelectedPackage = productId
+            globSelectedPeriod = period
+            $("#package_is_available").click();
+        } else {
+            $("#selectedPackage_ntav").text(`${data.package_name}`)
+            $("#startDate_ntav").text(`${data.check_in}`)
+            $("#endDate_ntav").text(`${data.check_out}`)
+            $("#package_not_available").click();
+        }
+    })
+
+}
+
+
+let bookNowBtn = $("#bookNowBtn");
+bookNowBtn.on("click", () =>{
+    addCookieItem(globSelectedPackage, globBookedDates, 1, "package", globSelectedPeriod);
+})
+
+
+
+
+// check availablilty lean
+
+function checkAvailabiltyLean(productId,productType, bookedDates, quantity, period ){
+
+var url = "/booking/check_availabilty/"
+
+return fetch(url, {
+            method: 'POST',
+            headers:{
+                'Content-Type':'applicaiton/json',
+                'X-CSRFToken':csrftoken,
+            },
+
+    body:JSON.stringify({'productId':productId, 'productType':productType, 'bookedDates': bookedDates,"quantity":quantity,"period":period}),
+})
+.then((response) => response.json())
+.then((data) => {
+    return data
+})
+
+}
+
+
+
+
+
+// Add to cart
+function addCookieItem(productId, bookedDates, quantity, productType, period) {
+
+    if (!productId || !bookedDates || !quantity ||!period) return alert("Booking details missiing!")
+    console.log("booking details are", productId, bookedDates, quantity, period);
+
+    checkAvailabiltyLean(productId, productType, bookedDates, quantity, period).then((data) => {
+            if (data.is_available === false) alert(data.message); return;
+        })
+    cart[productId] = {quantity: quantity, dateBooked: bookedDates, productType:productType, period:period};
+
+
+
+  console.log("Cart", cart);
+  document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
+  $("#cartTotal").load(" #cartTotal");
+  currUrl = window.location.href;
+  if (currUrl.indexOf("/booking/cart/") > -1) {
+    location.reload();
+  } else {
+    $("#added_to_cart_btn").click();
+  }
+
+
+}
+})
+</script>
+
+{% endblock extra_scripts %}
