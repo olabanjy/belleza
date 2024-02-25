@@ -202,6 +202,7 @@
                                     <div class="custom_select">
                                         {% if all_rooms %}
                                         <select name="selected_room_id" id="selected_room_id" class="wide">
+                                            <option value="" selected disabled> Select Room </option>
                                             {% for room in all_rooms %}
                                             <option value="{{room.id}}">{{room.title}}</option>
                                             {% endfor %}
@@ -209,18 +210,16 @@
                                         {% endif %}
                                     </div>
                                 </div>
+
                                 <div class="col-lg-4">
-                                    <div class="custom_select">
-                                        <select name="selected_days_id" id="selected_days_id" class="wide">
-                                            <option>Number of Rooms</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
+
+                                    <div class="custom_select" id="selected_days_div">
+                                        <select name="selected_days_id" id="selected_days_id" class="wide" required>
+                                            <option value="" selected disabled> Select Number of Rooms </option>
+                                            <option value="1" > 1 </option>
+                                            <option value="2" > 2 </option>
+                                            <option value="3" > 3 </option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -320,9 +319,70 @@
 
 {% block extra_scripts %}
 
+
+<!-- <script>
+$(document).ready(function(){
+    let selectedRoomSelect = $("#selected_room_id")
+    // let roomavailabilty = $("#selected_days_id")
+
+    let roomavailabilty = document.querySelector('#selected_days_id');
+
+
+    console.log(document.querySelector('#selected_room_id'))
+
+    // Handle room selection
+    selectedRoomSelect.on("change", () => {
+
+
+        var url = "/booking/render_available_room_count/"
+
+
+        fetch(url, {
+            method: 'POST',
+            headers:{
+                'Content-Type':'applicaiton/json',
+            },
+            body:JSON.stringify({'productId':selectedRoomSelect.val()}),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+
+                Array(Number(data.available)).fill().forEach((_,i)=> {
+
+
+                    let newOption = new Option(i,i);
+
+
+                    // roomavailabilty.add(newOption,undefined);
+
+
+
+                    roomavailabilty.appendChild(newOption);
+
+
+
+
+                } )
+
+                console.log(roomavailabilty)
+
+            })
+
+   })
+
+})
+
+</script> -->
+
+
 <script>
 
 $(document).ready(function(){
+
+
+
+
+
 
     // set global variables
     var globBookedDates

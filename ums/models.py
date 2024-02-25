@@ -2,7 +2,9 @@ from django.db import models
 from core.models import BaseAbstractModel
 from django.conf import settings
 import random, string
-from django.db.models.signals import post_save, post_init, pre_save
+from django.db.models.signals import post_save
+from django.utils.translation import gettext_lazy as _
+from . import choices
 
 # Create your models here.
 
@@ -17,6 +19,11 @@ class Profile(BaseAbstractModel):
     dob = models.DateField(max_length=100, blank=True, null=True)
     gender = models.CharField(max_length=200, blank=True, null=True)
     welcome_email = models.CharField(max_length=100, default="pending")
+    user_type = models.TextField(
+        choices=choices.USER_TYPE_CHOICES,
+        default=choices.UserType.Client.value,
+        verbose_name=_("user_type"),
+    )
 
     def __str__(self):
         return self.user.email

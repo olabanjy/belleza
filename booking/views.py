@@ -15,6 +15,8 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.contrib import messages
 
+from django.template.loader import render_to_string
+
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
@@ -58,7 +60,7 @@ def room_details(request, room_id):
 
     the_room = get_object_or_404(Room, id=room_id)
 
-    similar_rooms = Room.objects.exclude(id__in=[the_room.id])
+    similar_rooms = Room.objects.exclude(id__in=[the_room.id])[:3]
 
     context = {
         "the_room": the_room,
@@ -91,6 +93,27 @@ def package_details(request, package_id):
         "page_title": f"{the_package.title}",
     }
     return render(request, template, context)
+
+
+@require_POST
+@csrf_exempt
+def render_available_room_count(request):
+    data = json.loads(request.body)
+    productId = data["productId"]
+
+    the_room = Room.objects.get(id=productId)
+
+    return JsonResponse({"available": the_room.availability})
+
+    # return JsonResponse(
+    #     {
+    #         "markup": render_to_string(
+    #             "process/room_availability_option.html",
+    #             context={"avaialable_count": range(the_room.availability)},
+    #             request=request,
+    #         )
+    #     }
+    # )
 
 
 @require_POST

@@ -119,3 +119,22 @@ _readable_package_option = {
 PACKAGE_OPTION_CHOICES = [
     (d.value, _readable_package_option[d.value]) for d in PackagePriceOption
 ]
+
+
+@unique
+class ClientType(DocEnum):
+    """
+    Client Type.
+    """
+
+    Personal = "Personal", "Personal user"
+    Corporate = "Corporate ", "Corporate user"
+
+
+_readable__client_type = {
+    ClientType.Personal.value: _("Personal"),
+    ClientType.Corporate.value: _("Corporate"),
+}
+
+
+CLIENT_TYPE_CHOICES = [(d.value, _readable__client_type[d.value]) for d in ClientType]
