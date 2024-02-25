@@ -75,3 +75,21 @@ def terms_and_condition(request):
     context = {"page_title": "Terms and Condition"}
 
     return render(request, template, context)
+
+
+def menu(request):
+
+    template = "core/menu.html"
+
+    context = {"page_title": "Menu"}
+
+    return render(request, template, context)
+
+
+def polo_arena(request):
+
+    template = "core/polo_arena.html"
+
+    context = {"page_title": "Polo Arena"}
+
+    return render(request, template, context)

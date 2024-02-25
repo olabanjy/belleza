@@ -2,20 +2,17 @@ from django.db import models
 from core.models import BaseAbstractModel
 from . import choices
 
-
-# Create your models here.
 from django.utils.translation import gettext_lazy as _
 from ums.models import Profile
 from django.utils import timezone
 
-from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 
 
 class Features(BaseAbstractModel):
     slug = models.SlugField(null=False)
     title = models.CharField(max_length=240)
-    # icon  = models.ImageField(upload_to="features/icon/", blank=True, null=True)
     icon = models.CharField(max_length=120, null=True)
 
     def __str__(self):
@@ -189,11 +186,9 @@ class OrderItem(CustomContentBaseTypeModel):
     check_out = models.DateTimeField(null=True)
 
     def __str__(self):
-
         return f"{self.id} - {self.user} - {self.quantity}"
 
     def get_total_item_price(self):
-
         if self.content_object:
             if self.item_type == choices.ProductType.Room.value:
                 return self.quantity * self.content_object.price
@@ -249,6 +244,10 @@ class Order(BaseAbstractModel):
     )
     coupon = models.ForeignKey(
         "Coupon", on_delete=models.SET_NULL, blank=True, null=True
+    )
+
+    booking_info = models.ForeignKey(
+        "BookingInfo", on_delete=models.CASCADE, blank=True, null=True
     )
 
     refund_requested = models.BooleanField(default=False)
@@ -307,3 +306,24 @@ class AppLogs(BaseAbstractModel):
 
     def __str__(self):
         return f"{self.log_title} - {self.created_at}"
+
+
+class BookingInfo(BaseAbstractModel):
+    user = models.ForeignKey(Profile, on_delete=models.SET_NULL, blank=True, null=True)
+    phone = models.CharField(max_length=40, null=True, blank=True)
+    other_phone = models.CharField(max_length=40, null=True, blank=True)
+    phone_verified = models.BooleanField(default=False)
+    full_name = models.CharField(blank=True, null=True, max_length=200)
+    company_name = models.CharField(blank=True, null=True, max_length=200)
+    address = models.TextField(blank=True, null=True)
+    corporate_rep = models.CharField(blank=True, null=True, max_length=200)
+    number_of_guests = models.IntegerField(default=1)
+    nature_of_business = models.CharField(blank=True, null=True, max_length=400)
+    client_type = models.TextField(
+        choices=choices.CLIENT_TYPE_CHOICES,
+        default=choices.ClientType.Personal.value,
+        verbose_name=_("client_type"),
+    )
+
+    def __str__(self):
+        return f"{self.user}"

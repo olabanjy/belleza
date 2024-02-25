@@ -1,0 +1,427 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+
+<main>
+    <div class="hero small-height jarallax" data-jarallax data-speed="0.2">
+        <img class="jarallax-img" src="{% static 'img/polob.png' %}" alt="">
+        <div class="wrapper opacity-mask d-flex align-items-center justify-content-center text-center animate_hero" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+            <div class="container">
+                <small class="slide-animated one">Belleza Beach Resort</small>
+                <h1 class="slide-animated two">Polo Arena</h1>
+            </div>
+        </div>
+    </div>
+    <!-- /Background Img Parallax -->
+
+    <div class="container margin_120_95">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-lg-5">
+                <div class="parallax_wrapper inverted">
+                    <img src="{% static 'img/aboutp1.png' %}" alt="" class="img-fluid rounded-img">
+                    <div data-cue="slideInUp" class="img_over"><span data-jarallax-element="-30"><img src="{% static 'img/aboutp2.png' %}" alt="" class="rounded-img"></span></div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="intro">
+                  <div class="title">
+                      <small>EQUESTRIAN EXCELLENCE</small>
+                      <h2>Unleash The Equestrian In You At Our Arena</h2>
+                  </div>
+                  <p>In our facility, the beach polo arena is a dream haven for horse lovers, equestrians, polo players, aspiring riders, and the elite. Nestled in a pristine coastal setting, it offers a unique experience, merging the elegance of equestrian pursuits with the breathtaking beauty of the beach.
+                  <br>
+                  For horse lovers, it's a canvas for the dance of hooves against the sun-kissed sands. Seasoned equestrians find a challenging yet harmonious environment, while polo players revel in the thrill heightened by the coastal breeze. Aspiring riders take their first steps toward excellence, and the discerning elite witness equestrian prowess in a setting of refined taste and exclusivity. Welcome to the ultimate beach polo arena, where hooves meet the beach, creating an unparalleled equestrian paradise.</p>
+                  <p><a href="#first_section" class="btn_1">View Our Polo Lessons</a></p>
+                  <p><a href="#trail" class="btn_1">View Our Trail Packages</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- /Row -->
+    </div>
+    <!-- /container -->
+
+
+    <div class="bg_white">
+      <div class="container margin_120_95">
+          <div class="title text-center mb-5">
+              <h2 data-cue="slideInUp" data-delay="100">LEARN TO PLAY POLO AT BELLEZA BEACH ARENA</h2>
+              <p style="text-decoration-color: #c5934c;">No prior horse riding experience required! Bring jeans, boots, and enthusiasm. Ideal for groups or individual lessons, and team building. Offering lessons and experiences with experienced instructors.</p>
+          </div>
+          <div class="row justify-content-between d-flex align-items-center add_bottom_90">
+              <div class="col-lg-6">
+                  <div class="pinned-image rounded_container pinned-image--small mb-4">
+                      <div class="pinned-image__container">
+                          <img src="{% static 'img/pololesson.png' %}" alt="">
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-5">
+                  <div class="title">
+                      <small>BELLEZA POLO ARENA</small>
+                      <h3>Belleza Polo Lesson Packages</h3>
+                      <p>Our Polo lessons are a great way to introduce you to riding and the amazing sport of polo. We have various types of lessons with our expe- rienced instructors. We also offer group lessons on request (max. group size of 4) teaching techniques.</p>
+                      <p><a href="#" class="btn_1 mt-1 outline">View Our Packages</a></p>
+                  </div>
+              </div>
+          </div>
+          <!-- /row-->
+      </div>
+      <!-- /container-->
+      </div>
+      <div class="container margin_120_95" id="first_section">
+          <div class="row justify-content-between">
+              <div class="col-xl-4 fixed_title">
+                  <div class="title">
+                      <small>Belleza Polo Arena</small>
+                      <h2>Our Packages</h2>
+                      <p class="lead">Unleash The Equestrian In You At Our Arena. Kindly go through our polo lesson packages and book a package.</p>
+                      <p><a href="#" class="btn_1 outline">Book Now</a></p>
+                  </div>
+              </div>
+              <div class="col-xl-7">
+                  <div class="row_list_version_3" data-cue="fadeIn">
+                      <div class="owl-carousel owl-theme carousel_item_1 kenburns rounded-img">
+                          <div class="item">
+                              <a href="#"><img src="{% static 'img/polopack.png' %}" alt=""></a>
+                          </div>
+                      </div>
+                      <!-- /carousel -->
+                      <div class="box_item_info" data-jarallax-element="-25">
+                          <!-- <small>From $150/night</small> -->
+                          <h2>Beginner Class</h2>
+                          <p>
+                              ₦200,000 (4-10 years)
+                              <br>
+                              ₦250,000 (11-17 years)
+                              <br>
+                              ₦300,000 (Adult)
+                          </p>
+                          <hr>
+                          <p>
+                              10 sessions - Horse knowledge, ground work, saddle work, practicals.
+                          </p>
+                      </div>
+                      <!-- /box_item_info -->
+                  </div>
+                  <!-- /row_list_version_3 -->
+                  <hr>
+                  <div class="row_list_version_3" data-cue="fadeIn">
+                      <!-- <div class="owl-carousel owl-theme carousel_item_1 kenburns rounded-img">
+                          <div class="item">
+                              <a href="#"><img src="img/rooms/1.jpg" alt=""></a>
+                          </div>
+                      </div> -->
+                      <!-- /carousel -->
+                      <div class="box_item_info" data-jarallax-element="-25">
+                          <!-- <small>From $150/night</small> -->
+                          <h2>Intermediate Class</h2>
+                          <p>
+                              ₦220,000 (4-10 years)
+                              <br>
+                              ₦270,000 (11-17 years)
+                              <br>
+                              ₦320,000 (Adult)
+                          </p>
+                          <hr>
+                          <p>
+                              12 sessions - Horse knowledge, ground work, saddle work, practicals, tack knowledge and fitting.
+                          </p>
+                      </div>
+                      <!-- /box_item_info -->
+                  </div>
+                  <!-- /row_list_version_3 -->
+                  <hr>
+                  <div class="row_list_version_3" data-cue="fadeIn">
+                      <!-- <div class="owl-carousel owl-theme carousel_item_1 kenburns rounded-img">
+                          <div class="item">
+                              <a href="#"><img src="img/rooms/1.jpg" alt=""></a>
+                          </div>
+                      </div> -->
+                      <!-- /carousel -->
+                      <div class="box_item_info" data-jarallax-element="-25">
+                          <!-- <small>From $150/night</small> -->
+                          <h2>Advanced Class</h2>
+                          <p>
+                              ₦250,000 (4-10 years)
+                              <br>
+                              ₦300,000 (11-17 years)
+                              <br>
+                              ₦350,000 (Adult)
+                          </p>
+                          <hr>
+                          <p>
+                              12 sessions - Horse knowledge, ground work, saddle work, practicals, intense workout.
+                          </p>
+                      </div>
+                      <!-- /box_item_info -->
+                  </div>
+                  <!-- /row_list_version_3 -->
+                  <hr>
+                  <div class="row_list_version_3" data-cue="fadeIn">
+                      <!-- <div class="owl-carousel owl-theme carousel_item_1 kenburns rounded-img">
+                          <div class="item">
+                              <a href="#"><img src="img/rooms/1.jpg" alt=""></a>
+                          </div>
+                      </div> -->
+                      <!-- /carousel -->
+                      <div class="box_item_info" data-jarallax-element="-25">
+                          <!-- <small>From $150/night</small> -->
+                          <h2>Full Package</h2>
+                          <p>
+                              ₦670,000 (4-10 years)
+                              <br>
+                              ₦820,000 (11-17 years)
+                              <br>
+                              ₦970,000 (Adult)
+                          </p>
+                          <hr>
+                          <p>
+                              34 sessions / 6 weeks / 4 months.
+                          </p>
+                      </div>
+                      <!-- /box_item_info -->
+                  </div>
+                  <!-- /row_list_version_3 -->
+                  <hr>
+                  <div class="row_list_version_3" data-cue="fadeIn">
+                      <!-- <div class="owl-carousel owl-theme carousel_item_1 kenburns rounded-img">
+                          <div class="item">
+                              <a href="room-details.html"><img src="img/rooms/1.jpg" alt=""></a>
+                          </div>
+                      </div> -->
+                      <!-- /carousel -->
+                      <div class="box_item_info" data-jarallax-element="-25">
+                          <!-- <small>From $150/night</small> -->
+                          <h2>Horse Training Course</h2>
+                          <p>
+                              ₦100,000
+                          </p>
+                          <hr>
+                          <p>
+                              The horse's condition will be assessed and a program will be recommended based on the findings. The starting prices are based on simple scenarios.
+                          </p>
+                      </div>
+                      <!-- /box_item_info -->
+                  </div>
+                  <!-- /row_list_version_3 -->
+
+              </div>
+          </div>
+      </div>
+      <!-- /container-->
+
+      <div class="bg_white">
+          <div class="container margin_120_95">
+              <!-- /row-->
+              <div class="row justify-content-between d-flex align-items-center">
+                  <div class="col-lg-6 order-lg-2">
+                      <div class="pinned-image rounded_container pinned-image--small mb-4">
+                          <div class="pinned-image__container">
+                              <img src="{% static 'img/horse.png' %}" alt="">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-5 order-lg-1">
+                      <div class="title">
+                          <small>Belleza Polo Arena</small>
+                          <h3>Evaluation and Assessment</h3>
+                          <br>
+                          <h5>Horse (₦50,000)</h5>
+                          <p>Horses will be assessed (checking body condition, health, fitness, alertness e.t.c).</p>
+                          <h5>Players and Riders (₦50,000)</h5>
+                          <p>Assessments will be carried out on experienced riders and players to determine course type.</p>
+
+                      </div>
+                  </div>
+              </div>
+              <!-- /row-->
+          </div>
+          <!-- /container-->
+      </div>
+      <!-- /bg_white -->
+
+      <section id="trail">
+          <div class="container margin_120_95">
+              <div class="title text-center mb-5">
+                  <small data-cue="slideInUp">Belleza Polo Arena</small>
+                  <h2 data-cue="slideInUp" data-delay="100">TRAIL PACKAGES</h2>
+                  <p>CATEGORIES: Beginner(walk), Intermediate(walk & trot), Advance(walk, trot & canter)​ </p>
+              </div>
+              <div class="row mt-4">
+                  <div class="col-lg-4 col-md-6">
+                      <div class="box_facilities no-border" data-cue="slideInUp">
+                          <i class=""></i>
+                          <h3>EFFORTLESS ELEGANCE</h3>
+                          <p>(Beach ride by the shore: 30mins)</p>
+                          <p>Enjoy a guided trail ride on the beautiful shores of Ilase beach. Feel the horse's excitement as they dip their hooves into the refreshing ocean. Pose for amazing pictures and enjoy bonding on a beautiful horse.</p>
+                          <hr>
+                          <h5>₦30,000</h5>
+                      </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                      <div class="box_facilities" data-cue="slideInUp">
+                          <i class=""></i>
+                          <h3>THE PONY SPIRIT</h3>
+                          <p>(Beach and Bush ride: 30mins)</p>
+                          <p>More scenery means more pictures! A quickly guided trail on both the beach and bush villag.</p>
+                          <hr>
+                          <h5>₦40,000</h5>
+                      </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                      <div class="box_facilities" data-cue="slideInUp">
+                          <i class=""></i>
+                          <h3>THE WESTSIDE ADVENTURE</h3>
+                          <p>(Beach and bush ride - west side: 60mins)</p>
+                          <p>Get the best of everything with a guided beach, village and bush trail. Gives you a chance to explore more of what the island has to offer. 2 spots for pictures.</p>
+                          <hr>
+                          <h5>₦55,000</h5>
+                      </div>
+                  </div>
+              </div>
+              <br>
+              <div class="row mt-4">
+                  <div class="col-lg-4 col-md-6">
+                      <div class="box_facilities" data-cue="slideInUp">
+                          <i class=""></i>
+                          <h3>THE EAST SIDE ADVENTURE</h3>
+                          <p>(Beach and bush ride - East side: 60mins)</p>
+                          <p>Get the best of everything with a guided beach village & bush trail. Gives you a chance to explore more of what the island has to offer. 2 spots for pictures.</p>
+                          <hr>
+                          <h5>₦55,000</h5>
+                      </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                      <div class="box_facilities" data-cue="slideInUp">
+                          <i class=""></i>
+                          <h3>THE WESTERN EXPERIENCE</h3>
+                          <p>(VIP trail: 90mins)</p>
+                          <p>Get a VIP service as the horses pick you up straight from the jetty. Enjoy the beach shore riding, bush riding & riding through the village with the opportunities to stop for photos. Finally indulge in a special picnic. (FOR EXPERIENCED RIDERS ONLY).</p>
+                          <hr>
+                          <h5>₦55,000</h5>
+                      </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                      <div class="box_facilities" data-cue="slideInUp">
+                          <i class=""></i>
+                          <h3>THE COWBOY & COLTS EXPERIENCE</h3>
+                          <p>(Beach and bush ride picnic: 90mins)</p>
+                          <p>Best of all worlds and more. A scenic picnic break in between your trail. Watch the horses graze as they take a breath while you and your partner or friends enjoy a yummy Belleza picnic. Lots of time to take photos and get creative with the horses and environment.</p>
+                          <hr>
+                          <h5>₦70,000</h5>
+                      </div>
+                  </div>
+              </div>
+              <br>
+              <br>
+              <div class="title text-center mb-5">
+                  <p><a href="#" class="btn_1">Book Now</a></p>
+              </div>
+              <!-- /Row -->
+          </div>
+      </section>
+
+      <div class="bg_white">
+          <div class="container margin_120_95">
+              <div class="row justify-content-between d-flex align-items-center add_bottom_90">
+                  <div class="col-lg-6">
+                      <div class="pinned-image rounded_container pinned-image--small mb-4">
+                          <div class="pinned-image__container">
+                              <img src="{% static 'img/poloinner.png' %}" alt="">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-5">
+                      <div class="title">
+                          <h3>FULL DAY PACKAGE</h3>
+                          <small>₦150,000 (save ₦36,000)</small>
+                          <p>
+                              <ul>
+                                  <li>8am - 7pm</li>
+                                  <li>Boat ride (To & From)</li>
+                                  <li>Vehicle transfer to the arena</li>
+                                  <li>2 Trail rides</li>
+                                  <li>Beach & Bush ride - West Side (60mins)</li>
+                                  <li>Beach & Bush ride - East Side (60mins)</li>
+                                  <li>Swimming, games, pictures</li>
+                              </ul>
+                          </p>
+                          <p><a href="#" class="btn_1 mt-1 outline">Book Now</a></p>
+                      </div>
+                  </div>
+              </div>
+              <!-- /row-->
+              <div class="row justify-content-between d-flex align-items-center">
+                  <div class="col-lg-6 order-lg-2">
+                      <div class="pinned-image rounded_container pinned-image--small mb-4">
+                          <div class="pinned-image__container">
+                              <img src="{% static 'img/poloinner2.png' %}" alt="">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-5 order-lg-1">
+                      <div class="title">
+                          <h3>OVERNIGHT PACKAGE</h3>
+                          <small>₦300,000 (save ₦86,000)</small>
+                          <p>
+                              <ul>
+                                  <li>8am - 10am next day</li>
+                                  <li>Boat ride (To & From)</li>
+                                  <li>Vehicle transfer to the arena</li>
+                                  <li>3 Trail rides</li>
+                                  <li>Beach & Bush ride - West Side (60mins)</li>
+                                  <li>Beach & Bush ride - East Side (60mins)</li>
+                                  <li>Beach & Bush ride Picnic (90mins)</li>
+                                  <li>Swimming, games, pictures</li>
+                              </ul>
+                          </p>
+                          <p><a href="#" class="btn_1 mt-1 outline">Book Now</a></p>
+                      </div>
+                  </div>
+              </div>
+              <!-- /row-->
+          </div>
+          <!-- /container-->
+      </div>
+      <!-- /bg_white -->
+
+      <div class="bg_white">
+          <div class="container margin_120_95">
+              <div class="row justify-content-between d-flex align-items-center add_bottom_90">
+                  <div class="col-lg-6">
+                      <div class="pinned-image rounded_container pinned-image--small mb-4">
+                          <div class="pinned-image__container">
+                              <img src="{% static 'img/poloinner3.png' %}" alt="">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-5">
+                      <div class="title">
+                          <h3>RIDING LESSONS</h3>
+                          <p>
+                              <ul>
+                                  <li>Crash Course (10mins): ₦15,000</li>
+                                  <li>1 Session (60mins): ₦30,000</li>
+                                  <li>4 Sessions Pakage (60mins each): ₦100,000</li>
+                              </ul>
+                          </p>
+                          <p>EXPERIENCED RIDERS: 30 minutes ride - ₦30,000
+                             <br>
+                             SHOW JUMPING LESSONS: Coming Soon
+                          </p>
+                          <p><a href="#" class="btn_1 mt-1 outline">Book Now</a></p>
+                      </div>
+                  </div>
+              </div>
+              <!-- /row-->
+          </div>
+          <!-- /container-->
+      </div>
+      <!-- /bg_white -->
+</main>
+
+{% endblock content %}

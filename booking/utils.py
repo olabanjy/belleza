@@ -1,12 +1,15 @@
 import json
 from .models import *
-from booking.models import Room, Order, OrderItem, Package
+
+from booking.models import Room, Order, OrderItem, Package, BookingInfo
 
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import get_user_model
 from ums.models import Profile
 from datetime import datetime
+
+from . import choices
 
 from django.contrib.contenttypes.models import ContentType
 
@@ -105,40 +108,92 @@ def cartData(request):
 
 
 def guestOrder(request, data):
-    first_name = data["userInfo"]["first_name"]
-    last_name = data["userInfo"]["last_name"]
-    phone = data["userInfo"]["phone"]
-    user_email = data["userInfo"]["email"]
+
+    clientType = data["clientType"]
+
+    if clientType == "personal":
+        user_email = data["bookingData"]["email"]
+        first_name = data["bookingData"]["first_name"]
+        last_name = data["bookingData"]["last_name"]
+        phone = data["bookingData"]["phone"]
+        address = data["bookingData"]["address"]
+        other_phone = data["bookingData"]["other_phone"]
+
+        user_password = f"{user_email.split('@', 1)[0]}{1234}"
+        # User = get_user_model
+        try:
+            the_user = User.objects.get(email=user_email)
+
+        except User.DoesNotExist:
+            the_user, created = User.objects.get_or_create(
+                username=str(user_email.split("@", 1)[0]),
+                defaults={
+                    "email": user_email,
+                    "password": make_password(user_password),
+                },
+            )
+            # send an email to the user here!
+
+        the_profile, created = Profile.objects.get_or_create(user=the_user)
+
+        bookingInfo = BookingInfo.objects.create(
+            user=the_profile,
+            phone=phone,
+            full_name=f"{first_name} {last_name}",
+            other_phone=other_phone,
+            address=address,
+            client_type=choices.ClientType.Personal.value,
+        )
+
+        order = Order.objects.create(
+            user=the_profile, ordered=False, booking_info=bookingInfo
+        )
+
+    elif clientType == "corporate":
+        company_name = data["bookingData"]["company_name"]
+        user_email = data["bookingData"]["company_email"]
+        company_phone_number = data["bookingData"]["company_phone_number"]
+        company_other_phone = data["bookingData"]["company_other_phone"]
+        company_address = data["bookingData"]["company_address"]
+        company_nature = data["bookingData"]["company_nature"]
+        number_of_guests = data["bookingData"]["number_of_guests"]
+        company_representative = data["bookingData"]["company_representative"]
+
+        user_password = f"{user_email.split('@', 1)[0]}{1234}"
+        try:
+            the_user = User.objects.get(email=user_email)
+
+        except User.DoesNotExist:
+            the_user, created = User.objects.get_or_create(
+                username=str(user_email.split("@", 1)[0]),
+                defaults={
+                    "email": user_email,
+                    "password": make_password(user_password),
+                },
+            )
+
+        the_profile, created = Profile.objects.get_or_create(user=the_user)
+
+        bookingInfo = BookingInfo.objects.create(
+            user=the_profile,
+            phone=company_phone_number,
+            company_name=company_name,
+            other_phone=company_other_phone,
+            address=company_address,
+            nature_of_business=company_nature,
+            number_of_guests=number_of_guests,
+            corporate_rep=company_representative,
+            client_type=choices.ClientType.Personal.value,
+        )
+
+        order = Order.objects.create(
+            user=the_profile, ordered=False, booking_info=bookingInfo
+        )
 
     cookieData = cookieCart(request)
     items = cookieData["items"]
 
-    user_password = f"{user_email.split('@', 1)[0]}{1234}"
-    # User = get_user_model
-    try:
-        the_user = User.objects.get(email=user_email)
-
-    except User.DoesNotExist:
-        the_user, created = User.objects.get_or_create(
-            username=str(user_email.split("@", 1)[0]),
-            defaults={"email": user_email, "password": make_password(user_password)},
-        )
-        # send an email to the user here!
-
-    the_profile, created = Profile.objects.get_or_create(user=the_user)
-    the_profile.first_name = first_name
-    the_profile.last_name = last_name
-    the_profile.phone = phone
-
-    the_profile.save()
-
     # send welcome email to user
-
-    order = Order.objects.create(
-        user=the_profile,
-        ordered=False,
-    )
-    order.save()
 
     for product in items:
 

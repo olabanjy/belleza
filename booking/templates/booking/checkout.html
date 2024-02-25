@@ -38,19 +38,49 @@
           </div>
           <div class="card-body">
 
+            <div class="hideable_client_type_enum">
 
+              <label for="selected_client_type">Are you booking on behalf of a company?</label> <br>
+              <div class="custom_select" id="selected_days_div">
+                <select name="selected_client_type" id="selected_client_type" class="wide" >
+                    <option value="" selected disabled> Corporate or personal booking?  </option>
+                    <option value="personal" > Personal </option>
+                    <option value="corporate" > Corporate </option>
+                </select>
+
+            </div>
+            </div>
+
+            <hr>
+
+
+              <div class="hideable_personal_booking_form">
+                <div class="row">
+                  <div class="col-sm-6">
+                      <div class="form-floating mb-4">
+                          <input class="form-control" type="text" id="first_name" name="first_name" placeholder="First Name" >
+                          <label for="first_name">Name</label>
+                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-floating mb-4">
+                          <input class="form-control" type="text" id="last_name" name="last_name" placeholder="Last Name" >
+                          <label for="last_name">Last name</label>
+                      </div>
+                  </div>
+              </div>
 
               <div class="row">
                 <div class="col-sm-6">
                     <div class="form-floating mb-4">
-                        <input class="form-control" type="text" id="first_name" name="first_name" placeholder="First Name" required>
-                        <label for="first_name">Name</label>
+                        <input class="form-control" type="email" id="email_contact" name="email_contact" placeholder="Email">
+                        <label for="email_contact">Email</label>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-floating mb-4">
-                        <input class="form-control" type="text" id="last_name" name="last_name" placeholder="Last Name" required>
-                        <label for="last_name">Last name</label>
+                        <input class="form-control" type="text" id="phone_contact" name="phone_contact" placeholder="Telephone">
+                        <label for="phone_contact">Telephone</label>
                     </div>
                 </div>
             </div>
@@ -58,48 +88,90 @@
             <div class="row">
               <div class="col-sm-6">
                   <div class="form-floating mb-4">
-                      <input class="form-control" type="email" id="email_contact" name="email_contact" placeholder="Email" required>
-                      <label for="email_contact">Email</label>
+                      <input class="form-control" type="text" id="personal_address" name="personal_address" placeholder="Personal Address">
+                      <label for="address_1">Personal Address</label>
                   </div>
               </div>
               <div class="col-sm-6">
                   <div class="form-floating mb-4">
-                      <input class="form-control" type="text" id="phone_contact" name="phone_contact" placeholder="Telephone" required>
-                      <label for="phone_contact">Telephone</label>
+                      <input class="form-control" type="text" id="other_number" name="other_number" placeholder="Other Number">
+                      <label for="other_number">Other Number</label>
                   </div>
               </div>
           </div>
+              </div>
 
-          <h6 class="mb-3">Billing Address </h6>
 
+
+              <div class="hideable_coporate_booking_form">
+
+                <div class="row">
+                  <div class="col-sm-6">
+                      <div class="form-floating mb-4">
+                          <input class="form-control" type="text" id="company_name" name="company_name" placeholder="Company Name">
+                          <label for="company_name">Company Name</label>
+                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-floating mb-4">
+                          <input class="form-control" type="text" id="company_email" name="company_email" placeholder="Company Email">
+                          <label for="company_email">Company Email</label>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-floating mb-4">
+                      <input class="form-control" type="text" id="company_phone_number" name="company_phone_number" placeholder="Corporate Phone Number">
+                      <label for="company_phone_number">Phone Number</label>
+                  </div>
+              </div>
+
+                <div class="col-sm-6">
+                    <div class="form-floating mb-4">
+                        <input class="form-control" type="text" id="company_other_phone" name="company_other_phone" placeholder="Other Phone">
+                        <label for="company_other_phone">Other Phone Number</label>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-6">
+                  <div class="form-floating mb-4">
+                      <input class="form-control" type="text" id="company_address" name="company_address" placeholder="Address">
+                      <label for="company_address">Address</label>
+                  </div>
+              </div>
+              <div class="col-sm-6">
+                  <div class="form-floating mb-4">
+                      <input class="form-control" type="text" id="company_nature" name="company_nature" placeholder="Nature of Business">
+                      <label for="company_nature">Nature of Business</label>
+                  </div>
+              </div>
+          </div>
           <div class="row">
             <div class="col-sm-6">
                 <div class="form-floating mb-4">
-                    <input class="form-control" type="text" id="address_1" name="address_1" placeholder="Address 1" required>
-                    <label for="address_1">Address 1</label>
+                    <input class="form-control" type="text" id="number_of_guests" name="number_of_guests" placeholder="Number of Guests">
+                    <label for="number_of_guests">Number of Guests </label>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-floating mb-4">
-                    <input class="form-control" type="text" id="address_2" name="address_2" placeholder="Address 2">
-                    <label for="address_2">Address 2</label>
+                    <input class="form-control" type="text" id="company_representative" name="company_representative" placeholder="Company Representative" >
+                    <label for="company_representative"> Company Representative </label>
                 </div>
             </div>
         </div>
-        <div class="row">
-          <div class="col-sm-6">
-              <div class="form-floating mb-4">
-                  <input class="form-control" type="text" id="state" name="state" placeholder="State of Residence" required>
-                  <label for="state">Residential state </label>
               </div>
-          </div>
-          <div class="col-sm-6">
-              <div class="form-floating mb-4">
-                  <input class="form-control" type="text" id="country" name="country" placeholder="Country of Residence" required>
-                  <label for="country"> Country </label>
-              </div>
-          </div>
-      </div>
+
+
+
+
+
             </form>
 
 
@@ -161,6 +233,54 @@
 <script type="text/javascript">
 
 
+$(document).ready(function(){
+
+
+let clientType = null
+
+  // check if package in cart
+
+const checkPackageExist = () => {
+  let productTypeArr = [];
+  for (let key in cart) {
+    for (let keyObj in cart[key]) {
+      if (keyObj === 'productType') productTypeArr.push(cart[key][keyObj])
+    }
+  }
+return productTypeArr.includes("package");
+
+}
+
+console.log(checkPackageExist())
+console.log($("#selected_client_type").val())
+if (checkPackageExist() == false){
+  clientType = "personal";
+  $(".hideable_personal_booking_form").show();
+  $(".hideable_client_type_enum").hide();
+  $(".hideable_coporate_booking_form").hide();
+}else if (checkPackageExist() == true){
+  $(".hideable_client_type_enum").show();
+  $(".hideable_personal_booking_form").hide();
+  $(".hideable_coporate_booking_form").hide();
+  let selected_client_type = $("#selected_client_type")
+  selected_client_type.on("change", () => {
+    if (selected_client_type.val() == "corporate") {
+    clientType = "corporate"
+    $(".hideable_coporate_booking_form").show();
+    $(".hideable_client_type_enum").show();
+    $(".hideable_personal_booking_form").hide();
+  } else {
+    clientType = "personal";
+    $(".hideable_personal_booking_form").show();
+    $(".hideable_client_type_enum").show();
+    $(".hideable_coporate_booking_form").hide();
+  }
+  })
+
+}
+
+
+
 var total = '{{order.get_total}}'
 
 
@@ -173,23 +293,37 @@ form.addEventListener('submit', function(e){
 
 
 function submitFormData(){
-      var userFormData = {
+
+
+  let bookingData;
+
+  if (clientType === "personal"){
+    bookingData = {
           'first_name': form.first_name.value,
           'last_name': form.last_name.value,
           'email': form.email_contact.value,
           'phone': form.phone_contact.value,
+          "address": form.personal_address.value,
+          "other_phone":form.other_number.value,
           'total': total,
-      }
+    }
+  } else {
+    bookingData = {
+            "company_name": form.company_name.value,
+            "company_email": form.company_email.value,
+            "company_phone_number": form.company_phone_number.value,
+            "company_other_phone": form.company_other_phone.value,
+            "company_address": form.company_address.value,
+            "company_nature": form.company_nature.value,
+            "number_of_guests": form.number_of_guests.value,
+            "company_representative": form.company_representative.value,
+            'total': total,
+    }
+  }
 
 
-      var billingInfo = {
-            'billing_address_1':form.address_1.value,
-            'billing_address_2':form.address_2.value,
-            'billing_state':form.state.value,
-            'billing_country':form.country.value
-            }
 
-      console.log('form data', userFormData, billingInfo)
+      console.log('booking data', bookingData, 'client type', clientType)
 
       var url = "/booking/process_checkout/"
 
@@ -200,7 +334,7 @@ function submitFormData(){
 	    			'X-CSRFToken':csrftoken,
                 },
 
-                body:JSON.stringify({'userInfo':userFormData, 'billingInfo': billingInfo}),
+                body:JSON.stringify({'clientType':clientType, 'bookingData': bookingData}),
             })
             .then((response) => response.json())
             .then((data) => {
@@ -218,6 +352,10 @@ function submitFormData(){
                 window.location.href = `/booking/payment_view/${profile_id}/${order_id}/`
             })
 }
+
+})
+
+
 
 
 

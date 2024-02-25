@@ -1,0 +1,1250 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+
+<main>
+    <div id="carousel-home">
+        <div class="owl-carousel owl-theme kenburns">
+            <div class="owl-slide background-image cover" data-background="url(/static/img/menubg.png)">
+                <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+                    <div class="container">
+                        <div class="row justify-content-center justify-content-md-start">
+                            <div class="col-lg-6 static">
+                                <div class="slide-text white">
+                                    <small class="owl-slide-animated owl-slide-title">Restaurant Experience</small>
+                                    <h2 class="owl-slide-animated owl-slide-title-2">Experience Flavorful Moments With Us.</h2>
+                                    <div class="owl-slide-animated owl-slide-title-3"><a class="btn_1 outline white mt-3" href="#first_section">View Menu</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/owl-slide-->
+
+        </div>
+        <div class="mouse_wp">
+            <a href="#first_section" class="btn_scrollto">
+                <div class="mouse"></div>
+            </a>
+        </div>
+        <!-- / mouse -->
+    </div>
+    <!--/carousel-->
+
+
+    <div class="pattern_3">
+        <div class="container margin_120_95" id="first_section">
+            <div class="title text-center mb-5">
+                  <small data-cue="slideInUp">Belleza Beach Resort</small>
+                  <h2 data-cue="slideInUp" data-delay="100">Menu</h2>
+            </div>
+          <div class="tabs_menu" data-cue="slideInUp" data-delay="200">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a id="tab-A" href="#pane-A" class="nav-link active" data-bs-toggle="tab" role="tab">Food Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tab-B" href="#pane-B" class="nav-link" data-bs-toggle="tab" role="tab">Drinks Menu</a>
+                    </li>
+                     <li class="nav-item">
+                        <a id="tab-C" href="#pane-C" class="nav-link" data-bs-toggle="tab" role="tab">Cigar Menu</a>
+                    </li>
+                </ul>
+                <div class="tab-content add_bottom_25" role="tablist">
+                    <div id="pane-A" class="card tab-pane fade show active" role="tabpanel" aria-labelledby="tab-A">
+                        <div class="card-header" role="tab" id="heading-A">
+                            <h5>
+                                <a class="collapsed" data-bs-toggle="collapse" href="#collapse-A" aria-expanded="true" aria-controls="collapse-A">
+                                    Food Menu
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapse-A" class="collapse" role="tabpanel" aria-labelledby="heading-A">
+                            <div class="card-body">
+                                <div class="banner background-image" data-background="url(/static/img/foodbg.png)">
+                                    <div class="wrapper d-flex align-items-center justify-content-between opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.6)">
+                                        <div>
+                                           <small>Best Seller</small>
+                                            <h3>The Belleza Grill Platter - ₦85,000</h3>
+                                            <p>BBQ Turkey, Chicken Wings, Gizzard, Fish, Ribs, Snails, Prawns, Corn-on-the-cob - served with any two of Plantain, Fried Yam, Sweet Potatoes, French Fries.</p>
+                                            <!-- <a href="menu-of-the-day.html" class="btn_1">View Menu</a> -->
+                                        </div>
+                                        <!-- <figure class="d-none d-lg-block"><img src="img/restaurant/banner.svg" alt="" width="200" height="200" class="img-fluid"></figure> -->
+                                    </div>
+                                    <!-- /wrapper -->
+                                </div>
+                                <!-- /banner -->
+                                <div class="row magnific-gallery add_top_30">
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>SALADS</h4>
+                                            <figure>
+                                                <a href="{% static 'img/salad.png' %}" title="Salads" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/salad.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Coleslaw</h3><em>₦2,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Greek Salad</h3><em>₦6,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Thai Beef Salad</h3><em>₦7,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Chicken Ceaser Salad </h3><em>₦7,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Egg and Potato Salad</h3><em>₦5,000</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>SANDWICHES</h4>
+                                            <figure>
+                                                <a href="{% static 'img/sandwich.png' %}" title="sandwichs" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/sandwich.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Club Sandwich </h3><em>₦8,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Chicken Mayo Sandwich</h3><em>₦8,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Tomato and Cheese Sandwich</h3><em>₦8,500</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Ham and Cheese Sandwich</h3><em>₦8,500</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>BURGERS</h4>
+                                            <figure>
+                                                <a href="{% static 'img/burger.png' %}" title="burgers" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/burger.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Beef Burger</h3><em>₦10,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Chicken Burger</h3><em>₦11,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Crumb Chicken Burger</h3><em>₦11,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Chicken & Beef Burger </h3><em>₦12,500</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>WRAPS</h4>
+                                            <figure>
+                                                <a href="{% static 'img/wraps.png' %}" title="wraps" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/wraps.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Chicken Wrap</h3><em>₦8,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Beef Wrap</h3><em>₦8,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Belleza Special (Chicken & Beef) </h3><em>₦8,500</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Chicken escalope</h3><em>₦12,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Finger licking pops</h3><em>₦12,500</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>BAR SNACKS & GRILLS</h4>
+                                            <br>
+                                            <figure>
+                                                <a href="{% static 'img/grill.png' %}" title="grills" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/grill.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Giz-Dodo</h3><em>₦6,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Pepper Goat Meat </h3><em>₦7,500</em>
+                                                <p>with Yam Fries / Dodo / Sweet Potato Fries</p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Peppered Snails  </h3><em>₦12,000</em>
+                                                <p>with Yam Fries / Sweet Potato Fries</p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Snails and Dodo Kebab</h3><em>₦9,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Grilled Turkey</h3><em>₦7,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Grilled Chicken</h3><em>₦6,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Grilled Fish</h3><em>₦8,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Barbecue Pork Ribs</h3><em>₦12,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>The Belleza Brunch Platter</h3><em>₦70,000</em>
+                                                <p>(Turkey, Chicken Wings, Chicken Drums,
+                                                    Finger Licking Pops, Sandwich, Burger,
+                                                    Belleza Smokey Jollof, Coleslaw
+                                                    (served with any two of Plantain,
+                                                    Fried Yam, Sweet Potatoes, French Fries)</p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>The Belleza Grill Platter</h3><em>₦85,000</em>
+                                                <p>(BBQ Turkey, Chicken Wings, Gizzard,
+                                                    Fish, Ribs, Snails, Prawns, Corn-on-the-cob
+                                                    (served with any two of Plantain, Fried Yam,
+                                                    Sweet Potatoes, French Fries)</p>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <h5>SIDES FOR GRILLS</h5>
+                                            <div class="menu_title">
+                                                <h3>Yam Fries</h3><em>₦3,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Sweet potato Fries</h3><em>₦3,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Fried Plantain/Dodo</h3><em>₦3,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>French Fries</h3><em>₦3,500</em>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <h5>PEPPER SOUPS</h5>
+                                            <div class="menu_title">
+                                                <h3>Assorted Meat Soup</h3><em>₦7,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Goat Meat Soup</h3><em>₦8,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Chicken Pepper Soup</h3><em>₦7,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Fish Pepper Soup</h3><em>₦9,500</em>
+                                                <p>(Croaker or Cat Fish)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>CONTINENTAL BREAKFAST & DISHES</h4>
+                                            <figure>
+                                                <a href="{% static 'img/conti.png' %}" title="CONTINENTAL BREAKFAST" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/conti.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <br>
+                                            <h5>BREAKFAST</h5>
+                                            <div class="menu_title">
+                                                <h3>Full English breakfast</h3><em>₦15,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Belleza Continental Breakfast Platter</h3><em>₦50,000</em>
+                                            </div>
+                                            <br>
+                                            <h5>PASTAS</h5>
+                                            <div class="menu_title">
+                                                <h3>Chicken Alfredo pasta </h3><em>₦12,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Spaghetti Bolognese  </h3><em>₦11,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Seafood Pasta</h3><em>₦18,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Spaghetti Arrabiata </h3><em>₦14,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Spaghetti Carbonara </h3><em>₦14,000</em>
+                                            </div>
+                                            <br>
+                                            <h5>SAUCES</h5>
+                                            <div class="menu_title">
+                                                <h3>Beef Stroganoff </h3><em>₦14,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Grilled Croaker Fish in Sweet Chilli Sauce </h3><em>₦12,500</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Steak in Creamy or Tomato Sauce</h3><em>₦16,500</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Beef Fillet Steak in Peppercorn Sauce </h3><em>₦16,500</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Chicken Casserole </h3><em>₦16,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Prawns in Sweet Chilli Sauce </h3><em>₦18,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Pork in Sweet and Sour Sauce </h3><em>₦13,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Fillet fish in Sauce Meuniere </h3><em>₦12,500</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Chicken Supreme Sauce</h3><em>₦12,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Chilli Chicken Peanut </h3><em>₦12,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Chicken Curry sauce </h3><em>₦12,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Chicken Yassa sauce </h3><em>₦12,900</em>
+                                            </div>
+                                            <br>
+                                            <h5>SIDES FOR CONTINENTAL DISHES</h5>
+                                            <div class="menu_title">
+                                                <h3>Basmati Rice</h3><em>₦5,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Spaghetti</h3><em>₦3,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Vegetables</h3><em>₦3,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Jellof Rice</h3><em>₦5,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Fried Rice</h3><em>₦5,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>French Fries</h3><em>₦3,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Sauté Potato</h3><em>₦3,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Mash Potato</h3><em>₦4,000</em>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="menu_item">
+                                            <h4>NATIONAL/AFRICANA KITCHEN</h4>
+                                            <figure>
+                                                <a href="{% static 'img/native.png' %}" title="grills" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/native.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <div class="menu_title">
+                                                <h3>Fish or Egg Sauce </h3><em>₦12,500</em>
+                                                <p>Served with Fried/Boiled Yam or Plantain</p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Garden Egg Sauce  </h3><em>₦14,500</em>
+                                                <p>Served with Fried/Boiled Yam or Plantain</p>
+                                            </div>
+                                            <br>
+                                            <h5>RICE DISHES</h5>
+                                            <div class="menu_title">
+                                                <h3>Belleza Smoky Jollof Rice</h3><em>₦5,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Fried Rice </h3><em>₦5,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Oriental Fried Rice </h3><em>₦7,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Basmati rice and Stew</h3><em>₦5,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>White Rice and Stew</h3><em>₦4,500</em>
+                                            </div>
+                                            <br>
+                                            <p>NB: All rice dishes should be ordered with protein of choice.</p>
+                                            <br>
+                                            <h5>PROTEIN</h5>
+                                            <div class="menu_title">
+                                                <h3>Prawns</h3><em>₦10,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Pepper Croaker Fish </h3><em>₦7,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Pepper Titus Fish </h3><em>₦6,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Goat Meat</h3><em>₦6,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Beef</h3><em>₦4,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Assorted Meat</h3><em>₦6,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Snail</h3><em>₦9,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Pepper Chicken</h3><em>₦5,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Pepper Turkey</h3><em>₦6,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Alatasuesue</h3><em>₦6,500</em>
+                                                <p>(Peppered Dry Fish, Ponmo & Beef)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h5>SOUPS</h5>
+                                            <div class="menu_title">
+                                                <h3>Egusi</h3><em>₦6,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Efo-Riro </h3><em>₦6,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Edikaikong </h3><em>₦6,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Seafood Okra </h3><em>₦10,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Okra Soup</h3><em>₦6,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Fisherman White Soup</h3><em>₦15,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Banga</h3><em>₦7,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Oha</h3><em>₦7,500</em>
+                                            </div>
+                                            <br>
+                                            <h5>SWALLOW</h5>
+                                            <div class="menu_title">
+                                                <h3>Wheat</h3><em>₦2,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Poundo Yam </h3><em>₦2,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Eba </h3><em>₦2,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Semolina</h3><em>₦2,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Fufu</h3><em>₦2,000</em>
+                                            </div>
+                                            <br>
+                                            NB: All soup dishes should be ordered with swallow and protein of choice.
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- /row -->
+                            </div>
+                            <!-- /card-body -->
+                        </div>
+                    </div>
+                    <!-- /tab -->
+                    <div id="pane-B" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-B">
+                        <div class="card-header" role="tab" id="heading-B">
+                            <h5>
+                                <a class="collapsed" data-bs-toggle="collapse" href="#collapse-B" aria-expanded="false" aria-controls="collapse-B">
+                                    Drinks Menu
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapse-B" class="collapse" role="tabpanel" aria-labelledby="heading-B">
+                            <div class="card-body">
+                                <div class="banner background-image" data-background="url(/static/img/drinksb.png)">
+                                    <div class="wrapper d-flex align-items-center justify-content-between opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+                                        <div>
+                                            <small>SIGNATURE COCKTAIL</small>
+                                            <h3>Screaming Orgasm - ₦10,500</h3>
+                                            <p>vodka, baileys, khalua, cream, amaretto liqueur</p>
+                                            <!-- <a href="menu-of-the-day.html" class="btn_1">View Menu</a> -->
+                                        </div>
+                                        <!-- <figure class="d-none d-lg-block"><img src="img/restaurant/banner.svg" alt="" width="200" height="200" class="img-fluid"></figure> -->
+                                    </div>
+                                    <!-- /wrapper -->
+                                </div>
+                                <!-- /banner -->
+                                <div class="row magnific-gallery add_top_30">
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>SIGNATURE COCKTAIL</h4>
+                                            <br>
+                                            <figure>
+                                                <a href="{% static 'img/cocktail.png' %}" title="SIGNATURE COCKTAIL" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/cocktail.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Trash Can </h3><em>₦10,500</em>
+                                                <p>(rum, gin, vodka, triple sec, redbull,
+                                                    blue curcao, peache schnaps)</p>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Long Beach IceTea</h3><em>₦9,500</em>
+                                                <p>(vodka, tequila, gin, rum, triple sec,
+                                                    cranberry juice, khalua)</p>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Hurricane</h3><em>₦8,500</em>
+                                                <p>(dark rum, light rum, lime juice, sweet and
+                                                    sour mix, orange juice, dash of pineapple
+                                                    juice, passion fruit syrup, grenadine)</p>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Kiwi Delight</h3><em>₦8,500</em>
+                                                <p>(kiwi syrup, vodka, sweet and sour
+                                                    mix, orange, pineapple juice)</p>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Screaming Orgasm</h3><em>₦10,500</em>
+                                                <p>(vodka, baileys, khalua, cream, amaretto
+                                                    liqueur) </p>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Pain Killer</h3><em>₦8,500</em>
+                                                <p>(dark rum, orange juice, pineapple
+                                                    juice, coconut cream)</p>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Watermelon Fizzt</h3><em>₦8,500</em>
+                                                <p>(fresh watermelon, gin, lemon juice,
+                                                    orange juice)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>INTERNATIONAL COCKTAIL</h4>
+                                            <figure>
+                                                <a href="{% static 'img/icocktail.png' %}" title="INTERNATIONAL COCKTAIL" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/icocktail.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Whiskey Sour </h3><em>₦9,000</em>
+                                                <p>(whiskey, lemon juice, sugar syrup, angostura
+                                                    bitters)</p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Amaretto Sour</h3><em>₦9,500</em>
+                                                <p>(whiskey, amaretto liqueur, sweet and sour
+                                                    mix, egg white) (optional)</p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Sex on The Beach</h3><em>₦9,500</em>
+                                                <p>(vodka, orange juice, cranberry juice,
+                                                    peach schnapps)</p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Mojito </h3><em>₦9,500</em>
+                                                <p>Strawberry / Passion Fruit / Plain</p>
+                                                <p>(lime wedges, edible sugar, rum, mint leaves,
+                                                    soda)</p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Martini</h3><em>₦9,000</em>
+                                                <p>(gin, dry martini) </p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Pina Colada</h3><em>₦9,000</em>
+                                                <p>(rum, coconut cream, pineapple juice, whipping
+                                                    cream)</p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Blue Hawaiian</h3><em>₦9,000</em>
+                                                <p>(vodka, rum, pineapple juice, coconut cream,
+                                                    sweet and sour mix)</p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Green Sea</h3><em>₦9,000</em>
+                                                <p>(basil leave, ginger syrup, lime juice, vodka,
+                                                    fresh pineapple) </p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Negroni</h3><em>₦7,000</em>
+                                                <p>(campari, martini rosso, gin) </p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Cosmopolitan</h3><em>₦9,000</em>
+                                                <p>(vodka, cranberry juice, triple sec, lemon) </p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Passion Fruit Martini</h3><em>₦10,000</em>
+                                                <p>(vodka, passion fruit, orange juice)  </p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Mai Tai</h3><em>₦9,000</em>
+                                                <p>(white rum, black rum, orgeat syrup, lemon,
+                                                    triple sec) </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>MOCKTAIL</h4>
+                                            <figure>
+                                                <a href="{% static 'img/mocktail.png' %}" title="MOCKTAIL" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/mocktail.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Island Breeze </h3><em>₦5,000</em>
+                                                <p>(pineapple juice, sweet and sour mix, angostura
+                                                    bitters, cranberry juice)</p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Virgin Watermelon Fizz</h3><em>₦5,000</em>
+                                                <p>(fresh watermelon, pineapple juice, orange juice,
+                                                    sweet and sour mix)</p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Chapman</h3><em>₦5,000</em>
+                                                <p>(orange juice, fanta, sprite, angostura bitters,
+                                                    grenadine syrup)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>SMOOTHIES</h4>
+                                            <figure>
+                                                <a href="{% static 'img/smoothie.png' %}" title="SMOOTHIES" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/smoothie.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Pineapple Smoothie </h3><em>₦5,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Watermelon Smoothie</h3><em>₦5,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Mixed Berry Smoothie</h3><em>₦5,800</em>
+                                                <p>(orange juice, fanta, sprite, angostura bitters,
+                                                    grenadine syrup)</p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Mixed Fruit Smoothie</h3><em>₦5,500</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>VODKA</h4>
+                                            <figure>
+                                                <a href="{% static 'img/vcocktail.png' %}" title="VODKA" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/vcocktail.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>B52 Flaming Shot </h3><em>₦5,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Jaga Bomb</h3><em>₦5,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Helen’s Nipple</h3><em>₦5,000</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>FRESH JUICE</h4>
+                                            <figure>
+                                                <a href="{% static 'img/juice.png' %}" title="FRESH JUICE" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/juice.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Fresh Pineapple Juice </h3><em>₦5,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Fresh Watermelon Juice</h3><em>₦5,000</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>COLD COFFEE</h4>
+                                            <figure>
+                                                <a href="{% static 'img/coldcoffee.png' %}" title="COLD COFFEE" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/coldcoffee.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Ice Latte</h3><em>₦3,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Frappuccino</h3><em>₦3,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Cold Chocolate</h3><em>₦2,500</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>HOT COFFEE</h4>
+                                            <figure>
+                                                <a href="{% static 'img/hotcoffee.png' %}" title="HOT COFFEE" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/hotcoffee.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Americano</h3><em>₦3,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Latte</h3><em>₦3,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Cappuccino</h3><em>₦3,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Shot of Espresso</h3><em>₦2,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Hot Chocolate</h3><em>₦2,500</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>WHISKEY</h4>
+                                            <figure>
+                                                <a href="{% static 'img/whiskey.png' %}" title="WHISKEY" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/whiskey.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Glenfiddich 15yrs</h3><em>₦10,000(shot)</em><em>₦160,000(bottle)</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Glenfiddich 18yrs</h3><em>₦15,000(shot)</em><em>₦210,000(bottle)</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Glenfiddich 21yrs</h3><em>₦160,000(bottle)</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Glenfiddich 23yrs</h3><em>₦600,000(bottle)</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Glenfiddich 26yrs</h3><em>₦1,000,000(bottle)</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Singleton 15yrs</h3><em>₦10,000(shot)</em><em>₦135,000(bottle)</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Singleton 18yrs</h3><em>₦15,000(shot)</em><em>₦175,000(bottle)</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Johnnie Walker – Blue Label</h3><em>₦450,000(bottle)</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Johnnie Walker – Gold Label</h3><em>₦125,000(bottle)</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Jameson Black Barrel</h3><em>₦8,000(shot)</em><em>₦100,000(bottle)</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Macallan 15yrs</h3><em>₦10,000(shot)</em><em>₦250,000(bottle)</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Macallan 18yrs</h3><em>₦15,000(shot)</em><em>₦395,000(bottle)</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Macallan Rare Cast</h3><em>₦500,000(bottle)</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>CHAMPAGNE</h4>
+                                            <figure>
+                                                <a href="{% static 'img/champagne.png' %}" title="HOT COFFEE" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/champagne.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Moet & Chandon Imperial Brut</h3><em>₦150,000</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Moet & Chandon Rose Imperial</h3><em>₦170,000</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Moet & Chandon Nectar Imperial</h3><em>₦170,000</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Moet & Chandon Nectar Imperial Rose</h3><em>₦220,000</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Moet & Chandon Ice Imperial </h3><em>₦190,000</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Veuve Clicquot Rich</h3><em>₦240,000</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Veuve Clicquot Rose</h3><em>₦200,000</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Veuve Clicquot Brut</h3><em>₦170,000</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Dom Perignon Rose</h3><em>₦800,000</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Dom Perignon Rose Brut</h3><em>₦600,000</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Louis Roderer Cristal</h3><em>₦600,000</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Ace of Spades</h3><em>₦600,000</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>COGNAC</h4>
+                                            <figure>
+                                                <a href="{% static 'img/cognac.png' %}" title="cognac" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/cognac.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Hennessy XO</h3><em>₦520,000(bottle)</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Hennessy VSOP</h3><em>₦15,000(shot)</em><em>₦180,000(bottle)</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Martell XO</h3><em>₦500,000(bottle)</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Martell Blue Swift</h3><em>₦15,000(shot)</em><em>₦180,000(bottle)</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Remy Martin XO</h3><em>₦500,000(bottle)</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Remy Martin 1738</h3><em>₦10,000(shot)</em><em>₦180,000(bottle)</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Remy Martin VSOP</h3><em>₦10,000(shot)</em><em>₦150,000(bottle)</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>RED WINE</h4>
+                                            <figure>
+                                                <a href="{% static 'img/rwine.png' %}" title="red wine" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/rwine.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Brotte La Fiole du Pape</h3><em>₦95,000</em>
+                                                <p>(Châteauneuf-du-Pape)</p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Unanime Gran Vino Tinto</h3><em>₦95,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Isolabella Della Croce</h3><em>₦80,000</em>
+                                                <p>(36 Trentasei Brachetto d’Acqui))</p>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Sandeman</h3><em>₦35,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Sweet Lips</h3><em>₦35,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Santa Alba</h3><em>₦35,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Four Cousins</h3><em>₦35,000</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>TEQUILA</h4>
+                                            <figure>
+                                                <a href="{% static 'img/tequila.png' %}" title="TEQUILA" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/tequila.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Volcan Blanco</h3><em>₦140,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Volcan Cristalino</h3><em>₦190,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Clase Azul Reposado</h3><em>₦620,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Don Julio 1942</h3><em>₦620,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Casamigos Blanco</h3><em>₦185,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Olmeca Blanco</h3><em>₦4,500(shot)</em><em>₦75,000 (bottle)</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>WHITE WINE</h4>
+                                            <figure>
+                                                <a href="{% static 'img/wwine.png' %}" title="WHITE WINE" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/wwine.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Isolabella Della Croce</h3><em>₦80,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Sandeman</h3><em>₦65,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Fortant</h3><em>₦35,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Four Cousins</h3><em>₦35,000</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>VODKA</h4>
+                                            <figure>
+                                                <a href="{% static 'img/vodka.png' %}" title="VODKA" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/vodka.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Ciroc</h3><em>₦10,000(shot)</em><em>₦100,000(bottle)</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Belvedere</h3><em>₦12,500(shot)</em><em>₦120,000(bottle)</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>Rose</h4>
+                                            <figure>
+                                                <a href="{% static 'img/rose.png' %}" title="Rose" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/rose.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Four Cousins</h3><em>₦35,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Sweet Lips</h3><em>₦35,000</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>Gin</h4>
+                                            <figure>
+                                                <a href="{% static 'img/gin.png' %}" title="Gin" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/gin.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Hendrick’s</h3><em>₦10,000(shot)</em><em>₦120,000(bottle)</em>
+                                            </div>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Gin Mare</h3><em>₦10,000(shot)</em><em>₦120,000(bottle)</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>NON-ALCOHOLIC WINE</h4>
+                                            <figure>
+                                                <a href="{% static 'img/nonwine.png' %}" title="NON-ALCOHOLIC WINE" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/nonwine.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <br>
+                                            <div class="menu_title">
+                                                <h3>Charme</h3><em>₦30,000</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>BEER</h4>
+                                            <figure>
+                                                <a href="{% static 'img/beer.png' %}" title="beer" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/beer.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Heineken</h3><em>₦5,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Budweiser</h3><em>₦5,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Guiness</h3><em>₦5,000</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <h4>SOFT DRINKS & JUICES</h4>
+                                            <figure>
+                                                <a href="{% static 'img/juices.png' %}" title="soft drinks" data-fslightbox="gallery_1" data-type="image">
+                                                    <img src="{% static 'img/juices.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Water</h3><em>₦3,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Soft Drinks</h3><em>₦3,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Malt</h3><em>₦4,500</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Assorted Juice</h3><em>₦4,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Cranbery Juice</h3><em>₦5,000</em>
+                                            </div>
+                                            <div class="menu_title">
+                                                <h3>Energy Drink</h3><em>₦5,000</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /row -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /tab -->
+                    <div id="pane-C" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-C">
+                        <div class="card-header" role="tab" id="heading-C">
+                            <h5>
+                                <a class="collapsed" data-bs-toggle="collapse" href="#collapse-C" aria-expanded="false" aria-controls="collapse-C">
+                                    Cigar Menu
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapse-C" class="collapse" role="tabpanel" aria-labelledby="heading-C">
+                            <div class="card-body">
+                                <div class="banner background-image" data-background="url(/static/img/cigarb.png)">
+                                    <div class="wrapper d-flex align-items-center justify-content-between opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+                                        <div>
+                                            <small>Best Seller</small>
+                                            <h3>La Flor Dominicana - ₦35,000 per stick</h3>
+                                            <p>Dominican long filler tobaccos blended with a heavy double dose of the rich Ligero leaves.</p>
+                                            <!-- <a href="#main-cigar" class="btn_1">View Menu</a> -->
+                                        </div>
+                                        <!-- <figure class="d-none d-lg-block"><img src="img/restaurant/banner.svg" alt="" width="200" height="200" class="img-fluid"></figure> -->
+                                    </div>
+                                    <!-- /wrapper -->
+                                </div>
+                                <!-- /banner -->
+                                <div id="main-cigar" class="row magnific-gallery add_top_30">
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <figure>
+                                                <a href="{% static 'img/ArturoFuente.png' %}" title="Summer Berry" data-fslightbox="gallery_3" data-type="image">
+                                                    <img src="{% static 'img/ArturoFuente.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Arturo Fuente</h3><em>₦18,000 per stick</em>
+                                            </div>
+                                            <p>The Arturo Fuente brand is over 100 years old. An entire century of legacy, passion,
+                                                and success passed down from one generation to the next. With countless 90+
+                                                ratings and a massive fan base, this brand established itself as an unstoppable force
+                                                in the cigar industry. Moreover, they use only the finest wrapper, binder, and fillers
+                                                tobaccos. Many if which are expertly grown on the family Chateau in Bonao,
+                                                Dominican republic.
+                                                Undoubtedly the most highly rated and regarded cigar brand in the world. Arturo
+                                                Fuente cigars deliver smooth, naturally enhanced flavors and aromas, making each
+                                                smoke an unforgettable experience
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <figure>
+                                                <a href="{% static 'img/La Flor Dominicana.png' %}" title="Coconut Tart" data-fslightbox="gallery_3" data-type="image">
+                                                    <img src="{% static 'img/La Flor Dominicana.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>La Flor Dominicana</h3><em>₦35,000 per stick</em>
+                                            </div>
+                                            <p> Cigar Aficionado. These full-bodied smokes feature aged Dominican long filler
+                                                tobaccos blended with a heavy double dose of the rich Ligero leaves that are
+                                                plucked from the top of the plants.
+                                                <br>
+                                                The wrapper is a dark and oily Ecuadorian Sumatra sun grown leaf. Finishing this
+                                                beauty is a unique 654 style head, resembling a 654's pointed, flat shape</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <figure>
+                                                <a href="{% static 'img/Montecristo.png' %}" title="Pumpkin Cookies" data-fslightbox="gallery_3" data-type="image">
+                                                    <img src="{% static 'img/Montecristo.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Montecristo</h3><em>₦25,000 per stick</em>
+                                            </div>
+                                            <p>Montecristo Nicaragua Toro is handmade at the Tabacalera Fernandez factory in
+                                                Nicaragua and features a select blend of Nicaraguan tobacco long fillers, binder and
+                                                wrapper.
+                                                This bold Nicaraguan puro is medium to full bodied and features notes of coffee,
+                                                leather, earth and spices.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <figure>
+                                                <a href="{% static 'img/Asylum13Ogre.png' %}" title="Cookies Cream Cheese" data-fslightbox="gallery_3" data-type="image">
+                                                    <img src="{% static 'img/Asylum13Ogre.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Asylum 13 Ogre</h3><em>₦18,000 per stick</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="menu_item">
+                                            <figure>
+                                                <a href="{% static 'img/Davidoff.png' %}" title="Chocolate Cupcakes" data-fslightbox="gallery_3" data-type="image">
+                                                    <img src="{% static 'img/Davidoff.png' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="menu_title">
+                                                <h3>Davidoff Nicaraguan
+                                                    Puto Diadema</h3><em>₦35,000 per stick</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /row -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /tab -->
+                </div>
+                <!-- /tab-content -->
+          </div>
+          <!-- /tabs_menu-->
+
+            <!-- <p class="text-center mt-5"><a href="menu-of-the-day.html" class="btn_1 outline">View Day Menu</a></p> -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /pattern -->
+
+</main>
+
+{% endblock content %}
+
+
+{% block extra_scripts %}
+
+<script src="{% static 'js/slider.js' %}"></script>
+
+{% endblock extra_scripts %}

@@ -10,6 +10,11 @@ urlpatterns = [
     path("packages/", all_packages, name="packages"),
     path("package/<package_id>/", package_details, name="package-details"),
     #####
+    path(
+        "render_available_room_count/",
+        render_available_room_count,
+        name="render-available-room-count",
+    ),
     path("check_availabilty/", check_availabilty, name="check_availabilty"),
     path("cart/", cart, name="cart"),
     path("checkout/", checkout, name="checkout"),

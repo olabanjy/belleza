@@ -10,4 +10,6 @@ urlpatterns = [
     path("contact-us/", contact_us, name="contact-us"),
     path("policy/", policy, name="policy"),
     path("t&c/", terms_and_condition, name="terms"),
+    path("menu/", menu, name="menu"),
+    path("polo-arena/", polo_arena, name="polo_arena"),
 ]

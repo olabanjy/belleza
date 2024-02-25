@@ -108,5 +108,36 @@ class PackageComplimentaryAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 admin.site.register(PackageComplimentary, PackageComplimentaryAdmin)
 
 
-admin.site.register(OrderItem)
-admin.site.register(Order)
+class OrderItemAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "user",
+        "ordered",
+        "item_type",
+        "package_price_option",
+        "quantity",
+        "check_in",
+        "check_out",
+        "object_id",
+        "content_object",
+    )
+
+
+admin.site.register(OrderItem, OrderItemAdmin)
+
+
+class OrderAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "user",
+        "ref_code",
+        "ordered_date",
+        "ordered",
+        "payment",
+        "booking_info",
+        "refund_requested",
+        "refund_granted",
+    )
+
+
+admin.site.register(Order, OrderAdmin)
