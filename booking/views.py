@@ -143,7 +143,6 @@ def check_availabilty(request):
             check_in__gte=datetime.strptime(check_in_date.strip(), "%d/%m/%Y"),
             check_out__lte=datetime.strptime(check_out_date.strip(), "%d/%m/%Y"),
         )
-        print(order_items_qs)
         sum_agrregate = order_items_qs.aggregate(Sum("quantity"))
         print(sum_agrregate)
         if order_items_qs.exists():
@@ -154,7 +153,7 @@ def check_availabilty(request):
                 )
                 raise Exception("An error occured!")
             available_rooms = the_room.availability - sum_agrregate["quantity__sum"]
-            if available_rooms > quantity:
+            if available_rooms >= quantity:
                 json_resp.update(
                     {
                         "is_available": True,
@@ -175,7 +174,7 @@ def check_availabilty(request):
                     }
                 )
         else:
-            if the_room.availability > quantity:
+            if the_room.availability >= quantity:
                 json_resp.update(
                     {
                         "is_available": True,
