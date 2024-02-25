@@ -9,7 +9,7 @@
  <main>
 
     <div class="hero full-height jarallax" data-jarallax data-speed="0.2">
-        <img class="jarallax-img kenburns" src="{% static 'img/rooms/1.jpg' %}" alt="">
+        <img class="jarallax-img kenburns" src="{{the_package.detail_banner_1.url}}" alt="">
         <div class="wrapper opacity-mask d-flex align-items-center  text-center animate_hero" data-opacity-mask="rgba(0, 0, 0, 0.5)">
             <div class="container">
                 <div class="row justify-content-center">
@@ -172,7 +172,7 @@
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                         <a href="{% url 'booking:package-details' package.id %}" class="box_cat_rooms">
                             <figure>
-                                <div class="background-image" data-background="url(img/rooms/2.jpg)"></div>
+                                <div class="background-image" data-background="url({{package.banner.url}})"></div>
                                 <div class="info">
                                     <small>From ₦{{package.day_weekday_price|intcomma}}</small>
                                     <h3>{{package.title}}</h3>

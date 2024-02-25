@@ -172,13 +172,11 @@
                 {% for package in all_packages %}
                 <div class="row_list_version_3" data-cue="fadeIn">
                     <div class="owl-carousel owl-theme carousel_item_1 kenburns rounded-img">
-                        {% if package.gallery %}
-                        {% for item in package.gallery.all %}
+
                         <div class="item">
-                            <a href="{% url 'booking:package-details' package.id %}"><img src="{{item.images.url}}" alt=""></a>
+                            <a href="{% url 'booking:package-details' package.id %}"><img src="{{package.banner.url}}" alt=""></a>
                         </div>
-                        {% endfor %}
-                        {% endif %}
+
 
                     </div>
                     <!-- /carousel -->
