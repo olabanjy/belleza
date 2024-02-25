@@ -43,7 +43,10 @@
                     </div>
                     <!-- /carousel -->
                     <div class="box_item_info" data-jarallax-element="-25">
-                        <!-- <small>From $150/night</small> -->
+                        {% if package.slug == 'gold' %}
+                        <small>Most Preferred</small>
+                        {% endif %}
+
                         <h2>{{package.title}}</h2>
                         <p>Maximum Number of {{package.nos_of_guest}} Guests. Extra Guest Attract A Fee of ₦{{package.extra_guest_fee|intcomma}} Per Person.</p>
                         <div class="facilities clearfix">
