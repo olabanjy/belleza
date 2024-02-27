@@ -23,7 +23,7 @@ $(function () {
     /* Booked Dates */
     const DateTime = easepick.DateTime;
     const bookedDates = [
-      ["2023-09-01", "2023-09-04"],
+      ["2024-02-21", "2024-02-28"],
       "2023-09-07",
       ["2023-10-11", "2023-10-17"],
     ].map((d) => {

@@ -34,36 +34,61 @@ def cookieCart(request):
             bookedDates = cart[i]["dateBooked"]
             check_in_date, check_out_date = bookedDates.split("-")
 
+            check_in_dt, check_out_dt = datetime.strptime(
+                check_in_date.strip(), "%d/%m/%Y"
+            ), datetime.strptime(check_out_date.strip(), "%d/%m/%Y")
+
             if cart[i]["productType"] == "room":
                 product = Room.objects.get(id=i)
-                total = product.price * cart[i]["quantity"]
+                rate = (check_out_dt - check_in_dt).days
+                total = product.price * cart[i]["quantity"] * rate + product.caution_fee
                 product_price = product.price
+
+                product_check_in = datetime.strptime(
+                    f"{check_in_date.strip()} 12:00:00", "%d/%m/%Y %H:%M:%S"
+                )
+                product_check_out = datetime.strptime(
+                    f"{check_out_date.strip()} 10:00:00", "%d/%m/%Y %H:%M:%S"
+                )
+
             elif cart[i]["productType"] == "package":
+
                 product = Package.objects.get(id=i)
 
-                check_weekday = wee_day(check_in_date)
+                fetch_rate = (check_out_dt - check_in_dt).days
 
-                if check_weekday == True and cart[i]["period"] == "day":
-                    total = product.day_weekday_price * cart[i]["quantity"]
-                    product_price = product.day_weekday_price
-                    price_option = choices.PackagePriceOption.DayWeekday.value
+                rate = fetch_rate if fetch_rate > 0 else 1
 
-                elif check_weekday == True and cart[i]["period"] == "night":
-                    price_option = choices.PackagePriceOption.OvernightWeekday.value
-                    total = product.overnight_weekday_price * cart[i]["quantity"]
-                    product_price = product.overnight_weekday_price
+                if cart[i]["period"] == "day":
 
-                elif check_weekday == False and cart[i]["period"] == "day":
-                    price_option = choices.PackagePriceOption.DayWeekend.value
-                    total = product.day_weekend_price * cart[i]["quantity"]
-                    product_price = product.day_weekend_price
+                    total = (
+                        product.day_price * cart[i]["quantity"] * rate
+                        + product.caution_fee
+                    )
+                    product_price = product.day_price
+                    price_option = choices.PackagePriceOption.Day.value
 
-                elif check_weekday == False and cart[i]["period"] == "night":
-                    price_option = choices.PackagePriceOption.OvernightWeekend.value
+                    product_check_in = datetime.strptime(
+                        f"{check_in_date.strip()} 12:00:00", "%d/%m/%Y %H:%M:%S"
+                    )
+                    product_check_out = datetime.strptime(
+                        f"{check_out_date.strip()} 19:00:00", "%d/%m/%Y %H:%M:%S"
+                    )
 
-                    total = product.overnight_weekend_price * cart[i]["quantity"]
-                    product_price = product.overnight_weekend_price
+                elif cart[i]["period"] == "night":
+                    price_option = choices.PackagePriceOption.Overnight.value
+                    total = (
+                        product.overnight_price * cart[i]["quantity"] * rate
+                        + product.caution_fee
+                    )
+                    product_price = product.overnight_price
 
+                    product_check_in = datetime.strptime(
+                        f"{check_in_date.strip()} 12:00:00", "%d/%m/%Y %H:%M:%S"
+                    )
+                    product_check_out = datetime.strptime(
+                        f"{check_out_date.strip()} 10:00:00", "%d/%m/%Y %H:%M:%S"
+                    )
             order["get_total"] += total
             order["get_cart_items"] += cart[i]["quantity"]
 
@@ -74,6 +99,8 @@ def cookieCart(request):
                     "id": product.id,
                     "name": product.title,
                     "price": product_price,  # product.price,
+                    "caution_fee": product.caution_fee,
+                    "rate": rate,
                     "displayImagePath": (
                         product.thumbnail
                         if cart[i]["productType"] == "room"
@@ -83,8 +110,8 @@ def cookieCart(request):
                     "price_option": (
                         price_option if cart[i]["productType"] == "package" else None
                     ),
-                    "check_in": datetime.strptime(check_in_date.strip(), "%d/%m/%Y"),
-                    "check_out": datetime.strptime(check_out_date.strip(), "%d/%m/%Y"),
+                    "check_in": product_check_in,
+                    "check_out": product_check_out,
                 },
                 "quantity": cart[i]["quantity"],
                 "get_final_price": total,
@@ -181,7 +208,7 @@ def guestOrder(request, data):
             other_phone=company_other_phone,
             address=company_address,
             nature_of_business=company_nature,
-            number_of_guests=number_of_guests,
+            number_of_guests=int(number_of_guests),
             corporate_rep=company_representative,
             client_type=choices.ClientType.Personal.value,
         )
@@ -196,13 +223,14 @@ def guestOrder(request, data):
     # send welcome email to user
 
     for product in items:
-
         if product["type"] == "room":
             the_product = Room.objects.get(id=product["id"])
             product_type = ContentType.objects.get_for_model(Room)
         elif product["type"] == "package":
             the_product = Package.objects.get(id=product["id"])
             product_type = ContentType.objects.get_for_model(Package)
+            # check for extra guests
+
         order_item, created = OrderItem.objects.get_or_create(
             content_type=product_type,
             object_id=the_product.id,
@@ -223,6 +251,18 @@ def guestOrder(request, data):
             check_out=product["item"]["check_out"],
         )
         order.items.add(order_item)
+
+        # check for extra guests
+        if (
+            product["type"] == "package"
+            and order.booking_info.number_of_guests > the_product.nos_of_guest
+        ):
+            extra_guests = (
+                order.booking_info.number_of_guests - the_product.nos_of_guest
+            )
+            order_item.extra_guest = extra_guests
+            order_item.save()
+
     return the_profile, order
 
 
@@ -235,3 +275,79 @@ def wee_day(date):
         return True
     else:
         return False
+
+
+def handle_complimentary_booking(user_id, check_in, check_out, package):
+    the_prof = Profile.objects.get(id=user_id)
+    room_product_type = ContentType.objects.get_for_model(Room)
+    if package == "silver":
+        deluxe_room = Room.objects.filter(slug="deluxe-room").first()
+        OrderItem.objects.get_or_create(
+            user=the_prof,
+            content_type=room_product_type,
+            object_id=deluxe_room.id,
+            item_type=choices.ProductType.Room.value,
+            ordered=True,
+            check_in=check_in,
+            check_out=check_out,
+            quantity=5,
+            is_complimentary=True,
+        )
+
+        # book 3 full poolview
+        full_poolview_room = Room.objects.filter(slug="full-poolview").first()
+        OrderItem.objects.get_or_create(
+            user=the_prof,
+            content_type=room_product_type,
+            object_id=full_poolview_room.id,
+            item_type=choices.ProductType.Room.value,
+            ordered=True,
+            check_in=check_in,
+            check_out=check_out,
+            quantity=3,
+            is_complimentary=True,
+        )
+
+        # book 2 oceanview
+        ocean_view = Room.objects.filter(slug="ocean-view").first()
+        OrderItem.objects.get_or_create(
+            user=the_prof,
+            content_type=room_product_type,
+            object_id=ocean_view.id,
+            item_type=choices.ProductType.Room.value,
+            ordered=True,
+            check_in=check_in,
+            check_out=check_out,
+            quantity=2,
+            is_complimentary=True,
+        )
+    elif package == "bronze":
+        # book two fullpoolview
+        full_poolview_room = Room.objects.filter(slug="full-poolview").first()
+        OrderItem.objects.get_or_create(
+            user=the_prof,
+            content_type=room_product_type,
+            object_id=full_poolview_room.id,
+            item_type=choices.ProductType.Room.value,
+            ordered=True,
+            check_in=check_in,
+            check_out=check_out,
+            quantity=2,
+            is_complimentary=True,
+        )
+    elif package == "gold":
+        # book all rooms
+        all_rooms = Room.objects.all()
+        for room in all_rooms:
+            OrderItem.objects.get_or_create(
+                user=the_prof,
+                content_type=room_product_type,
+                object_id=room.id,
+                item_type=choices.ProductType.Room.value,
+                ordered=True,
+                check_in=check_in,
+                check_out=check_out,
+                quantity=room.availability,
+                is_complimentary=True,
+            )
+    print("done with complementary bookings")

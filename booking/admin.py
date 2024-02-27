@@ -24,6 +24,7 @@ class RoomAdmin(ImportExportModelAdmin, admin.ModelAdmin):
         "price",
         "caution_fee",
         "availability",
+        # "stock_availability",
         "template_view",
     )
     search_fields = ["slug", "title"]

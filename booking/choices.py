@@ -102,17 +102,13 @@ class PackagePriceOption(DocEnum):
     Package Price Option.
     """
 
-    DayWeekday = "day_weekday", "DayWeekday"
-    OvernightWeekday = "overnight_weekday", "OvernightWeekday"
-    DayWeekend = "day_weekend", "DayWeekend"
-    OvernightWeekend = "overnight_weekend", "OvernightWeekend"
+    Day = "day", "Day"
+    Overnight = "overnight", "Overnight"
 
 
 _readable_package_option = {
-    PackagePriceOption.DayWeekday.value: _("day_weekday"),
-    PackagePriceOption.OvernightWeekday.value: _("overnight_weekday"),
-    PackagePriceOption.DayWeekend.value: _("day_weekend"),
-    PackagePriceOption.OvernightWeekend.value: _("overnight_weekend"),
+    PackagePriceOption.Day.value: _("day"),
+    PackagePriceOption.Overnight.value: _("overnight"),
 }
 
 

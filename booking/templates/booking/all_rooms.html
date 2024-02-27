@@ -219,6 +219,11 @@
                                             <option value="1" > 1 </option>
                                             <option value="2" > 2 </option>
                                             <option value="3" > 3 </option>
+                                            <option value="4" > 4 </option>
+                                            <option value="5" > 5 </option>
+                                            <option value="6" > 6 </option>
+                                            <option value="7" > 7 </option>
+                                            <option value="8" > 8 </option>
 
                                         </select>
                                     </div>
@@ -284,7 +289,7 @@
         </div>
         <div class="modal-body">
 
-          <p>   <span id="selectedRoom_ntav"></span> Room is not available from <strong><span id="startDate_ntav"></span></strong> to  <strong><span id="endDate_ntav"></span></strong>.Kindly book another room
+          <p>   <span id="selectedRoom_ntav"></span> Room has been fully booked from <strong><span id="startDate_ntav"></span></strong> to  <strong><span id="endDate_ntav"></span></strong>.Kindly book another room
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -318,6 +323,70 @@
 
 
 {% block extra_scripts %}
+
+<script>
+
+$(function () {
+  "use strict";
+
+  $(function () {
+    /* Booked Dates */
+    const DateTime = easepick.DateTime;
+    const bookedDates = [
+      ["2024-02-21", "2024-02-28"],
+      "2023-09-07",
+      ["2023-10-11", "2023-10-17"],
+    ].map((d) => {
+      if (d instanceof Array) {
+        const start = new DateTime(d[0], "YYYY-MM-DD");
+        const end = new DateTime(d[1], "YYYY-MM-DD");
+
+        return [start, end];
+      }
+
+      return new DateTime(d, "YYYY-MM-DD");
+    });
+
+    /* Configuration picker */
+    const picker = new easepick.create({
+      element: document.getElementById("date_booking"),
+      css: ["/static/css/daterangepicker_v2.css"],
+      lang: "en-EN", // Language tags https://www.techonthenet.com/js/language_tags.php
+      format: "DD/MM/YYYY",
+      calendars: 2,
+      grid: 2,
+      zIndex: 10,
+      inline: true,
+      plugins: ["LockPlugin", "RangePlugin"],
+      RangePlugin: {
+        tooltipNumber(num) {
+          return num - 1;
+        },
+        locale: {
+          one: "night",
+          other: "nights",
+        },
+      },
+      LockPlugin: {
+        minDate: new Date(),
+        minDays: 2,
+        inseparable: false,
+        filter(date, picked) {
+          if (picked.length === 1) {
+            const incl = date.isBefore(picked[0]) ? "[)" : "(]";
+            return (
+              !picked[0].isSame(date, "day") && date.inArray(bookedDates, incl)
+            );
+          }
+          return date.inArray(bookedDates, "[)");
+        },
+      },
+    });
+  }); // End Easypick config
+});
+
+
+</script>
 
 
 <!-- <script>
@@ -430,6 +499,8 @@ function checkAvailabilty(productId,productType, bookedDates, quantity ){
     })
     .then((response) => response.json())
     .then((data) => {
+
+        console.log(data)
 
         if (data.is_available === true){
             $("#selectedRoom").text(`${data.room_name}`)

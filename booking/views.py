@@ -6,7 +6,13 @@ from django.core.paginator import Paginator
 from datetime import datetime
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Sum
-from .utils import cookieCart, cartData, guestOrder, wee_day
+from .utils import (
+    cookieCart,
+    cartData,
+    guestOrder,
+    handle_complimentary_booking,
+    wee_day,
+)
 from . import choices
 from ums.models import Profile
 import requests
@@ -20,6 +26,8 @@ from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
+from django.utils.safestring import mark_safe
+
 
 import json, random, string
 from django.http import JsonResponse
@@ -29,6 +37,7 @@ import hashlib
 
 
 from .models import (
+    CustomContentBaseTypeModel,
     Room,
     Package,
     Gallery,
@@ -45,10 +54,17 @@ def create_ref_code():
     return "".join(random.choices(string.ascii_lowercase + string.digits, k=20))
 
 
+def return_json_response(obj):
+    print("obj", obj)
+    return JsonResponse(
+        data=obj,
+    )
+
+
 def all_rooms(request):
     template = "booking/all_rooms.html"
 
-    all_rooms = Room.objects.filter(is_active=True).all().order_by("created_at")
+    all_rooms = Room.objects.filter(is_active=True).all().order_by("position")
 
     context = {"all_rooms": all_rooms, "page_title": "Our Rooms"}
 
@@ -73,7 +89,7 @@ def room_details(request, room_id):
 def all_packages(request):
     template = "booking/all_packages.html"
 
-    all_packages = Package.objects.filter(is_active=True).all().order_by("created_at")
+    all_packages = Package.objects.filter(is_active=True).all().order_by("position")
 
     context = {"all_packages": all_packages, "page_title": "Our Packages"}
 
@@ -140,8 +156,12 @@ def check_availabilty(request):
             object_id=the_room.id,
             item_type=choices.ProductType.Room.value,
             ordered=True,
-            check_in__gte=datetime.strptime(check_in_date.strip(), "%d/%m/%Y"),
-            check_out__lte=datetime.strptime(check_out_date.strip(), "%d/%m/%Y"),
+            check_in__gte=datetime.strptime(
+                f"{check_in_date.strip()} 12:00:00", "%d/%m/%Y %H:%M:%S"
+            ),
+            check_out__lte=datetime.strptime(
+                f"{check_out_date.strip()} 10:00:00", "%d/%m/%Y %H:%M:%S"
+            ),
         )
         sum_agrregate = order_items_qs.aggregate(Sum("quantity"))
         print(sum_agrregate)
@@ -197,55 +217,171 @@ def check_availabilty(request):
 
     elif productType == "package":
 
-        # Rework Package
-        period = data["period"]
-
-        check_weekday = wee_day(check_in_date)
-
-        if check_weekday == True and period == "day":
-            price_option = choices.PackagePriceOption.DayWeekday.value
-        elif check_weekday == True and period == "night":
-            price_option = choices.PackagePriceOption.OvernightWeekday.value
-
-        elif check_weekday == False and period == "day":
-            price_option = choices.PackagePriceOption.DayWeekend.value
-
-        elif check_weekday == False and period == "night":
-            price_option = choices.PackagePriceOption.OvernightWeekend.value
-
         the_package = Package.objects.get(id=productId)
         product_type = ContentType.objects.get_for_model(Package)
-        # check availabilty in order_item
-        order_items_qs = OrderItem.objects.filter(
-            content_type=product_type,
-            object_id=the_package.id,
-            item_type=choices.ProductType.Package.value,
-            ordered=True,
-            check_in__gte=datetime.strptime(check_in_date.strip(), "%d/%m/%Y"),
-            check_out__lte=datetime.strptime(check_out_date.strip(), "%d/%m/%Y"),
-            package_price_option=price_option,
-        )
-        if order_items_qs.exists():
 
-            json_resp.update(
-                {
-                    "is_available": False,
-                    "message": f"{the_package.title} is full booked between {check_in_date} and {check_out_date}. Kindly book another room",
-                    "package_name": the_package.title,
-                    "check_in": check_in_date,
-                    "check_out": check_out_date,
-                }
+        period = data["period"]
+        if period == "day":
+
+            product_check_in = datetime.strptime(
+                f"{check_in_date.strip()} 12:00:00", "%d/%m/%Y %H:%M:%S"
             )
-        else:
-            json_resp.update(
-                {
-                    "is_available": True,
-                    "message": f"{the_package.title} is available between {check_in_date} and {check_out_date}. Kindly book another room",
-                    "package_name": the_package.title,
-                    "check_in": check_in_date,
-                    "check_out": check_out_date,
-                }
+            product_check_out = datetime.strptime(
+                f"{check_out_date.strip()} 19:00:00", "%d/%m/%Y %H:%M:%S"
             )
+        elif period == "night":
+
+            product_check_in = datetime.strptime(
+                f"{check_in_date.strip()} 12:00:00", "%d/%m/%Y %H:%M:%S"
+            )
+            product_check_out = datetime.strptime(
+                f"{check_out_date.strip()} 10:00:00", "%d/%m/%Y %H:%M:%S"
+            )
+
+        # check availabilty in order_item
+        any_order_items_qs = OrderItem.objects.filter(
+            ordered=True,
+            check_in__gte=product_check_in,
+            check_out__lte=product_check_out,
+        )
+
+        if the_package.slug == "gold":
+            # check cookie cart
+            cart_data = cartData(request)
+
+            items = cart_data["items"]
+            room_bookings = [d for d in items if d["type"] == "room"]
+            room_booking_count = len(room_bookings)
+            if room_booking_count > 0:
+                json_resp.update(
+                    {
+                        "is_available": False,
+                        "message": f"{the_package.title} is full booked between {check_in_date} and {check_out_date}. Kindly book another package",
+                        "package_name": the_package.title,
+                        "check_in": check_in_date,
+                        "check_out": check_out_date,
+                    }
+                )
+
+            # if gold, check if there is booked room or package for that period
+            if any_order_items_qs.exists():
+                json_resp.update(
+                    {
+                        "is_available": False,
+                        "message": f"{the_package.title} is full booked between {check_in_date} and {check_out_date}. Kindly book another package",
+                        "package_name": the_package.title,
+                        "check_in": check_in_date,
+                        "check_out": check_out_date,
+                    }
+                )
+
+            else:
+                json_resp.update(
+                    {
+                        "is_available": True,
+                        "message": f"{the_package.title} is available between {check_in_date} and {check_out_date}",
+                        "package_name": the_package.title,
+                        "check_in": check_in_date,
+                        "check_out": check_out_date,
+                    }
+                )
+
+        elif the_package.slug == "bronze":
+            # if bronze, check if there is any available full poolview rooms
+            # fetch poolview
+            flplv = Room.objects.filter(slug="full-poolview")
+
+            if not flplv.exists():
+                return
+            # fetch full poolview orders
+            product_type = ContentType.objects.get_for_model(Room)
+            flplv_ordered = any_order_items_qs.filter(
+                content_type=product_type,
+                object_id=flplv.first().id,
+                item_type=choices.ProductType.Room.value,
+            )
+            if not flplv_ordered.exists():
+                json_resp.update(
+                    {
+                        "is_available": True,
+                        "message": f"{the_package.title} is available between {check_in_date} and {check_out_date}",
+                        "package_name": the_package.title,
+                        "check_in": check_in_date,
+                        "check_out": check_out_date,
+                    }
+                )
+            else:
+                sum_agrregate = order_items_qs.aggregate(Sum("quantity"))
+                quantity_remaining = (
+                    flplv.first().availability - sum_agrregate["quantity__sum"]
+                )
+                if quantity_remaining >= 2:
+                    json_resp.update(
+                        {
+                            "is_available": True,
+                            "message": f"{the_package.title} is available between {check_in_date} and {check_out_date}",
+                            "package_name": the_package.title,
+                            "check_in": check_in_date,
+                            "check_out": check_out_date,
+                        }
+                    )
+                else:
+                    json_resp.update(
+                        {
+                            "is_available": False,
+                            "message": f"{the_package.title} is full booked between {check_in_date} and {check_out_date}. Kindly book another package",
+                            "package_name": the_package.title,
+                            "check_in": check_in_date,
+                            "check_out": check_out_date,
+                        }
+                    )
+
+        elif the_package.slug == "silver":
+            # fetch anyroom order items
+            any_room_order_item = any_order_items_qs.filter(
+                item_type=choices.ProductType.Room.value,
+            )
+            if not any_room_order_item.exists():
+                json_resp.update(
+                    {
+                        "is_available": True,
+                        "message": f"{the_package.title} is available between {check_in_date} and {check_out_date}",
+                        "package_name": the_package.title,
+                        "check_in": check_in_date,
+                        "check_out": check_out_date,
+                    }
+                )
+            else:
+                sum_agrregate = any_room_order_item.aggregate(Sum("quantity"))
+                print("booked rooms count", sum_agrregate)
+
+                all_rooms_sum = Room.objects.aggregate(Sum("availability"))
+                all_room_sum_aggregate = all_rooms_sum["availability__sum"]
+                print("all rooms count", all_room_sum_aggregate)
+
+                quantity_remaining = (
+                    all_room_sum_aggregate - sum_agrregate["quantity__sum"]
+                )
+                if quantity_remaining >= 10:
+                    json_resp.update(
+                        {
+                            "is_available": True,
+                            "message": f"{the_package.title} is available between {check_in_date} and {check_out_date}",
+                            "package_name": the_package.title,
+                            "check_in": check_in_date,
+                            "check_out": check_out_date,
+                        }
+                    )
+                else:
+                    json_resp.update(
+                        {
+                            "is_available": False,
+                            "message": f"{the_package.title} is full booked between {check_in_date} and {check_out_date}. Kindly book another package",
+                            "package_name": the_package.title,
+                            "check_in": check_in_date,
+                            "check_out": check_out_date,
+                        }
+                    )
 
     return JsonResponse(
         data=json_resp,
@@ -296,21 +432,68 @@ def checkout(request):
         print("You don not have any item in the cart")
         return redirect("core:home")
 
-    context = {"items": items, "order": order}
+    context = {
+        "items": items,
+        "order": order,
+    }
     return render(request, template, context)
 
 
 @require_POST
 @csrf_exempt
 def process_checkout(request):
+    from django.contrib.humanize.templatetags.humanize import intcomma
 
     data = json.loads(request.body)
-    print(data)
 
     the_profile, order = guestOrder(request, data)
 
+    orderInfo = {
+        "order_id": str(order.id)[:12],
+        "ref_code": order.ref_code,
+        "ordered_date": order.ordered_date.strftime("%m/%d/%Y"),
+        "ordered": order.ordered,
+        "order_total": intcomma(int(order.get_total())),
+    }
+
+    bookingInfo = {
+        "email": order.user.user.email,
+        "phone": order.booking_info.phone,
+        "other_phone": order.booking_info.other_phone,
+        "full_name": order.booking_info.full_name,
+        "company_name": order.booking_info.company_name,
+        "address": order.booking_info.address,
+        "corporate_rep": order.booking_info.corporate_rep,
+        "nature_of_business": order.booking_info.nature_of_business,
+    }
+
+    order_items = []
+    for item in order.items.all():
+        extra_guests_cost = 0
+        if item.extra_guest and item.item_type == choices.ProductType.Package.value:
+            extra_guests_cost = item.extra_guest * item.content_object.extra_guest_fee
+        order_items.append(
+            {
+                "id": str(item.id),
+                "name": item.content_object.title,
+                "caution": intcomma(int(item.content_object.caution_fee)),
+                "type": item.item_type,
+                "check_in": item.check_in.strftime("%m/%d/%Y, %H:%M:%S"),
+                "check_out": item.check_out.strftime("%m/%d/%Y, %H:%M:%S"),
+                "price": intcomma(int(item.get_final_price())),
+                "extra_guests": item.extra_guest,
+                "extra_guests_cost": intcomma(int(extra_guests_cost)),
+            }
+        )
+
     return JsonResponse(
-        data={"the_profile_id": the_profile.id, "the_order_id": order.id},
+        data={
+            "the_profile_id": the_profile.id,
+            "the_order_id": order.id,
+            "completeOrder": json.dumps(orderInfo, default=str),
+            "bookingInfo": json.dumps(bookingInfo),
+            "order_items": json.dumps(order_items, default=str),
+        },
     )
 
 
@@ -364,6 +547,34 @@ def process_paystack_payment(request):
                 for item in order_items:
                     item.ordered = True
                     item.save()
+                    try:
+
+                        # update item stock availability for both room and packages
+                        if item.item_type == choices.ProductType.Package.value:
+                            the_package = Package.objects.get(id=item.object_id)
+
+                            if the_package.slug == "silver":
+                                handle_complimentary_booking(
+                                    item.user.id,
+                                    item.check_in,
+                                    item.check_out,
+                                    "silver",
+                                )
+                            elif the_package.slug == "gold":
+                                handle_complimentary_booking(
+                                    item.user.id, item.check_in, item.check_out, "gold"
+                                )
+                            elif the_package.slug == "bronze":
+                                handle_complimentary_booking(
+                                    item.user.id,
+                                    item.check_in,
+                                    item.check_out,
+                                    "bronze",
+                                )
+
+                    except Exception as e:
+                        print(e)
+                        pass
 
                     order_item_total += item.get_final_price()
 
@@ -420,6 +631,35 @@ def process_flutterwave_payment(request):
                 for item in order_items:
                     item.ordered = True
                     item.save()
+                    try:
+
+                        # update item stock availability for both room and packages
+                        if item.item_type == choices.ProductType.Package.value:
+                            the_package = Package.objects.get(id=item.object_id)
+
+                            if the_package.slug == "silver":
+                                handle_complimentary_booking(
+                                    item.user.id,
+                                    item.check_in,
+                                    item.check_out,
+                                    "silver",
+                                )
+                            elif the_package.slug == "gold":
+                                handle_complimentary_booking(
+                                    item.user.id, item.check_in, item.check_out, "gold"
+                                )
+                            elif the_package.slug == "bronze":
+                                handle_complimentary_booking(
+                                    item.user.id,
+                                    item.check_in,
+                                    item.check_out,
+                                    "bronze",
+                                )
+
+                    except Exception as e:
+                        print(e)
+                        pass
+                    # update item stock availability for both room and packages
 
                     order_item_total += item.get_final_price()
 
