@@ -40,7 +40,7 @@ class Room(BaseAbstractModel):
         max_digits=19,
     )
     availability = models.IntegerField(default=1)
-
+    # stock_availability = models.IntegerField(default=1)
     check_in = models.CharField(max_length=240, null=True)
     check_out = models.CharField(max_length=240, null=True)
     banner = models.ImageField(upload_to="rooms/banner/", blank=True, null=True)
@@ -56,6 +56,7 @@ class Room(BaseAbstractModel):
         default=choices.TemplateView.Normal.value,
         verbose_name=_("template_view"),
     )
+    position = models.IntegerField(default=1)
 
     def __str__(self):
         return self.title
@@ -116,28 +117,52 @@ class Package(BaseAbstractModel):
         help_text=_("the cost of extra guest"),
         max_digits=19,
     )
+    day_price = models.DecimalField(
+        decimal_places=2,
+        help_text=_("day booking price"),
+        max_digits=19,
+        blank=True,
+        null=True,
+    )
+    overnight_price = models.DecimalField(
+        decimal_places=2,
+        help_text=_("overnight booking price"),
+        max_digits=19,
+        blank=True,
+        null=True,
+    )
+
     day_weekday_price = models.DecimalField(
         decimal_places=2,
         help_text=_("weekday day booking price"),
         max_digits=19,
+        blank=True,
+        null=True,
     )
     overnight_weekday_price = models.DecimalField(
         decimal_places=2,
         help_text=_("weekday overnight booking price"),
         max_digits=19,
+        blank=True,
+        null=True,
     )
     day_weekend_price = models.DecimalField(
         decimal_places=2,
         help_text=_("weekend day booking price"),
         max_digits=19,
+        blank=True,
+        null=True,
     )
     overnight_weekend_price = models.DecimalField(
         decimal_places=2,
         help_text=_("weekend overnight booking price"),
         max_digits=19,
+        blank=True,
+        null=True,
     )
 
     features = models.ManyToManyField("Features", blank=True)
+    position = models.IntegerField(default=1)
 
     def __str__(self):
         return self.title
@@ -181,7 +206,10 @@ class OrderItem(CustomContentBaseTypeModel):
         blank=True,
         verbose_name=_("package_option"),
     )
+    extra_guest = models.IntegerField(blank=True, null=True)
+    is_complimentary = models.BooleanField(default=False)
     quantity = models.IntegerField(default=1)
+    rate = models.IntegerField(default=1)
     check_in = models.DateTimeField(null=True)
     check_out = models.DateTimeField(null=True)
 
@@ -191,34 +219,45 @@ class OrderItem(CustomContentBaseTypeModel):
     def get_total_item_price(self):
         if self.content_object:
             if self.item_type == choices.ProductType.Room.value:
-                return self.quantity * self.content_object.price
+                rt_total = self.quantity * self.rate * self.content_object.price
+                return rt_total + self.content_object.caution_fee
             elif self.item_type == choices.ProductType.Package.value:
-                if (
-                    self.package_price_option
-                    == choices.PackagePriceOption.DayWeekday.value
-                ):
-                    return self.quantity * self.content_object.day_weekday_price
+                if self.package_price_option == choices.PackagePriceOption.Day.value:
+                    rt_total = self.quantity * self.content_object.day_price * self.rate
+                    if self.extra_guest and self.extra_guest > 0:
+                        extra_guest_cost = (
+                            self.extra_guest * self.content_object.extra_guest_fee
+                        )
+
+                        return (
+                            rt_total
+                            + extra_guest_cost
+                            + self.content_object.caution_fee
+                        )
+                    return rt_total + self.content_object.caution_fee
                 elif (
                     self.package_price_option
-                    == choices.PackagePriceOption.DayWeekend.value
+                    == choices.PackagePriceOption.Overnight.value
                 ):
-                    return self.quantity * self.content_object.day_weekend_price
-                elif (
-                    self.package_price_option
-                    == choices.PackagePriceOption.OvernightWeekday.value
-                ):
-                    return self.quantity * self.content_object.overnight_weekday_price
-                elif (
-                    self.package_price_option
-                    == choices.PackagePriceOption.OvernightWeekend.value
-                ):
-                    return self.quantity * self.content_object.overnight_weekend_price
+                    rt_total = self.quantity * self.content_object.day_price * self.rate
+                    if self.extra_guest and self.extra_guest > 0:
+                        extra_guest_cost = (
+                            self.extra_guest * self.content_object.extra_guest_fee
+                        )
+                        return (
+                            rt_total
+                            + extra_guest_cost
+                            + self.content_object.caution_fee
+                        )
+
+                    return rt_total + self.content_object.caution_fee
+
             else:
                 return 0
 
     def get_total_discount_item_price(self):
         if self.content_object and self.item_type == choices.ProductType.Room.value:
-            return self.quantity * self.content_object.discount_price
+            return self.quantity * self.content_object.discount_price * self.rate
         else:
             return 0
 
