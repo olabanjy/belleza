@@ -28,7 +28,7 @@ def homepage(request):
     featured_room = all_rooms_qs.filter(featured=True).first()
     other_rooms = all_rooms_qs.exclude(id__in=[featured_room.id]).all()[:2]
 
-    all_packages = Package.objects.filter(is_active=True).all()
+    all_packages = Package.objects.filter(is_active=True).all().order_by("position")
 
     context = {
         "all_rooms_qs": all_rooms_qs,
