@@ -219,43 +219,38 @@ class OrderItem(CustomContentBaseTypeModel):
     def get_total_item_price(self):
         if self.content_object:
             if self.item_type == choices.ProductType.Room.value:
-                return (
-                    self.quantity * self.rate * self.content_object.price
-                    + self.content_object.caution_fee
-                )
+                rt_total = self.quantity * self.rate * self.content_object.price
+                return rt_total + self.content_object.caution_fee
             elif self.item_type == choices.ProductType.Package.value:
                 if self.package_price_option == choices.PackagePriceOption.Day.value:
+                    rt_total = self.quantity * self.content_object.day_price * self.rate
                     if self.extra_guest and self.extra_guest > 0:
                         extra_guest_cost = (
                             self.extra_guest * self.content_object.extra_guest_fee
                         )
+
                         return (
-                            (self.quantity * self.content_object.day_price * self.rate)
+                            rt_total
                             + extra_guest_cost
                             + self.content_object.caution_fee
                         )
-                    return (
-                        self.quantity * self.content_object.day_price * self.rate
-                        + self.content_object.caution_fee
-                    )
+                    return rt_total + self.content_object.caution_fee
                 elif (
                     self.package_price_option
                     == choices.PackagePriceOption.Overnight.value
                 ):
+                    rt_total = self.quantity * self.content_object.day_price * self.rate
                     if self.extra_guest and self.extra_guest > 0:
                         extra_guest_cost = (
                             self.extra_guest * self.content_object.extra_guest_fee
                         )
                         return (
-                            (self.quantity * self.content_object.day_price * self.rate)
+                            rt_total
                             + extra_guest_cost
                             + self.content_object.caution_fee
                         )
 
-                    return (
-                        self.quantity * self.content_object.overnight_price * self.rate
-                        + self.content_object.caution_fee
-                    )
+                    return rt_total + self.content_object.caution_fee
 
             else:
                 return 0

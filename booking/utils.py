@@ -41,7 +41,9 @@ def cookieCart(request):
             if cart[i]["productType"] == "room":
                 product = Room.objects.get(id=i)
                 rate = (check_out_dt - check_in_dt).days
-                total = product.price * cart[i]["quantity"] * rate + product.caution_fee
+                total = (
+                    product.price * cart[i]["quantity"] * rate
+                ) + product.caution_fee
                 product_price = product.price
 
                 product_check_in = datetime.strptime(
@@ -250,6 +252,8 @@ def guestOrder(request, data):
             check_in=product["item"]["check_in"],
             check_out=product["item"]["check_out"],
         )
+        print(order_item.get_total_item_price())
+        print(order_item.get_final_price())
         order.items.add(order_item)
 
         # check for extra guests

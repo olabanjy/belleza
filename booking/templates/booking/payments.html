@@ -99,6 +99,9 @@
 
 <script type="text/javascript">
 
+    cart = {}
+    document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
+
     var orderAmount = Number($("input#amount").val())
 
     let paystackForm = document.getElementById("paystack-payment-form");

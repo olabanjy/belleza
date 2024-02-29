@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.views.defaults import page_not_found
 from django.views.generic import View
 from django.core.paginator import Paginator
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Sum
 from .utils import (
@@ -80,6 +80,7 @@ def room_details(request, room_id):
 
     context = {
         "the_room": the_room,
+        "availability_count": range(1, the_room.availability + 1),
         "similar_rooms": similar_rooms,
         "page_title": f"{the_room.title}",
     }
@@ -121,22 +122,14 @@ def render_available_room_count(request):
 
     return JsonResponse({"available": the_room.availability})
 
-    # return JsonResponse(
-    #     {
-    #         "markup": render_to_string(
-    #             "process/room_availability_option.html",
-    #             context={"avaialable_count": range(the_room.availability)},
-    #             request=request,
-    #         )
-    #     }
-    # )
-
 
 @require_POST
 @csrf_exempt
 def check_availabilty(request):
     data = json.loads(request.body)
-    print(data)
+
+    cart_data = cartData(request)
+
     json_resp = {}
 
     productId = data["productId"]
@@ -147,9 +140,39 @@ def check_availabilty(request):
     check_in_date, check_out_date = bookedDates.split("-")
 
     if productType == "room":
+        check_in_datetime, check_out_datetime = datetime.strptime(
+            f"{check_in_date.strip()} 12:00:00", "%d/%m/%Y %H:%M:%S"
+        ), datetime.strptime(f"{check_out_date.strip()} 10:00:00", "%d/%m/%Y %H:%M:%S")
         # fetch room
         the_room = Room.objects.get(id=productId)
         product_type = ContentType.objects.get_for_model(Room)
+
+        # check if room is already in cart
+        items = cart_data["items"]
+        room_in_cart = False
+        room_bookings = [d for d in items if d["type"] == "room"]
+        print("room bookings", room_bookings)
+        if len(room_bookings) > 0:
+            for r in room_bookings:
+                if (
+                    the_room.title in r["item"]["name"]
+                    and r["item"]["check_in"] >= check_in_datetime
+                    and r["item"]["check_out"] <= check_out_datetime
+                ):
+                    room_in_cart = True
+                    break
+
+        if room_in_cart:
+            return JsonResponse(
+                data={
+                    "is_available": False,
+                    "message": f"{the_room.title} has been fully booked between {check_in_date} and {check_out_date}. Kindly book another room",
+                    "room_name": the_room.title,
+                    "check_in": check_in_date,
+                    "check_out": check_out_date,
+                },
+            )
+
         # check availabilty in order_item
         order_items_qs = OrderItem.objects.filter(
             content_type=product_type,
@@ -164,7 +187,7 @@ def check_availabilty(request):
             ),
         )
         sum_agrregate = order_items_qs.aggregate(Sum("quantity"))
-        print(sum_agrregate)
+
         if order_items_qs.exists():
             # subtract quantity booked from availabilty
             if the_room.availability <= sum_agrregate["quantity__sum"]:
@@ -177,7 +200,7 @@ def check_availabilty(request):
                 json_resp.update(
                     {
                         "is_available": True,
-                        "message": "Room is available",
+                        "message": f"{the_room.title} is available between {check_in_date} and {check_out_date}",
                         "room_name": the_room.title,
                         "check_in": check_in_date,
                         "check_out": check_out_date,
@@ -187,7 +210,7 @@ def check_availabilty(request):
                 json_resp.update(
                     {
                         "is_available": False,
-                        "message": f"{the_room.title} is full booked between {check_in_date} and {check_out_date}. Kindly book another room",
+                        "message": f"{the_room.title} has been fully booked between {check_in_date} and {check_out_date}. Kindly book another room",
                         "room_name": the_room.title,
                         "check_in": check_in_date,
                         "check_out": check_out_date,
@@ -198,7 +221,7 @@ def check_availabilty(request):
                 json_resp.update(
                     {
                         "is_available": True,
-                        "message": "Room is available",
+                        "message": f"{the_room.title} is available between {check_in_date} and {check_out_date}",
                         "room_name": the_room.title,
                         "check_in": check_in_date,
                         "check_out": check_out_date,
@@ -208,7 +231,7 @@ def check_availabilty(request):
                 json_resp.update(
                     {
                         "is_available": False,
-                        "message": f"{the_room.title} is full booked between {check_in_date} and {check_out_date}. Kindly book another room",
+                        "message": f"{the_room.title} has been fully booked between {check_in_date} and {check_out_date}. Kindly book another room",
                         "room_name": the_room.title,
                         "check_in": check_in_date,
                         "check_out": check_out_date,
@@ -245,16 +268,39 @@ def check_availabilty(request):
             check_out__lte=product_check_out,
         )
 
+        items = cart_data["items"]
+
+        package_in_cart = False
+        package_bookings = [d for d in items if d["type"] == "package"]
+
+        if len(package_bookings) > 0:
+
+            for p in package_bookings:
+
+                if product_check_in >= p["item"]["check_in"] and product_check_out <= p[
+                    "item"
+                ]["check_out"] + timedelta(days=30):
+                    package_in_cart = True
+                    break
+
+        if package_in_cart:
+            return JsonResponse(
+                data={
+                    "is_available": False,
+                    "message": f"{the_package.title} has been fully booked between {check_in_date} and {check_out_date}. Kindly book another room",
+                    "package_name": the_package.title,
+                    "check_in": check_in_date,
+                    "check_out": check_out_date,
+                },
+            )
+
         if the_package.slug == "gold":
             # check cookie cart
-            cart_data = cartData(request)
-
-            items = cart_data["items"]
             room_bookings = [d for d in items if d["type"] == "room"]
             room_booking_count = len(room_bookings)
             if room_booking_count > 0:
-                json_resp.update(
-                    {
+                return JsonResponse(
+                    data={
                         "is_available": False,
                         "message": f"{the_package.title} is full booked between {check_in_date} and {check_out_date}. Kindly book another package",
                         "package_name": the_package.title,
@@ -427,6 +473,8 @@ def checkout(request):
     cartItems = data["cartItems"]
     order = data["order"]
     items = data["items"]
+
+    print(order)
 
     if cartItems < 1:
         print("You don not have any item in the cart")

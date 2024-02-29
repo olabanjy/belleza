@@ -215,7 +215,7 @@
 
                                     <div class="custom_select" id="selected_days_div">
                                         <select name="selected_days_id" id="selected_days_id" class="wide" required>
-                                            <option value="" selected disabled> Select Number of Rooms </option>
+                                            <option value="" selected disabled>Number of Rooms </option>
                                             <option value="1" > 1 </option>
                                             <option value="2" > 2 </option>
                                             <option value="3" > 3 </option>
@@ -268,7 +268,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>   <span id="selectedRoom"></span>   Room is available from <strong><span id="startDate"></span></strong> to  <strong><span id="endDate"></span></strong>. Proceed to booking
+          <p>   <span id="selectedRoom"></span>   Room is available from <strong><span id="startDate"></span></strong> to  <strong><span id="endDate"></span></strong>. Proceed to booking </p>
+          <!-- <p id="selectedRoom_msg">  </p> -->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -289,7 +290,8 @@
         </div>
         <div class="modal-body">
 
-          <p>   <span id="selectedRoom_ntav"></span> Room has been fully booked from <strong><span id="startDate_ntav"></span></strong> to  <strong><span id="endDate_ntav"></span></strong>.Kindly book another room
+          <p>   <span id="selectedRoom_ntav"></span> Room has been fully booked from <strong><span id="startDate_ntav"></span></strong> to  <strong><span id="endDate_ntav"></span></strong>.Kindly book another room </p>
+          <p id="selectedRoom_msg">  </p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -389,59 +391,6 @@ $(function () {
 </script>
 
 
-<!-- <script>
-$(document).ready(function(){
-    let selectedRoomSelect = $("#selected_room_id")
-    // let roomavailabilty = $("#selected_days_id")
-
-    let roomavailabilty = document.querySelector('#selected_days_id');
-
-
-    console.log(document.querySelector('#selected_room_id'))
-
-    // Handle room selection
-    selectedRoomSelect.on("change", () => {
-
-
-        var url = "/booking/render_available_room_count/"
-
-
-        fetch(url, {
-            method: 'POST',
-            headers:{
-                'Content-Type':'applicaiton/json',
-            },
-            body:JSON.stringify({'productId':selectedRoomSelect.val()}),
-            })
-            .then((response) => response.json())
-            .then((data) => {
-
-                Array(Number(data.available)).fill().forEach((_,i)=> {
-
-
-                    let newOption = new Option(i,i);
-
-
-                    // roomavailabilty.add(newOption,undefined);
-
-
-
-                    roomavailabilty.appendChild(newOption);
-
-
-
-
-                } )
-
-                console.log(roomavailabilty)
-
-            })
-
-   })
-
-})
-
-</script> -->
 
 
 <script>
@@ -506,6 +455,7 @@ function checkAvailabilty(productId,productType, bookedDates, quantity ){
             $("#selectedRoom").text(`${data.room_name}`)
             $("#startDate").text(`${data.check_in}`)
             $("#endDate").text(`${data.check_out}`)
+
             // set global
             globBookedDates = bookedDates
             globSelectedNumberOfRooms = quantity
@@ -515,6 +465,7 @@ function checkAvailabilty(productId,productType, bookedDates, quantity ){
             $("#selectedRoom_ntav").text(`${data.room_name}`)
             $("#startDate_ntav").text(`${data.check_in}`)
             $("#endDate_ntav").text(`${data.check_out}`)
+
             $("#room_not_available").click();
         }
     })
@@ -563,7 +514,7 @@ function addCookieItem(productId, bookedDates, quantity, productType) {
     console.log("booking details are", productId, bookedDates, quantity);
 
     checkAvailabiltyLean(productId, productType, bookedDates, quantity).then((data) => {
-            if (data.is_available === false) alert(data.message); return;
+            if (data.is_available === false) return;
         })
     cart[productId] = { quantity: quantity, dateBooked: bookedDates, productType:productType};
 

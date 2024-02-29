@@ -165,7 +165,8 @@
                                 <div class="col-lg-4">
                                     <div class="custom_select">
                                         <select name="selected_period_id" id="selected_period_id" class="wide">
-                                            <option>Select Time</option>
+
+                                            <option value="" selected disabled>Select Time </option>
                                             <option value="day">Day</option>
                                             <option value="night">Overnight</option>
                                         </select>
@@ -444,7 +445,7 @@ function addCookieItem(productId, bookedDates, quantity, productType, period) {
     console.log("booking details are", productId, bookedDates, quantity, period);
 
     checkAvailabiltyLean(productId, productType, bookedDates, quantity, period).then((data) => {
-            if (data.is_available === false) alert(data.message); return;
+            if (data.is_available === false) return;
         })
     cart[productId] = {quantity: quantity, dateBooked: bookedDates, productType:productType, period:period};
 
