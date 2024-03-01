@@ -175,5 +175,23 @@ TEST_FLW_SECRET_KEY = config("TEST_FLW_SECRET_KEY")
 TEST_FLW_ENCRYPTION_KEY = config("TEST_FLW_ENCRYPTION_KEY")
 FLW_SECRET_HASH = config("FLW_SECRET_HASH")
 
+TEST_ENV = config("TEST_ENV")
+
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = config("EMAIL_HOST")
+EMAIL_PORT = config("EMAIL_PORT")
+EMAIL_USE_TLS = config("EMAIL_USE_TLS")
+
+
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
+
+
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+
+
+ADMINS = (("Beleza Support", "hello@zamari.tv"),)
