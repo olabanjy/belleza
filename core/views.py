@@ -4,6 +4,10 @@ from django.views.defaults import page_not_found
 from django.views.generic import View
 from django.core.paginator import Paginator
 
+from .mail import send_email
+
+from django.conf import settings
+
 
 import json
 from django.http import JsonResponse

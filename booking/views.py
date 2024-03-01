@@ -6,6 +6,8 @@ from django.core.paginator import Paginator
 from datetime import datetime, timedelta
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Sum
+from django.contrib.humanize.templatetags.humanize import intcomma, naturalday
+from core.mail import send_email
 from .utils import (
     cookieCart,
     cartData,
@@ -434,6 +436,30 @@ def check_availabilty(request):
     )
 
 
+@require_POST
+@csrf_exempt
+def remove_item(request):
+
+    data = json.loads(request.body)
+
+    item_id = data["id"]
+
+    cart_data = cartData(request)
+
+    items = cart_data["items"]
+
+    the_obj = next((x for x in items if str(x["id"]) == item_id), False)
+
+    if the_obj:
+        items.remove(the_obj)
+        print("item deleted")
+        print(items)
+
+    return JsonResponse(
+        data={"message": "item deleted"},
+    )
+
+
 def cart(request):
     data = cartData(request)
 
@@ -490,7 +516,6 @@ def checkout(request):
 @require_POST
 @csrf_exempt
 def process_checkout(request):
-    from django.contrib.humanize.templatetags.humanize import intcomma
 
     data = json.loads(request.body)
 
@@ -632,6 +657,27 @@ def process_paystack_payment(request):
                 order.save()
                 # send an email to customer
                 # send email to admin
+                try:
+                    for item in order_items:
+                        send_email(
+                            ["shola.albert@gmail.com", order.user.user.email],
+                            "Your Reservation at Belleza",
+                            html_path="emails/reservation.html",
+                            context={
+                                "item": item,
+                                "fullName": (
+                                    f"{order.booking_info.full_name}"
+                                    if item.item_type == choices.ProductType.Room.value
+                                    else f"{order.booking_info.corporate_rep}"
+                                ),
+                                "check_in": item.check_in,
+                                "check_out": item.check_out,
+                                "amount": item.get_final_price(),
+                            },
+                        )
+                except Exception as e:
+                    print(e)
+                    pass
                 return redirect("core:home")
             else:
                 print("payment failed")
@@ -680,7 +726,6 @@ def process_flutterwave_payment(request):
                     item.ordered = True
                     item.save()
                     try:
-
                         # update item stock availability for both room and packages
                         if item.item_type == choices.ProductType.Package.value:
                             the_package = Package.objects.get(id=item.object_id)
@@ -716,6 +761,27 @@ def process_flutterwave_payment(request):
                 order.ref_code = create_ref_code()
                 order.save()
                 # send an email to customer
+                try:
+                    for item in order_items:
+                        send_email(
+                            ["shola.albert@gmail.com", order.user.user.email],
+                            "Your Reservation at Belleza",
+                            html_path="emails/reservation.html",
+                            context={
+                                "item": item,
+                                "fullName": (
+                                    f"{order.booking_info.full_name}"
+                                    if item.item_type == choices.ProductType.Room.value
+                                    else f"{order.booking_info.corporate_rep}"
+                                ),
+                                "check_in": item.check_in,
+                                "check_out": item.check_out,
+                                "amount": item.get_final_price(),
+                            },
+                        )
+                except Exception as e:
+                    print(e)
+                    pass
                 # send email to admin
                 return redirect("core:home")
             else:

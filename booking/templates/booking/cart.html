@@ -28,7 +28,7 @@
 </div>
 
 <section class="h-100 gradient-custom">
-  <div class="container py-5">
+  <div class="container py-5" id="cart_container">
     <div class="row d-flex justify-content-center my-4">
       <div class="col-md-8">
         <div class="card mb-4">
@@ -61,10 +61,10 @@
                 <p> Quantity: {{room.quantity}} </p>
                 <p>Number of Nights: {{room.item.rate}} </p>
                 <br>
-                <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                <a onclick="removeItem('{{room.id}}');" href="javascript:void(0)" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
                   title="Remove item">
                   <i class="fas fa-trash"></i>
-                </button>
+              </a>
                 <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
                   title="Move to the wish list">
                   <i class="fas fa-heart"></i>
@@ -137,10 +137,10 @@
               <p> Quantity: {{package.quantity}} </p>
               <p> Number of Days: {{package.item.rate}} </p>
               <br>
-              <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+              <a onclick="removeItem('{{package.id}}')" href="#0" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
                 title="Remove item">
                 <i class="fas fa-trash"></i>
-              </button>
+            </a>
               <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
                 title="Move to the wish list">
                 <i class="fas fa-heart"></i>
@@ -222,3 +222,20 @@
 </section>
 </main>
 {% endblock content %}
+
+
+{% block extra_scripts %}
+<script type="text/javascript">
+
+
+
+  function removeItem(id){
+      delete cart[id]
+      document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
+      $("#cart_container").load(" #cart_container > *");
+  }
+
+
+
+</script>
+{% endblock extra_scripts %}
