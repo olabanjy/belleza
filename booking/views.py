@@ -438,6 +438,16 @@ def check_availabilty(request):
 
 @require_POST
 @csrf_exempt
+def test_api(request):
+    data = json.loads(request.body)
+
+    return JsonResponse(
+        data={"message": "data received", "data": data},
+    )
+
+
+@require_POST
+@csrf_exempt
 def remove_item(request):
 
     data = json.loads(request.body)

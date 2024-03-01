@@ -18,6 +18,7 @@ urlpatterns = [
     path("check_availabilty/", check_availabilty, name="check_availabilty"),
     path("cart/", cart, name="cart"),
     path("remove_item/", remove_item, name="remove-item"),
+    path("test_api/", test_api, name="test-api"),
     path("checkout/", checkout, name="checkout"),
     path("process_checkout/", process_checkout, name="process-checkout"),
     path("payment_view/<profile_id>/<order_id>/", payment_view, name="payment-view"),
