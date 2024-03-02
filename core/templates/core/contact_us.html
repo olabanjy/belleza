@@ -56,17 +56,18 @@
             <div class="col-xl-7 col-lg-7 order-lg-1">
                 <h3 class="mb-3">Get in Touch</h3>
                 <div id="message-contact"></div>
-                <form method="post" action="#" id="contactform" autocomplete="off">
+                <form method="post"  id="contactform" autocomplete="off">
+
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-floating mb-4">
-                                <input class="form-control" type="text" id="name_contact" name="name_contact" placeholder="Name">
+                                <input class="form-control" type="text" id="name_contact" name="name_contact" placeholder="Name" required>
                                 <label for="name_contact">Name</label>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-floating mb-4">
-                                <input class="form-control" type="text" id="lastname_contact" name="lastname_contact" placeholder="Last Name">
+                                <input class="form-control" type="text" id="lastname_contact" name="lastname_contact" placeholder="Last Name" required>
                                 <label for="lastname_contact">Last name</label>
                             </div>
                         </div>
@@ -75,30 +76,32 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-floating mb-4">
-                                <input class="form-control" type="email" id="email_contact" name="email_contact" placeholder="Email">
+                                <input class="form-control" type="email" id="email_contact" name="email_contact" placeholder="Email" required>
                                 <label for="email_contact">Email</label>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-floating mb-4">
-                                <input class="form-control" type="text" id="phone_contact" name="phone_contact" placeholder="Telephone">
+                                <input class="form-control" type="text" id="phone_contact" name="phone_contact" placeholder="Telephone" required>
                                 <label for="phone_contact">Telephone</label>
                             </div>
                         </div>
                     </div>
                     <!-- /row -->
                     <div class="form-floating mb-4">
-                        <textarea class="form-control" placeholder="Message" id="message_contact" name="message_contact"></textarea>
+                        <textarea class="form-control" placeholder="Message" id="message_contact" name="message_contact" required></textarea>
                         <label for="message_contact">Message</label>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating mb-4">
-                                <input class="form-control" type="text" id="verify_contact" name="verify_contact" placeholder="Are you human? 3 + 1 =">
+                                <input class="form-control" type="text" id="verify_contact" name="verify_contact" placeholder="Are you human? 3 + 1 =" required>
                                 <label for="verify_contact">Are you human? 3 + 1 =</label>
                             </div>
                         </div>
                     </div>
+                    <div class="err_msg"></div>
+                    <button style="display: none;" type="button" id="email_sent_success_btn"  data-bs-toggle="modal" data-bs-target="#email_sent_success"></button>
                     <p class="mt-3"><input type="submit" value="Submit" class="btn_1 outline" id="submit-contact"></p>
                 </form>
             </div>
@@ -115,3 +118,92 @@
 </main>
 
 {% endblock content %}
+
+{% block modals %}
+
+<div class="modal fade" id="email_sent_success" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel"> Your enquiry has been sent! </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p> Your enquiry has been sent to our customer support and we will get back to you shortly.  </p>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock modals %}
+
+
+
+{% block extra_scripts %}
+
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+
+
+    var form = document.getElementById('contactform')
+    form.addEventListener('submit', function(e){
+        e.preventDefault()
+        console.log('Submitting form...')
+        submitFormData()
+    })
+
+
+ function submitFormData(){
+
+
+    formData = {
+          'name_contact': form.name_contact.value,
+          'lastname_contact': form.lastname_contact.value,
+          'email_contact': form.email_contact.value,
+          'phone_contact': form.phone_contact.value,
+          "message_contact": form.message_contact.value,
+          "verify_contact":form.verify_contact.value,
+    }
+
+
+    var url = "/process_contact_form/"
+
+
+    fetch(url, {
+                method: 'POST',
+                headers:{
+                    'Content-Type':'applicaiton/json',
+	    			'X-CSRFToken':csrftoken,
+                },
+
+                body:JSON.stringify(formData),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if  (data['status'] == "success"){
+                    // trigger success modal
+                    $("#email_sent_success_btn").click();
+                } else {
+                    let err_div = $("#err_msg")
+                    err_div.innerHTML = `<p style="color: red;"> There was a problem sending your enquiry !</p>`
+                }
+            })
+
+
+
+ }
+
+
+
+})
+
+
+</script>
+
+{% endblock extra_scripts %}

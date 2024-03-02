@@ -3,10 +3,16 @@ from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.views.defaults import page_not_found
 from django.views.generic import View
 from django.core.paginator import Paginator
+from django.views.generic import View
+
+from django.contrib import messages
 
 from .mail import send_email
 
 from django.conf import settings
+
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 
 import json
@@ -61,6 +67,43 @@ def contact_us(request):
     context = {"page_title": "Contact Us"}
 
     return render(request, template, context)
+
+
+@require_POST
+@csrf_exempt
+def process_contact_form(request):
+    data = json.loads(request.body)
+
+    # status:"success"
+    json_resp = {}
+
+    name_contact = data["name_contact"]
+    lastname_contact = data["lastname_contact"]
+    email_contact = data["email_contact"]
+    phone_contact = data["phone_contact"]
+    message_contact = data["message_contact"]
+    verify_contact = data["verify_contact"]
+
+    try:
+        send_email(
+            ["ugchukwuma@gmail.com"],
+            "New Enquiry Submission",
+            html_path="emails/new_enquiry.html",
+            context={
+                "fullName": f"{name_contact} {lastname_contact}",
+                "email": email_contact,
+                "phone": phone_contact,
+                "message": message_contact,
+            },
+        )
+
+        json_resp.update({"status": "success"})
+    except Exception as e:
+        json_resp.update({"status": "failed", "message": f"{e}"})
+
+    return JsonResponse(
+        data=json_resp,
+    )
 
 
 def policy(request):

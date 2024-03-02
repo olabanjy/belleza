@@ -41,9 +41,9 @@ def cookieCart(request):
             if cart[i]["productType"] == "room":
                 product = Room.objects.get(id=i)
                 rate = (check_out_dt - check_in_dt).days
-                total = (
-                    product.price * cart[i]["quantity"] * rate
-                ) + product.caution_fee
+                total = (product.price * cart[i]["quantity"] * rate) + (
+                    product.caution_fee * cart[i]["quantity"]
+                )
                 product_price = product.price
 
                 product_check_in = datetime.strptime(
@@ -63,9 +63,8 @@ def cookieCart(request):
 
                 if cart[i]["period"] == "day":
 
-                    total = (
-                        product.day_price * cart[i]["quantity"] * rate
-                        + product.caution_fee
+                    total = (product.day_price * cart[i]["quantity"] * rate) + (
+                        product.caution_fee * cart[i]["quantity"]
                     )
                     product_price = product.day_price
                     price_option = choices.PackagePriceOption.Day.value
@@ -79,10 +78,10 @@ def cookieCart(request):
 
                 elif cart[i]["period"] == "night":
                     price_option = choices.PackagePriceOption.Overnight.value
-                    total = (
-                        product.overnight_price * cart[i]["quantity"] * rate
-                        + product.caution_fee
+                    total = (product.overnight_price * cart[i]["quantity"] * rate) + (
+                        product.caution_fee * cart[i]["quantity"]
                     )
+
                     product_price = product.overnight_price
 
                     product_check_in = datetime.strptime(
@@ -101,7 +100,7 @@ def cookieCart(request):
                     "id": product.id,
                     "name": product.title,
                     "price": product_price,  # product.price,
-                    "caution_fee": product.caution_fee,
+                    "caution_fee": product.caution_fee * cart[i]["quantity"],
                     "rate": rate,
                     "displayImagePath": (
                         product.thumbnail

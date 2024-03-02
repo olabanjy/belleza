@@ -65,10 +65,10 @@
                   title="Remove item">
                   <i class="fas fa-trash"></i>
               </a>
-                <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
+                <a href="{% url 'booking:rooms' %}" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
                   title="Move to the wish list">
-                  <i class="fas fa-heart"></i>
-                </button>
+                  <i class="fas fa-plus"></i>
+            </a>
 
               </div>
 
@@ -141,10 +141,10 @@
                 title="Remove item">
                 <i class="fas fa-trash"></i>
             </a>
-              <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
+              <a href="{% url 'booking:packages' %}" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
                 title="Move to the wish list">
-                <i class="fas fa-heart"></i>
-              </button>
+                <i class="fas fa-plus"></i>
+                </a>
 
             </div>
 
