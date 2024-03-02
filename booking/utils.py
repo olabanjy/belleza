@@ -249,11 +249,11 @@ def guestOrder(request, data):
                 else None
             ),
             ordered=False,
+            rate=int(product["item"]["rate"]),
             check_in=product["item"]["check_in"],
             check_out=product["item"]["check_out"],
         )
-        print(order_item.get_total_item_price())
-        print(order_item.get_final_price())
+
         order.items.add(order_item)
 
         # check for extra guests

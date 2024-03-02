@@ -239,7 +239,9 @@ class OrderItem(CustomContentBaseTypeModel):
                     self.package_price_option
                     == choices.PackagePriceOption.Overnight.value
                 ):
-                    rt_total = self.quantity * self.content_object.day_price * self.rate
+                    rt_total = (
+                        self.quantity * self.content_object.overnight_price * self.rate
+                    )
                     if self.extra_guest and self.extra_guest > 0:
                         extra_guest_cost = (
                             self.extra_guest * self.content_object.extra_guest_fee
