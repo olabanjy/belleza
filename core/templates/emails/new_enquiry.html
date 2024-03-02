@@ -1,0 +1,339 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" style="color-scheme: light dark; supported-color-schemes: light dark;">
+  <head>
+    <meta charset="utf-8">
+
+    <!--[if !mso]>
+
+    <!-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--<![endif]-->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no">
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+    <title>Belleza Beach Resort</title>
+
+    <!--[if mso]>
+    <xml>
+    <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+
+    <!--[if !mso]>
+
+<!-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
+
+    <!--<![endif]-->
+    <style>
+      @font-face {
+        font-family: "korb-reg";
+        src: url("https://tradewindshotel.com.au/wp-content/themes/tradewinds/css/fonts/korb/korb-reg.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: fallback;
+        mso-font-alt: 'Arial';
+      }
+      @font-face {
+        font-family: "brandon-reg";
+        src: url("https://tradewindshotel.com.au/wp-content/themes/tradewinds/css/fonts/brandon-grotesque/brandongrotesque-reg.woff") format("woff");
+        font-weight: 400;
+        font-style: normal;
+        font-display: fallback;
+        mso-font-alt: 'Arial';
+      }
+      .edm_defaultlink a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .link_text p,
+      .link_text p a {
+        font-size: 16px;
+        line-height: 18px;
+        color: #9caf88;
+        font-weight: 700;
+        text-decoration: underline;
+      }
+      @media screen and (max-width: 480px) {
+        h1 {
+          font-size: 40px !important;
+          line-height: 45px !important;
+        }
+        .text_intro p {
+          font-size: 20px !important;
+          line-height: 28px !important;
+        }
+        .booking_name p {
+          font-size: 28px !important;
+          line-height: 33px !important;
+        }
+        .feature p {
+          font-size: 14px !important;
+          line-height: 23px !important;
+        }
+        .edm_w1 {
+          width: 100px !important;
+        }
+      }
+      @media screen and (max-width: 659px) {
+        u+.edm_body .edm_full_wrap {
+          width: 100% !important;
+          width: 100vw !important;
+        }
+        u+.body a {
+          color: inherit;
+          text-decoration: none;
+          font-size: inherit;
+          font-weight: inherit;
+          line-height: inherit;
+        }
+        .edm_main_table {
+          width: 100% !important;
+        }
+        .edm_wrapper {
+          width: 100% !important;
+        }
+        .edm_hide {
+          display: none !important;
+        }
+        .edm_full_img {
+          width: 100% !important;
+          height: auto !important;
+        }
+        .edm_full_img img {
+          width: 100% !important;
+          height: auto !important;
+        }
+        .edm_center {
+          text-align: center !important;
+        }
+        .edm_left {
+          text-align: left !important;
+        }
+        .edm_side60 {
+          width: 60px !important;
+        }
+        .edm_contentPadding {
+          padding: 20px 10px !important;
+        }
+        .edm_ptop {
+          padding-top: 20px !important;
+        }
+        .edm_pbottom {
+          padding-bottom: 20px !important;
+        }
+        .edm_padding_gone {
+          padding: 0px !important;
+        }
+        .edm_h10 {
+          height: 10px !important;
+          font-size: 1px !important;
+          line-height: 1px !important;
+        }
+        .edm_h20 {
+          height: 20px !important;
+          font-size: 1px !important;
+          line-height: 1px !important;
+        }
+        .edm_h30 {
+          height: 30px !important;
+          font-size: 1px !important;
+          line-height: 1px !important;
+        }
+        .text_footer p {
+          text-align: center !important;
+        }
+        .decorate {
+          display: none !important;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        .edm_bg_grey,
+        .edm_contentPadding,
+        .edm_masthead {
+          background-color: #222222 !important;
+        }
+        .edm_main_table {
+          background-color: #000001 !important;
+        }
+        .edm_border_lightgrey {
+          background-color: #f7f5f1 !important;
+        }
+        .edm_border_blue {
+          background-color: #c7d5e3 !important;
+        }
+        h1 {
+          color: #c5934c !important;
+        }
+        .booking_hotel p {
+          color: #ffffff !important;
+        }
+        p,
+        p a {
+          color: #ffffff !important;
+        }
+      }
+      u+.body .cta:hover .gmail-screen {
+        background: transparent;
+        mix-blend-mode: normal;
+      }
+      u+.body .cta:hover .gmail-difference {
+        background: transparent;
+        mix-blend-mode: normal;
+      }
+    </style>
+
+    <!--[if gte mso 9]>
+<style>
+li { text-indent: -1em; /* Normalise space between bullets and text */ }
+</style>
+<![endif]-->
+  </head>
+  <body class="edm_body" xml:lang="en" style="margin: 0px auto; padding: 0px; word-wrap: normal; word-spacing: normal; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-transform: scale(1); -webkit-text-size-adjust: 100%; -webkit-font-smoothing: antialiased;" bgcolor="#fffffe">
+    <div role="article" aria-roledescription="email" aria-label="email_name" lang="en" dir="ltr" style="font-size:1rem">
+
+      <!-- PREHEADER TEXT -->
+      <div style="display:none;">&#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847;</div>
+      <table role="none" width="100%" border="0" cellspacing="0" align="center" cellpadding="0" class="edm_bg_grey edm_full_wrap" style="border-collapse: collapse; mso-table-lspace: 0px; mso-table-rspace: 0px; background-color: #dfdfdf;" bgcolor="#dfdfdf">
+        <tr>
+          <td align="center" valign="top" style="border-collapse: collapse; mso-line-height-rule: exactly; padding-top: 30px;" class="edm_padding_gone">
+            <table role="none" align="center" width="660" border="0" cellspacing="0" cellpadding="0" class="edm_main_table" style="border-collapse: collapse; mso-table-lspace: 0px; mso-table-rspace: 0px; width: 660px; table-layout: fixed;" bgcolor="#ffffff">
+
+              <!-- MASTHEAD -->
+              <tr>
+                <td valign="top" align="center" class="edm_masthead" style="border-collapse: collapse; mso-line-height-rule: exactly;">
+                  <table role="none" width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="border-collapse: collapse; mso-table-lspace: 0px; mso-table-rspace: 0px;">
+                    <tr>
+                      <td valign="top" align="center" style="border-collapse: collapse; mso-line-height-rule: exactly; padding-left: 24px; padding-top: 30px;">
+                        <table role="none" width="156" border="0" cellspacing="0" cellpadding="0" align="center" style="border-collapse: collapse; mso-table-lspace: 0px; mso-table-rspace: 0px; width: 156px;" class="edm_wrapper">
+                          <tr>
+                            <td valign="top" align="center" class="edm_pbottom" style="border-collapse: collapse; mso-line-height-rule: exactly;">
+                              <a href="https://bellezabeachresort.com" aria-label="Visit the Belleza Beach Resort" style="border-collapse: collapse; mso-line-height-rule: exactly; text-decoration: none;">
+                                <img src="https://bellezabeachresort.com/wp-content/uploads/2024/02/logob-removebg-preview.png" width="156" alt="Belleza Beach Resort" border="0" style="display: block; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px; color: #000000; max-width: 156px; border: 0; outline: none;">
+                              </a>
+                            </td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+
+
+              <tr>
+                <td valign="top" align="center" style="border-collapse: collapse; mso-line-height-rule: exactly; padding: 10px 20px 30px;" class="edm_contentPadding">
+                  <table role="none" width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="border-collapse: collapse; mso-table-lspace: 0px; mso-table-rspace: 0px;">
+
+                    <tr>
+                      <td valign="top" align="center" style="border-collapse: collapse; mso-line-height-rule: exactly;">
+                        <h1 style="font-family: 'korb-reg', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; margin: 0; padding: 0; font-size: 35px; line-height: 54px; color: #c5934c; font-weight: 400;">New Enquiry</h1>
+                      </td>
+                    </tr>
+
+                  </table>
+                </td>
+              </tr>
+
+              <!-- BANNER -->
+
+              <!-- CTA SECTION -->
+              <tr>
+                <td valign="top" align="center" style="border-collapse: collapse; mso-line-height-rule: exactly; padding: 0px 20px 30px;" class="edm_contentPadding">
+                  <table role="none" width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="border-collapse: collapse; mso-table-lspace: 0px; mso-table-rspace: 0px;">
+                    <tr>
+                      <td valign="top" align="center" style="border-collapse: collapse; mso-line-height-rule: exactly; background-color: #f7f5f1; padding: 20px;" class="edm_border_lightgrey edm_contentPadding" bgcolor="#f7f5f1">
+                        <table role="none" width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="border-collapse: collapse; mso-table-lspace: 0px; mso-table-rspace: 0px;">
+
+                          <tr>
+                            <td valign="top" bgcolor="#ffffff" align="center" style="border-collapse: collapse; mso-line-height-rule: exactly; padding: 40px 20px;" class="edm_contentPadding">
+                              <table role="none" width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="border-collapse: collapse; mso-table-lspace: 0px; mso-table-rspace: 0px;">
+                                <tr>
+                                  <td valign="top" align="left" style="border-collapse: collapse; mso-line-height-rule: exactly; padding-bottom: 10px;">
+                                    <h2 style="font-family: 'korb-reg', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; margin: 0; padding: 0; font-size: 18px; line-height: 26px; color: #000; font-weight: 700; ">New Enquiry Submission</h2>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td valign="top" align="center" style="border-collapse: collapse; mso-line-height-rule: exactly;">
+                                    <table role="none" width="100%" border="0" cellspacing="0" cellpadding="0" align="center" dir="rtl" style="border-collapse: collapse; mso-table-lspace: 0px; mso-table-rspace: 0px;">
+                                      <tr>
+                                        <td valign="top" align="center" style="border-collapse: collapse; mso-line-height-rule: exactly;">
+                                          <table role="none" width="156" border="0" cellspacing="0" cellpadding="0" align="right" style="border-collapse: collapse; mso-table-lspace: 0px; mso-table-rspace: 0px; width: 156px;" class="decorate" dir="ltr">
+                                            <tr>
+                                              <td height="4" style="border-collapse: collapse; mso-line-height-rule: exactly; height: 4px; font-size: 0px; line-height: 0px;" class="edm_hide">
+                                                <img src="https://emailancer.com/edm/tradewinds/images/spacer.gif" width="1" height="1" style="display: block; border: 0; outline: none;" border="0" alt>
+                                              </td>
+                                            </tr>
+                                          </table>
+
+                                          <!--[if gte mso 9]>
+                                            </td>
+                                            <td valign="top" dir="ltr">
+                                            <![endif]-->
+                                          <table role="none" width="380" border="0" cellspacing="0" cellpadding="0" align="left" style="border-collapse: collapse; mso-table-lspace: 0px; mso-table-rspace: 0px; width: 500px;" class="edm_wrapper" dir="ltr">
+                                            <tr>
+                                              <td valign="top" align="center" style="border-collapse: collapse; mso-line-height-rule: exactly;">
+                                                <table role="none" width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="border-collapse: collapse; mso-table-lspace: 0px; mso-table-rspace: 0px;">
+                                                  <tr>
+                                                    <td valign="top" align="center" style="border-collapse: collapse; mso-line-height-rule: exactly;">
+                                                      <table role="none" width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="border-collapse: collapse; mso-table-lspace: 0px; mso-table-rspace: 0px;">
+                                                        <tr>
+                                                          <td valign="top" align="left" style="border-collapse: collapse; mso-line-height-rule: exactly; padding-bottom: 20px;">
+                                                            <p style="margin: 0; padding: 0; font-family: 'brandon-reg', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 18px; line-height: 26px; color: #000000;"> FullName: {{fullName}} </p>
+                                                            <p style="margin: 0; padding: 0; font-family: 'brandon-reg', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 18px; line-height: 26px; color: #000000;"> Email: {{email}}</p>
+                                                            <p style="margin: 0; padding: 0; font-family: 'brandon-reg', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 18px; line-height: 26px; color: #000000;"> Phone: {{phone}}</p>
+                                                            <p style="margin: 0; padding: 0; font-family: 'brandon-reg', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 18px; line-height: 26px; color: #000000;"> Message: {{message}}</p>
+                                                          </td>
+                                                        </tr>
+                                                      </table>
+                                                    </td>
+                                                    <td width="20" style="border-collapse: collapse; mso-line-height-rule: exactly; width: 20px;" class="edm_hide">&nbsp;</td>
+                                                  </tr>
+                                                </table>
+                                              </td>
+                                            </tr>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td height="20" style="border-collapse: collapse; mso-line-height-rule: exactly; height: 20px; font-size: 1px; line-height: 1px;" class="edm_h10">&nbsp;</td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- CTA SECTION -->
+
+
+
+
+
+
+
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

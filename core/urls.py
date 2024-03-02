@@ -8,6 +8,7 @@ urlpatterns = [
     path("", homepage, name="home"),
     path("about/", about, name="about"),
     path("contact-us/", contact_us, name="contact-us"),
+    path("process_contact_form/", process_contact_form, name="process_contact_form"),
     path("policy/", policy, name="policy"),
     path("t&c/", terms_and_condition, name="terms"),
     path("menu/", menu, name="menu"),

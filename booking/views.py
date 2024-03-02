@@ -670,7 +670,7 @@ def process_paystack_payment(request):
                 try:
                     for item in order_items:
                         send_email(
-                            ["shola.albert@gmail.com", order.user.user.email],
+                            [order.user.user.email],
                             "Your Reservation at Belleza",
                             html_path="emails/reservation.html",
                             context={

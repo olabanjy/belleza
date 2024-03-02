@@ -13,7 +13,7 @@
                 <small class="slide-animated one">Belleza Beach Resort</small>
                 <h3 class="slide-animated two">Your Dream Beach<br>Getaway Starts Here</h3>
                 <br>
-                <div style="justify-content: center;"><a href="#booking_section" class="btn_1">Book Now</a></div>
+                <div style="justify-content: center;"><a href="#room_section" class="btn_1">Book Now</a></div>
             </div>
             <div class="mouse_wp slide-animated four">
                 <a href="#first_section" class="btn_scrollto">
@@ -74,7 +74,7 @@
             <h2 data-cue="slideInUp" data-delay="200">Rooms & Suites</h2>
         </div>
         {% if all_rooms_qs.count > 0 %}
-        <div class="row justify-content-center add_bottom_90" data-cues="slideInUp" data-delay="300">
+        <div class="row justify-content-center add_bottom_90" id="room_section" data-cues="slideInUp" data-delay="300">
             {% if featured_room %}
             <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
                 <a href="{% url 'booking:room-details' featured_room.id %}" class="box_cat_rooms">
@@ -157,14 +157,14 @@
     </div>
     <!-- /marquee-->
 
-    <div class="container margin_120_95" id="first_section">
+    <div class="container margin_120_95" id="package_section">
         <div class="row justify-content-between">
             <div class="col-xl-4 fixed_title">
                 <div class="title">
                     <small>Belleza Beach Resort</small>
                     <h2>Our Packages</h2>
                     <p class="lead"><strong>Your Dream Beach Getaway.</strong> We have packages that fit your number of guests and budget, from day to overnight packages.</p>
-                    <p><a href="#booking_section" class="btn_1 outline">View All Packages</a></p>
+                    <p><a href="{% url 'booking:packages' %}" class="btn_1 outline">View All Packages</a></p>
                 </div>
             </div>
             {% if all_packages %}
