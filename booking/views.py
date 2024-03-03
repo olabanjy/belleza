@@ -713,6 +713,7 @@ def process_flutterwave_payment(request):
         flutterwave_id = request.POST.get("flutterwave_id")
         print(flutterwave_id)
         order_ref = request.POST.get("flutterwave_tx_ref")
+        print(order_ref)
         order = Order.objects.get(id=order_ref, ordered=False)
 
         headers = {"Authorization": f"Bearer {settings.TEST_FLW_SECRET_KEY}"}
@@ -721,10 +722,11 @@ def process_flutterwave_payment(request):
             headers=headers,
         )
         response = resp.json()
+        print("response", response)
         try:
             status = response["status"]
             response_tranx_ref = response["data"]["tx_ref"]
-            if status == "success" and order.id == response_tranx_ref:
+            if status == "success" and str(order.id) == response_tranx_ref:
                 payment = Payment()
                 payment.txn_code = response_tranx_ref
                 payment.amount = int(order.get_total())
