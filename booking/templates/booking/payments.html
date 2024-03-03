@@ -168,12 +168,20 @@
 
             callback: function(payment) {
                     // Send AJAX verification request to backend
+                console.log(payment)
                 var element = document.createElement("input");
                 element.setAttribute("type", "hidden");
                 element.setAttribute("name", "flutterwave_id");
-                element.setAttribute("value", payment.id);
+                element.setAttribute("value", payment.transaction_id);
                 var form = document.getElementById("flutterwave-payment-form");
                 form.appendChild(element);
+
+                var element2 = document.createElement("input");
+                element.setAttribute("type", "hidden");
+                element.setAttribute("name", "flutterwave_tx_ref");
+                element.setAttribute("value", payment.tx_ref);
+                form.appendChild(element2);
+
                 form.submit();
 
             },

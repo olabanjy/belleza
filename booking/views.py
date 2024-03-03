@@ -711,7 +711,8 @@ def process_flutterwave_payment(request):
     if request.method == "POST":
 
         flutterwave_id = request.POST.get("flutterwave_id")
-        order_ref = request.POST.get("order-ref")
+        print(flutterwave_id)
+        order_ref = request.POST.get("flutterwave_tx_ref")
         order = Order.objects.get(id=order_ref, ordered=False)
 
         headers = {"Authorization": f"Bearer {settings.TEST_FLW_SECRET_KEY}"}
