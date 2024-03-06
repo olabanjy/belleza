@@ -192,7 +192,8 @@ def check_availabilty(request):
 
         if order_items_qs.exists():
             # subtract quantity booked from availabilty
-            if the_room.availability <= sum_agrregate["quantity__sum"]:
+            print(the_room.availability, "and", sum_agrregate["quantity__sum"])
+            if the_room.availability < sum_agrregate["quantity__sum"]:
                 print(
                     "there is a problem here, ordered room should never be more than availabilty"
                 )
@@ -289,7 +290,11 @@ def check_availabilty(request):
             return JsonResponse(
                 data={
                     "is_available": False,
-                    "message": f"{the_package.title} has been fully booked between {check_in_date} and {check_out_date}. Kindly book another room",
+                    "message": (
+                        f"{the_package.title} has been fully booked between {check_in_date} and {check_out_date}. Kindly book another package"
+                        if period == "night"
+                        else f"{the_package.title}  is fully booked on {check_in_date} Kindly book another package"
+                    ),
                     "package_name": the_package.title,
                     "check_in": check_in_date,
                     "check_out": check_out_date,
@@ -304,7 +309,11 @@ def check_availabilty(request):
                 return JsonResponse(
                     data={
                         "is_available": False,
-                        "message": f"{the_package.title} is full booked between {check_in_date} and {check_out_date}. Kindly book another package",
+                        "message": (
+                            f"{the_package.title} has been fully booked between {check_in_date} and {check_out_date}. Kindly book another package"
+                            if period == "night"
+                            else f"{the_package.title}  is fully booked on {check_in_date} Kindly book another package"
+                        ),
                         "package_name": the_package.title,
                         "check_in": check_in_date,
                         "check_out": check_out_date,
@@ -316,7 +325,11 @@ def check_availabilty(request):
                 json_resp.update(
                     {
                         "is_available": False,
-                        "message": f"{the_package.title} is full booked between {check_in_date} and {check_out_date}. Kindly book another package",
+                        "message": (
+                            f"{the_package.title} has been fully booked between {check_in_date} and {check_out_date}. Kindly book another package"
+                            if period == "night"
+                            else f"{the_package.title}  is fully booked on {check_in_date} Kindly book another package"
+                        ),
                         "package_name": the_package.title,
                         "check_in": check_in_date,
                         "check_out": check_out_date,
@@ -327,7 +340,11 @@ def check_availabilty(request):
                 json_resp.update(
                     {
                         "is_available": True,
-                        "message": f"{the_package.title} is available between {check_in_date} and {check_out_date}",
+                        "message": (
+                            f"{the_package.title} is available between {check_in_date} and {check_out_date}"
+                            if period == "night"
+                            else f"{the_package.title} is available on {check_in_date}"
+                        ),
                         "package_name": the_package.title,
                         "check_in": check_in_date,
                         "check_out": check_out_date,
@@ -352,7 +369,11 @@ def check_availabilty(request):
                 json_resp.update(
                     {
                         "is_available": True,
-                        "message": f"{the_package.title} is available between {check_in_date} and {check_out_date}",
+                        "message": (
+                            f"{the_package.title} is available between {check_in_date} and {check_out_date}"
+                            if period == "night"
+                            else f"{the_package.title} is available on {check_in_date}"
+                        ),
                         "package_name": the_package.title,
                         "check_in": check_in_date,
                         "check_out": check_out_date,
@@ -367,7 +388,11 @@ def check_availabilty(request):
                     json_resp.update(
                         {
                             "is_available": True,
-                            "message": f"{the_package.title} is available between {check_in_date} and {check_out_date}",
+                            "message": (
+                                f"{the_package.title} is available between {check_in_date} and {check_out_date}"
+                                if period == "night"
+                                else f"{the_package.title} is available on {check_in_date}"
+                            ),
                             "package_name": the_package.title,
                             "check_in": check_in_date,
                             "check_out": check_out_date,
@@ -377,7 +402,11 @@ def check_availabilty(request):
                     json_resp.update(
                         {
                             "is_available": False,
-                            "message": f"{the_package.title} is full booked between {check_in_date} and {check_out_date}. Kindly book another package",
+                            "message": (
+                                f"{the_package.title} has been fully booked between {check_in_date} and {check_out_date}. Kindly book another package"
+                                if period == "night"
+                                else f"{the_package.title}  is fully booked on {check_in_date} Kindly book another package"
+                            ),
                             "package_name": the_package.title,
                             "check_in": check_in_date,
                             "check_out": check_out_date,
@@ -393,7 +422,11 @@ def check_availabilty(request):
                 json_resp.update(
                     {
                         "is_available": True,
-                        "message": f"{the_package.title} is available between {check_in_date} and {check_out_date}",
+                        "message": (
+                            f"{the_package.title} is available between {check_in_date} and {check_out_date}"
+                            if period == "night"
+                            else f"{the_package.title} is available on {check_in_date}"
+                        ),
                         "package_name": the_package.title,
                         "check_in": check_in_date,
                         "check_out": check_out_date,
@@ -414,7 +447,11 @@ def check_availabilty(request):
                     json_resp.update(
                         {
                             "is_available": True,
-                            "message": f"{the_package.title} is available between {check_in_date} and {check_out_date}",
+                            "message": (
+                                f"{the_package.title} is available between {check_in_date} and {check_out_date}"
+                                if period == "night"
+                                else f"{the_package.title} is available on {check_in_date}"
+                            ),
                             "package_name": the_package.title,
                             "check_in": check_in_date,
                             "check_out": check_out_date,
@@ -424,7 +461,11 @@ def check_availabilty(request):
                     json_resp.update(
                         {
                             "is_available": False,
-                            "message": f"{the_package.title} is full booked between {check_in_date} and {check_out_date}. Kindly book another package",
+                            "message": (
+                                f"{the_package.title} has been fully booked between {check_in_date} and {check_out_date}. Kindly book another package"
+                                if period == "night"
+                                else f"{the_package.title}  is fully booked on {check_in_date} Kindly book another package"
+                            ),
                             "package_name": the_package.title,
                             "check_in": check_in_date,
                             "check_out": check_out_date,
@@ -669,6 +710,7 @@ def process_paystack_payment(request):
                 # send email to admin
                 try:
                     for item in order_items:
+                        # send email to customer
                         send_email(
                             [order.user.user.email],
                             "Your Reservation at Belleza",
@@ -685,6 +727,28 @@ def process_paystack_payment(request):
                                 "amount": item.get_final_price(),
                             },
                         )
+                        # send email to admin
+                        send_email(
+                            ["bookings@bellezabeachresort.com"],
+                            f"New {item.item_type} Reservation",
+                            html_path="emails/notify_admin_on_booking.html",
+                            context={
+                                "type": item.item_type,
+                                "item": item,
+                                "email": order.user.user.email,
+                                "phone": order.booking_info.phone,
+                                "other_phone": order.booking_info.other_phone,
+                                "fullName": (
+                                    f"{order.booking_info.full_name}"
+                                    if item.item_type == choices.ProductType.Room.value
+                                    else f"{order.booking_info.corporate_rep}"
+                                ),
+                                "check_in": item.check_in,
+                                "check_out": item.check_out,
+                                "amount": item.get_final_price(),
+                            },
+                        )
+
                 except Exception as e:
                     print(e)
                     pass
@@ -776,8 +840,9 @@ def process_flutterwave_payment(request):
                 # send an email to customer
                 try:
                     for item in order_items:
+                        # customer
                         send_email(
-                            ["shola.albert@gmail.com", order.user.user.email],
+                            [order.user.user.email],
                             "Your Reservation at Belleza",
                             html_path="emails/reservation.html",
                             context={
@@ -789,6 +854,32 @@ def process_flutterwave_payment(request):
                                 ),
                                 "check_in": item.check_in,
                                 "check_out": item.check_out,
+                                "amount": item.get_final_price(),
+                                "quantity": item.quantity,
+                            },
+                        )
+                        # admin
+                        # send email to admin
+                        send_email(
+                            [
+                                "bookings@bellezabeachresort.com",
+                            ],
+                            f"New {item.item_type} Reservation",
+                            html_path="emails/notify_admin_on_booking.html",
+                            context={
+                                "type": item.item_type,
+                                "item": item,
+                                "email": order.user.user.email,
+                                "phone": order.booking_info.phone,
+                                "other_phone": order.booking_info.other_phone,
+                                "fullName": (
+                                    f"{order.booking_info.full_name}"
+                                    if item.item_type == choices.ProductType.Room.value
+                                    else f"{order.booking_info.corporate_rep}"
+                                ),
+                                "check_in": item.check_in,
+                                "check_out": item.check_out,
+                                "quantity": item.quantity,
                                 "amount": item.get_final_price(),
                             },
                         )
