@@ -31,14 +31,14 @@
 
   <div class="container py-5">
     <div class="row d-flex justify-content-center my-4">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="card mb-4">
           <div class="card-header py-3">
             <h5 class="mb-0">Proceed with Paystack</h5>
           </div>
 
           <div class="card-body">
-            <img src="{% static 'img/paystack_icon.png' %}" width="100%" alt="">
+            <img src="{% static 'img/paystack_icon.png' %}" width="230px" height="auto" alt="">
 
             <form id="paystack-payment-form"  action="{% url 'booking:process-paystack-payment' %}" class="form" method="POST">
 
@@ -60,14 +60,14 @@
           </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="card mb-4">
           <div class="card-header py-3">
             <h5 class="mb-0">Proceed with Flutterwave </h5>
           </div>
           <div class="card-body">
 
-            <img src="{% static 'img/flutterwave_icon.png' %}" width="100%" alt="">
+            <img src="{% static 'img/flutterwave_new_icon.png' %}" width="230px" height="auto" alt="">
 
             <form id="flutterwave-payment-form" method="POST" action="{% url 'booking:process-flutterwave-payment' %}" class="form" >
 

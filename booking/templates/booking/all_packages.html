@@ -145,9 +145,13 @@
                 <div class="col-xl-7">
                     <div data-cue="slideInUp" data-delay="200">
                         <div class="booking_wrapper">
-                            <div class="col-12">
-                                <input type="hidden" id="date_booking" name="date_booking">
-                            </div>
+                          <div id="day_widget_container" style="display: none;" class="col-12">
+                            <input  type="hidden" id="day_booking" name="day_booking">
+                        </div>
+
+                        <div id="night_widget_container" style="display: none;" class="col-12">
+                            <input  type="hidden" id="night_booking" name="night_booking">
+                        </div>
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="custom_select">
@@ -211,7 +215,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>   <span id="selectedPackage"></span>   Package is available from <strong><span id="startDate"></span></strong> to  <strong><span id="endDate"></span></strong>. Proceed to booking
+          <!-- <p>   <span id="selectedPackage"></span>   Package is available from <strong><span id="startDate"></span></strong> to  <strong><span id="endDate"></span></strong>. Proceed to booking </p> -->
+          <p style="font-weight: bold;" id="available_message"> </p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -232,7 +237,8 @@
         </div>
         <div class="modal-body">
 
-          <p>   <span id="selectedPackage_ntav"></span> Package is not available from <strong><span id="startDate_ntav"></span></strong> to  <strong><span id="endDate_ntav"></span></strong>.Kindly book another room
+          <!-- <p>   <span id="selectedPackage_ntav"></span> Package is not available from <strong><span id="startDate_ntav"></span></strong> to  <strong><span id="endDate_ntav"></span></strong>.Kindly book another room </p> -->
+          <p style="font-weight: bold;" id="not_available_message"> </p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -271,6 +277,79 @@
 
 <script>
 
+  let selectedPeriod = $("#selected_period_id")
+
+      selectedPeriod.on("change", () => {
+          // period = selectedPeriod.val()
+
+          if  (selectedPeriod.val() == "day") {
+              $('#day_widget_container').show()
+              $('#night_widget_container').hide()
+          } else {
+              $('#day_widget_container').hide()
+              $('#night_widget_container').show()
+          }
+      })
+
+  </script>
+
+<script>
+
+  $(function () {
+    "use strict";
+
+    $(function () {
+      /* Booked Dates */
+      const DateTime = easepick.DateTime;
+      const bookedDates = [
+        ["2023-02-21", "2023-02-28"],
+        "2023-09-07",
+        ["2023-10-11", "2023-10-17"],
+      ].map((d) => {
+        if (d instanceof Array) {
+          const start = new DateTime(d[0], "YYYY-MM-DD");
+          const end = new DateTime(d[1], "YYYY-MM-DD");
+
+          return [start, end];
+        }
+
+        return new DateTime(d, "YYYY-MM-DD");
+      });
+
+      /* Configuration picker */
+      const picker = new easepick.create({
+        element: document.getElementById("day_booking"),
+        css: ["/static/css/daterangepicker_v2.css"],
+        lang: "en-EN", // Language tags https://www.techonthenet.com/js/language_tags.php
+        format: "DD/MM/YYYY",
+        calendars: 2,
+        grid: 2,
+        zIndex: 10,
+        inline: true,
+        plugins: ["LockPlugin"],
+        LockPlugin: {
+          minDate: new Date(),
+          minDays: 1,
+          inseparable: false,
+          filter(date, picked) {
+            if (picked.length === 1) {
+              const incl = date.isBefore(picked[0]) ? "[)" : "(]";
+              return (
+                !picked[0].isSame(date, "day") && date.inArray(bookedDates, incl)
+              );
+            }
+            return date.inArray(bookedDates, "[)");
+          },
+        },
+      });
+    }); // End Easypick config
+  });
+
+
+</script>
+
+<script>
+
     $(function () {
       "use strict";
 
@@ -294,7 +373,7 @@
 
         /* Configuration picker */
         const picker = new easepick.create({
-          element: document.getElementById("date_booking"),
+          element: document.getElementById("night_booking"),
           css: ["/static/css/daterangepicker_v2.css"],
           lang: "en-EN", // Language tags https://www.techonthenet.com/js/language_tags.php
           format: "DD/MM/YYYY",
@@ -331,7 +410,7 @@
     });
 
 
-    </script>
+</script>
 
 <script>
 
@@ -347,21 +426,32 @@ $(document).ready(function(){
 
     checkAvailabiltyBtn.on("click", () =>{
 
-        let bookedDates = $("#date_booking")
+        let dayBooking = $("#day_booking")
+        let nightBooking = $("#night_booking")
+
         let selectedPackage = $("#selected_package_id")
         let selectedPeriod = $("#selected_period_id")
-        console.log('availability data', bookedDates.val(), selectedPackage.val(), selectedPeriod.val())
 
-        if (!bookedDates.val()) {
-            alert('Please select check-in and check-out date'); return;
-        }
         if (!selectedPeriod.val()) {
             alert('Please select period to continue'); return;
         }
         if (!selectedPackage.val()) {
             alert('Please select a package to continue'); return;
         }
-        checkAvailabilty(selectedPackage.val(), "package",  bookedDates.val(), 1, selectedPeriod.val() )
+
+        let theBookedDates;
+        if (selectedPeriod.val() == "night") {
+            if (!dayBooking.val()){
+              alert('Please select check-in and check-out date to continue'); return;
+            }
+            theBookedDates = nightBooking.val()
+        } else if (selectedPeriod.val() == "day"){
+          if (!nightBooking.val()){
+            alert('Please select check-in date to continue'); return;
+          }
+            theBookedDates = `${dayBooking.val()} - ${dayBooking.val()}`
+        }
+        checkAvailabilty(selectedPackage.val(), "package",  theBookedDates, 1, selectedPeriod.val() )
     })
 
 
@@ -388,6 +478,7 @@ function checkAvailabilty(productId,productType, bookedDates, quantity, period )
             $("#selectedPackage").text(`${data.package_name}`)
             $("#startDate").text(`${data.check_in}`)
             $("#endDate").text(`${data.check_out}`)
+            $("#available_message").text(`${data.message}`)
             // set global
             globBookedDates = bookedDates
             globSelectedPackage = productId
@@ -397,6 +488,7 @@ function checkAvailabilty(productId,productType, bookedDates, quantity, period )
             $("#selectedPackage_ntav").text(`${data.package_name}`)
             $("#startDate_ntav").text(`${data.check_in}`)
             $("#endDate_ntav").text(`${data.check_out}`)
+            $("#not_available_message").text(`${data.message}`)
             $("#package_not_available").click();
         }
     })
