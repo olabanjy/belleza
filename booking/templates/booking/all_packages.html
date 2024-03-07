@@ -441,12 +441,12 @@ $(document).ready(function(){
 
         let theBookedDates;
         if (selectedPeriod.val() == "night") {
-            if (!dayBooking.val()){
+            if (!nightBooking.val()){
               alert('Please select check-in and check-out date to continue'); return;
             }
             theBookedDates = nightBooking.val()
         } else if (selectedPeriod.val() == "day"){
-          if (!nightBooking.val()){
+          if (!dayBooking.val()){
             alert('Please select check-in date to continue'); return;
           }
             theBookedDates = `${dayBooking.val()} - ${dayBooking.val()}`

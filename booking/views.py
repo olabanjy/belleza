@@ -879,7 +879,7 @@ def process_flutterwave_payment(request):
                                 ),
                                 "check_in": item.check_in,
                                 "check_out": item.check_out,
-                                "quantity": item.quantity,
+                                "item_quantity": item.quantity,
                                 "amount": item.get_final_price(),
                             },
                         )

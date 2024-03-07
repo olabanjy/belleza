@@ -3,6 +3,15 @@
 
  {% load humanize %}
 
+ {% block extra_styles %}
+
+ <style type="text/css">
+
+
+ </style>
+
+ {% endblock extra_styles %}
+
 
  {% block content %}
 
@@ -204,29 +213,17 @@
                                         <select name="selected_room_id" id="selected_room_id" class="wide">
                                             <option value="" selected disabled> Select Room </option>
                                             {% for room in all_rooms %}
-                                            <option value="{{room.id}}">{{room.title}}</option>
+                                            <option data-count="{{room.availability}}" value="{{room.id}}">{{room.title}}</option>
                                             {% endfor %}
                                         </select>
                                         {% endif %}
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4" id="selected_days_row">
 
-                                    <div class="custom_select" id="selected_days_div">
-                                        <select name="selected_days_id" id="selected_days_id" class="wide" required>
-                                            <option value="" selected disabled>Number of Rooms </option>
-                                            <option value="1" > 1 </option>
-                                            <option value="2" > 2 </option>
-                                            <option value="3" > 3 </option>
-                                            <option value="4" > 4 </option>
-                                            <option value="5" > 5 </option>
-                                            <option value="6" > 6 </option>
-                                            <option value="7" > 7 </option>
-                                            <option value="8" > 8 </option>
+                                    <input class="form-control wide" type="number" id="selected_days_id"   onchange="javascript: if (parseInt(this.value) > this.max) this.value = this.max;"  placeholder="Number of Rooms" name="selected_days_id" min="1" max="1" required>
 
-                                        </select>
-                                    </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <button style="display: none;" type="button" id="room_is_available"  data-bs-toggle="modal" data-bs-target="#room_is_available_modal"></button>
@@ -326,6 +323,35 @@
 
 {% block extra_scripts %}
 
+
+
+<script>
+
+$(document).ready(function(){
+
+
+    let roomOption = $("#selected_room_id")
+
+    // let selected_days_div = $("#selected_days_div")
+    let selected_days_div = $("#selected_days_id")
+
+    roomOption.on("change", function() {
+        let availability = $("#selected_room_id option:selected").data('count')
+
+        selected_days_div.val('1')
+        selected_days_div.attr( "max",`${availability}`)
+
+        $("#selected_days_id").load(" #selected_days_id > *");
+    })
+
+
+
+});
+
+</script>
+
+
+
 <script>
 
 $(function () {
@@ -416,6 +442,7 @@ $(document).ready(function(){
         let selectedRoom = $("#selected_room_id")
         let selectedNumberOfRooms = $("#selected_days_id")
         console.log('availability data', bookedDates.val(), selectedRoom.val(), selectedNumberOfRooms.val())
+
 
         if (!bookedDates.val()) {
             alert('Please select check-in and check-out date'); return;
