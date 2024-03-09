@@ -37,6 +37,13 @@ from django.http import JsonResponse
 import hmac
 import hashlib
 
+from .tasks import (
+    send_admin_booking_email,
+    send_booking_email,
+    auto_booking_reminder,
+    auto_checkout,
+)
+
 
 from .models import (
     CustomContentBaseTypeModel,
@@ -711,43 +718,12 @@ def process_paystack_payment(request):
                 try:
                     for item in order_items:
                         # send email to customer
-                        send_email(
-                            [order.user.user.email],
-                            "Your Reservation at Belleza",
-                            html_path="emails/reservation.html",
-                            context={
-                                "item": item,
-                                "fullName": (
-                                    f"{order.booking_info.full_name}"
-                                    if item.item_type == choices.ProductType.Room.value
-                                    else f"{order.booking_info.corporate_rep}"
-                                ),
-                                "check_in": item.check_in,
-                                "check_out": item.check_out,
-                                "amount": item.get_final_price(),
-                            },
-                        )
+
+                        send_booking_email.delay(order.id, item.id)
+
                         # send email to admin
-                        send_email(
-                            ["bookings@bellezabeachresort.com"],
-                            f"New {item.item_type} Reservation",
-                            html_path="emails/notify_admin_on_booking.html",
-                            context={
-                                "type": item.item_type,
-                                "item": item,
-                                "email": order.user.user.email,
-                                "phone": order.booking_info.phone,
-                                "other_phone": order.booking_info.other_phone,
-                                "fullName": (
-                                    f"{order.booking_info.full_name}"
-                                    if item.item_type == choices.ProductType.Room.value
-                                    else f"{order.booking_info.corporate_rep}"
-                                ),
-                                "check_in": item.check_in,
-                                "check_out": item.check_out,
-                                "amount": item.get_final_price(),
-                            },
-                        )
+
+                        send_admin_booking_email.delay(order.id, item.id)
 
                 except Exception as e:
                     print(e)
@@ -802,6 +778,7 @@ def process_flutterwave_payment(request):
                 for item in order_items:
                     item.ordered = True
                     item.save()
+
                     try:
                         # update item stock availability for both room and packages
                         if item.item_type == choices.ProductType.Package.value:
@@ -840,49 +817,14 @@ def process_flutterwave_payment(request):
                 # send an email to customer
                 try:
                     for item in order_items:
-                        # customer
-                        send_email(
-                            [order.user.user.email],
-                            "Your Reservation at Belleza",
-                            html_path="emails/reservation.html",
-                            context={
-                                "item": item,
-                                "fullName": (
-                                    f"{order.booking_info.full_name}"
-                                    if item.item_type == choices.ProductType.Room.value
-                                    else f"{order.booking_info.corporate_rep}"
-                                ),
-                                "check_in": item.check_in,
-                                "check_out": item.check_out,
-                                "amount": item.get_final_price(),
-                                "quantity": item.quantity,
-                            },
-                        )
-                        # admin
+                        # send email to customer
+
+                        send_booking_email.delay(order.id, item.id)
+
                         # send email to admin
-                        send_email(
-                            [
-                                "bookings@bellezabeachresort.com",
-                            ],
-                            f"New {item.item_type} Reservation",
-                            html_path="emails/notify_admin_on_booking.html",
-                            context={
-                                "type": item.item_type,
-                                "item": item,
-                                "email": order.user.user.email,
-                                "phone": order.booking_info.phone,
-                                "other_phone": order.booking_info.other_phone,
-                                "fullName": (
-                                    f"{order.booking_info.full_name}"
-                                    if item.item_type == choices.ProductType.Room.value
-                                    else f"{order.booking_info.corporate_rep}"
-                                ),
-                                "check_in": item.check_in,
-                                "check_out": item.check_out,
-                                "item_quantity": item.quantity,
-                                "amount": item.get_final_price(),
-                            },
-                        )
+
+                        send_admin_booking_email.delay(order.id, item.id)
+
                 except Exception as e:
                     print(e)
                     pass
@@ -987,4 +929,20 @@ def flutterwave_webhook_view(request):
     new_wbh.req_body = json.dumps(payload)
     new_wbh.save()
     # Do something (that doesn't take too long) with the payload
+    return HttpResponse(status=200)
+
+
+def trigger_auto_reminder(request):
+    try:
+        auto_booking_reminder.delay()
+    except:
+        pass
+    return HttpResponse(status=200)
+
+
+def trigger_auto_check_out(request):
+    try:
+        auto_checkout.delay()
+    except:
+        pass
     return HttpResponse(status=200)

@@ -32,4 +32,8 @@ urlpatterns = [
         process_flutterwave_payment,
         name="process-flutterwave-payment",
     ),
+    path("trigger_auto_reminder/", trigger_auto_reminder, name="trigger_auto_reminder"),
+    path(
+        "trigger_auto_check_out/", trigger_auto_check_out, name="trigger_auto_check_out"
+    ),
 ]

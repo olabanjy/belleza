@@ -212,6 +212,8 @@ class OrderItem(CustomContentBaseTypeModel):
     rate = models.IntegerField(default=1)
     check_in = models.DateTimeField(null=True)
     check_out = models.DateTimeField(null=True)
+    caution_refunded = models.BooleanField(default=False)
+    exited = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.id} - {self.user} - {self.quantity}"
@@ -270,7 +272,7 @@ class OrderItem(CustomContentBaseTypeModel):
 
 class Order(BaseAbstractModel):
     user = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
-    items = models.ManyToManyField("OrderItem")
+    items = models.ManyToManyField("OrderItem", related_name="items")
     ref_code = models.CharField(max_length=20, blank=True, null=True)
     ordered_date = models.DateTimeField(default=timezone.now)
     ordered = models.BooleanField(default=False)
