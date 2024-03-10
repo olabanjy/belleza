@@ -81,7 +81,7 @@ def send_reminder_email(item_id):
         send_email(
             [the_item.user.user.email],
             "Thank you for choosing Belleza",
-            html_path="emails/check_out.html",
+            html_path="emails/reminder.html",
             context={
                 "fullName": (
                     f"{the_order.booking_info.full_name}"
